@@ -225,6 +225,9 @@ app.post('/calculateSecretKeyvolunteer', (req, res, next)=>{
         }
     }
 });
+app.get("/aboutus",function(req,res){
+    res.render('aboutus');
+})
 /*app.post('/result', (req,res,next)=>{
     //will have to make generic/payment type based
     console.log("result hit");

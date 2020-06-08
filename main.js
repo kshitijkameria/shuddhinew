@@ -40,7 +40,7 @@ const doc = new pdfDocument();
 
 var sharp = require('sharp');
 
-const NgoSchema = new Schema({
+const UserSchema = new Schema({
     name: String,
     regno : {
         type: Number,
@@ -99,7 +99,7 @@ const NgoSchema = new Schema({
     }
 });
 
-const Ngomodel = mongoose.model('Ngo', NgoSchema);
+const Usermodel = mongoose.model('User', UserSchema);
 
 
 const filter = function (req, file, cb) {
@@ -168,29 +168,29 @@ const upload = multer({
   }
 
   router.get('/registerngo', (req, res) => {
-    res.render('trial')
+  res.render('trial')
 })
   app.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
-      let newNgo = new Ngomodel();
-      newNgo.name = req.body.name;
-      newNgo.regno = req.body.regno;
-      newNgo.regcert = req.files.regcert[0].path;
-      newNgo.cert12a =req.files.cert12a[0].path;
-      newNgo.cert80g =req.files.cert80g[0].path;
-      newNgo.fcra = req.files.fcra[0].path;
-      newNgo.acname = req.body.acname;
-      newNgo.acno = req.body.acno;
-      newNgo.ifsccode = req.body.ifsccode;
-      newNgo.bankadd = req.body.bankadd;
-      newNgo.authperson = req.body.authperson;
-      newNgo.phno = req.body.phno;
-      newNgo.email = req.body.email;
-      newNgo.password = req.body.password;
-      newNgo.confirmPassword = req.body.confirmPassword;
-      newNgo.description = req.body.description;
+      let newUser = new Usermodel();
+      newUser.name = req.body.name;
+      newUser.regno = req.body.regno;
+      newUser.regcert = req.files.regcert[0].path;
+      newUser.cert12a =req.files.cert12a[0].path;
+      newUser.cert80g =req.files.cert80g[0].path;
+      newUser.fcra = req.files.fcra[0].path;
+      newUser.acname = req.body.acname;
+      newUser.acno = req.body.acno;
+      newUser.ifsccode = req.body.ifsccode;
+      newUser.bankadd = req.body.bankadd;
+      newUser.authperson = req.body.authperson;
+      newUser.phno = req.body.phno;
+      newUser.email = req.body.email;
+      newUser.password = req.body.password;
+      newUser.confirmPassword = req.body.confirmPassword;
+      newUser.description = req.body.description;
       console.log("Hello guys");
       console.log(req.files);
-      newNgo.save(function (err) {
+      newUser.save(function (err) {
           if (err) {
               console.log(err.message);
               return
