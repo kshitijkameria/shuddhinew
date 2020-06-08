@@ -1,0 +1,74 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <h1> <%= user.name %> </h1>
+    <img src="/uploads/<%= user.logo %>" style="height:100px;width:100px" />
+
+    <a href="/main/imageupload"> Upload Logo </a>
+    <form method="post">
+        <input name="heading" placeholder="Name" required />HEADING
+        <br /><br />
+        <textarea style="height:400px;width:300px" name="content" placeholder="content" required>CONTENT</textarea>
+        <button style="background-color: blue">
+            Submit
+        </button>
+    </form>
+    <a href='/main/logout'>Logout</a>
+    
+
+
+    </div>
+    <h1>Donations</h1>
+    <table style="border :3px solid;border-color: #01b0d1;width:30rem" class="table">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% for(var i = 0; i < recs.length; i++) { %>
+        <tr>
+
+            <td></td>
+            <td style="color :black;border :3px solid;border-color: #01b0d1;width:30rem">
+                </br>
+                <a href = "/uploads/<%=recs[i].receipt%>" type = "application/pdf"target = "_blank">View PDF</a>
+                </br>
+                
+            </td>
+
+
+
+        </tr>
+        <% } %>
+    </table>
+    <h1>Your Work</h1>
+    <table style="border :3px solid;border-color: #01b0d1;width:30rem" class="table">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% for(var i = 0; i < blogs.length; i++) { %>
+        <tr>
+
+            <td></td>
+            <td style="color :black;border :3px solid;border-color: #01b0d1;width:30rem"><%=blogs[i].heading %>
+                </br>
+
+                </br>
+                <%=blogs[i].content %>
+            </td>
+
+
+
+        </tr>
+        <% } %>
+    </table>
+
+</body>
+
+</html>

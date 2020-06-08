@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <style>
+            @media print {
+                #printPageButton{
+                    display:none;
+                }
+            }
+        </style>
+        <script>
+            function myfunction() {
+                window.print();
+            }
+        </script>
+    </head>
+    <body>
+        <div style="height: 100%; width: 50%; border:1px solid;box-sizing: border-box; border-right: none;">
+            <div class="info" style="height: 20%">Receipt No.<b> <%=data.referenceId %></b></div>
+            <div class="info" style="height: 20%">Donor Name<b> <%=task.name %></b></div>
+            <div class="info" style="height: 20%"> Email<b> <%=task.email %></b></div>
+            <div class="info" style="height: 20%">Phone<b> <%=task.phNum %></b></div>
+            <div class="info" style="height: 20%">Amount<b> <%=data.orderAmount %></b></div>
+            <div class="info" style="height: 20%">Type of donation<b> <%=data.paymentMode%></b></div>
+            <div class="info" style="height: 20%">Description<b>  Donation to <%=ngo.name%></b></div>
+            <div class="info" style="height: 20%">NGO Contact No.<b> <%=ngo.phno%></b></div>
+            <div class="myclass" style="height: 30px">
+                <button id="printPageButton" type="button" onclick="myfunction()">Print</button>
+                <button id="printPageButton" type="button" onclick="location.href= '/'">Home</button>
+
+        </div>
+    </body>
+</html>

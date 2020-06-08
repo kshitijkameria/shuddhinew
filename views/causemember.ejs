@@ -1,0 +1,44 @@
+<title>
+    cashfree collect payments
+</title>
+<body>
+    <form id="checkoutForm" name="checkoutForm" method="POST" action= <%= postUrl %>>
+        
+    <table class="mainForm">
+    <tr>
+        <td>order id</td>
+        <td><input type="text" name="orderId"  ></td>
+    </tr>
+    <tr>
+        <td>order amount</td>
+        <td><input type="text" name="orderAmount"  ></td>
+    </tr>
+    <tr>
+        <td>customer name</td>
+        <td><input type="text" name="customerName" ></td>
+    </tr>
+    <tr>
+        <td>customer email</td>
+        <td><input type="text" name="customerEmail"  ></td>
+    </tr>
+    <tr>
+        <td>customer phone</td>
+        <td><input type="text" name="customerPhone"  ></td>
+        </tr>
+</table>
+        <table>
+        <tr>
+            <td colspan="2"><input type="submit" value="pay cashfree" id="payBtn" style="display:none" ></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button value="pay" id="submitBtn1">pay</button></td>
+        </tr>
+        </table>
+    </form>
+    <div id="generatedSignature"></div>
+</body>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/helper.js"></script>
+
+<script type="text/javascript" src="/javascripts/script.js"></script>
