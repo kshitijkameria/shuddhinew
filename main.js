@@ -42,9 +42,10 @@ var sharp = require('sharp');
 
 const UserSchema = new Schema({
     name: String,
-    regno : {
-        type: Number,
-        unique: true
+    regid : {
+        type: String,
+        unique: true,
+        required:true
     },
     regcert:{
         type: String,
@@ -78,10 +79,14 @@ const UserSchema = new Schema({
         type: String
     },
     phno:{
-        type: Number
+        type: Number,
+        unique: true,
+        required: true
     },
     email: {
         type: String,
+        unique: true,
+        required: true
         // required:true
     },
     password: {
@@ -92,11 +97,33 @@ const UserSchema = new Schema({
         type: String,
         validate: function () {
           return this.password == this.confirmPassword;
-        },
+        }
       },
       description:{
         type: String
-    }
+    },
+    donationtillnow:{
+        type:Number,
+        default:0
+    },
+    thisMonthDonations:{
+        type:Number,
+        default:0
+    },
+    lastMonthDonations:{
+        type:Number,
+        default:0
+    },
+    recentdonors:[{
+        donor:{
+            type: String,
+        },
+        amount:{
+            type:Number,
+        }
+    }],
+    logo: String,
+
 });
 
 const Usermodel = mongoose.model('User', UserSchema);
@@ -168,12 +195,12 @@ const upload = multer({
   }
 
   router.get('/registerngo', (req, res) => {
-  res.render('trial')
+  res.render('regngo')
 })
   app.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
       let newUser = new Usermodel();
       newUser.name = req.body.name;
-      newUser.regno = req.body.regno;
+      newUser.regid = req.body.regid;
       newUser.regcert = req.files.regcert[0].path;
       newUser.cert12a =req.files.cert12a[0].path;
       newUser.cert80g =req.files.cert80g[0].path;
@@ -195,7 +222,9 @@ const upload = multer({
               console.log(err.message);
               return
           }
+          res.redirect('/')
       });
+     
   })
 
 
@@ -247,60 +276,64 @@ const RecSchema = new Schema({
 
 })
 const Rec = mongoose.model('Rec', RecSchema);
-const UserSchema = new Schema({
-    name: String,
-    phno: {
-        type: Number,
-        unique: true,
-        required: true
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true,
-        select: false,
-    },
-    confirmPassword: {
-        type: String,
-        //  validate: function () {
-        //       return this.password == this.confirmPassword;
-        //   },
-        // required: true,
-    },
-    regid: {
-        type: String,
-        unique: true,
-        required: true
-    },
-    donationtillnow:{
-        type:Number,
-        default:0
-    },
-    thisMonthDonations:{
-        type:Number,
-        default:0
-    },
-    lastMonthDonations:{
-        type:Number,
-        default:0
-    },
-    recentdonors:[{
-        donor:{
-            type: String,
-        },
-        amount:{
-            type:Number,
-        }
-    }],
-    logo: String,
 
-});
 
-const User = mongoose.model('User', UserSchema);
+// const UserSchema = new Schema({
+//     name: String,
+//     phno: {
+//         type: Number,
+//         unique: true,
+//         required: true
+//     },
+//     email: {
+//         type: String,
+//         unique: true,
+//         required: true
+//     },
+//     password: {
+//         type: String,
+//         required: true,
+//         select: false,
+//     },
+//     confirmPassword: {
+//         type: String,
+//         //  validate: function () {
+//         //       return this.password == this.confirmPassword;
+//         //   },
+//         // required: true,
+//     },
+//     regid: {
+//         type: String,
+//         unique: true,
+//         required: true
+//     },
+//     donationtillnow:{
+//         type:Number,
+//         default:0
+//     },
+//     thisMonthDonations:{
+//         type:Number,
+//         default:0
+//     },
+//     lastMonthDonations:{
+//         type:Number,
+//         default:0
+//     },
+//     recentdonors:[{
+//         donor:{
+//             type: String,
+//         },
+//         amount:{
+//             type:Number,
+//         }
+//     }],
+//     logo: String,
+
+// });
+
+// const User = mongoose.model('User', UserSchema);
+
+
 const MemberSchema = new Schema({
     name: {
         type: String,
@@ -448,7 +481,7 @@ router.get('/donateforcause/:id',(req,res)=>{
 })
 
 router.get('/gov', function (req, res) {
-    res.render('gov')
+    res.render('reggov')
 })
 router.post('/gov', urlencodedParser, singleupload, function (req, res) {
     Gov.findOne({ email: req.body.email }, function (err, doc) {
@@ -487,7 +520,7 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
 
 
 router.get('/registermember', (req, res) => {
-    res.render('memberregister')
+    res.render('regmember')
 })
 
 
@@ -522,7 +555,7 @@ router.post('/registermember', urlencodedParser, function (req, res) {
     })
 })
 router.get('/registervolunteer', (req, res) => {
-    res.render('memberregister')
+    res.render('regvolunteer')
 })
 router.post('/registervolunteer', urlencodedParser, function (req, res) {
     Volunteer.findOne({ email: req.body.email }, function (err, doc) {

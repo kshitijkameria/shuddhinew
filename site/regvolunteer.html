@@ -29,18 +29,10 @@ body {
   background-size: cover;}
 
 
-h5 {
+h4 {
   color: white;
   font-family: sans-serif;
-  text-align: center;
-
 }
-        h3{
-            color: white;
-  font-family: sans-serif;
-  text-align: center;
-            
-        }
         
 ::placeholder {
   color: white;
@@ -275,38 +267,133 @@ select option {
 <div class="container">
   <form>
     <div class="row">
-      <h3>REGISTER AS A GOVERNMENT ORGANISATION</h3>
-        <h5>Step towards our nation</h5>
-        
+      <h4 style="text-align: center; font-size: 1.2em">REGISTER AS A MEMBER</h4>
       <div class="input-group input-group-icon">
           
-        <input type="text" style="color: white" placeholder="Full Name"/>
+        <input type="text" name="name" style="color: white" placeholder="Full Name"/>
         <div class="input-icon"><i class="fa fa-user"></i></div>
       </div>
       <div class="input-group input-group-icon">
-        <input type="email" style="color: white" placeholder="Email Adress"/>
+        <input type="email" name="email" style="color: white" placeholder="Email Adress"/>
         <div class="input-icon"><i class="fa fa-envelope"></i></div>
       </div>
+        
+        <div class="input-group input-group-icon">
+        <input type="password" name="password" style="color: white" placeholder="create your password"/>
+        <div class="input-icon"><i class="fa fa-envelope"></i></div>
+      </div>
+        
+        <div class="input-group input-group-icon">
+        <input type="password" name="cnfrmpassword" style="color: white" placeholder="confirm password"/>
+        <div class="input-icon"><i class="fa fa-envelope"></i></div>
+      </div>
+        
       <div class="input-group input-group-icon">
-        <input type="number" style="color: white" placeholder="phone no."/>
+        <input type="number" name="phone" style="color: white" placeholder="phone no."/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
         
         <div class="input-group input-group-icon">
-        <input type="text" style="color: white" placeholder="Reason of joining"/>
+        <input type="text" name="cityname" style="color: white" placeholder="city"/>
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
         
         <div class="input-group input-group-icon">
-        <input type="text" style="color: white" placeholder="Project Details"/>
+        <input type="text" name="aadhaar" style="color: white" placeholder="Aadhaar Number/PAN Card/Driving License"/>
             
         
         <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
         
-       
+         <div class="input-group input-group-icon">
+        <input type="text" name="address" style="color: white" placeholder="Address"/>
+        <div class="input-icon"><i class="fa fa-key"></i></div>
       </div>
+    </div>
+    <div class="row">
+      <div class="col-half">
+        <h4>DATE OF BIRTH</h4>
+        <div class="input-group">
+          <div class="col-third">
+            <input type="text" style="color: white" placeholder="DD"/>
+          </div>
+          <div class="col-third">
+            <input type="text" style="color: white" placeholder="MM"/>
+          </div>
+          <div class="col-third">
+            <input type="text" style="color: white" placeholder="YYYY"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-half">
+        <h4>GENDER</h4>
+        <div class="input-group">
+          <input type="radio" name="gender" value="male" id="gender-male"/>
+          <label for="gender-male">Male</label>
+          <input type="radio" name="gender" value="female" id="gender-female"/>
+          <label for="gender-female">Female</label>
+        </div>
+      </div>
+    </div>
+     
+    <h4>YOUR ROLE AT THE NGO</h4><br>
+    <input type="checkbox" id="volu" name="volu" value="volu"/>
+    <label for="volu">Volunteer</label>
+    <input type="checkbox" id="work" name="work" value="work"/>
+    <label for="work">Work</label>
+    <input type="checkbox" id="fund" name="fund" value="fund"/>
+    <label for="fund">Raise Fund</label>
+    <input type="checkbox" id="part" name="part" value="part"/>
+    <label for="part">Partner</label>
+    <input type="checkbox" id="don" name="don" value="don"/>
+    <label for="don">Donate</label>
+    <input type="checkbox" id="mem" name="mem" value="mem"/>
     
+    <label for="int">Intern</label>
+    <input type="checkbox" id="oth" name="oth" value="oth"/>
+    <label for="oth">Other</label>
+   
+      
+      <h4>EDUCATIONAL BACKGROUND</h4><br>
+      <input type="checkbox" id="reg" name="vol" value="reg"/>
+      <label for="reg">Bachelor Degree Regular</label>
+    <input type="checkbox" id="corr" name="vol" value="corr"/>
+    <label for="corr">Bachelor Degree Correspondance</label>
+    <input type="checkbox" id="mas" name="vol" value="mas"/>
+    <label for="mas">Master Degree</label>
+    <input type="checkbox" id="phd" name="vol" value="phd"/>
+    <label for="phd">Phd</label>
+    <input type="checkbox" id="doc" name="vol" value="doc"/>
+    <label for="doc">Post Doctorate or 5 years experience</label>
+    <input type="checkbox" id="art" name="vol" value="art"/>
+    <label for="art">Culture, Arts, Sports etc.</label>
+    <input type="checkbox" id="pass" name="vol" value="pass"/>
+    <label for="pass">12th Pass</label>
+    <input type="checkbox" id="vol" name="vol" value="vol"/>
+    <label for="vol">Other</label>
+      
+    <h4>YOUR INTREST</h4><br>
+    <input type="checkbox" id="ad" name="intrest" value="ad"/>
+    <label for="ad">Administration</label>
+    <input type="checkbox" id="eve" name="intrest" value="eve"/>
+    <label for="eve">Events</label>
+    <input type="checkbox" id="field" name="intrest" value="field"/>
+    <label for="field">Field Work</label>
+    <input type="checkbox" id="raise" name="intrest" value="raise"/>
+    <label for="raise">Fundraising</label>
+    <input type="checkbox" id="del" name="intrest" value="del"/>
+    <label for="del">Deliveries</label>
+    <input type="checkbox" id="phone" name="intrest" value="phone"/>
+    <label for="phone">Phone Support</label>
+    <input type="checkbox" id="news" name="intrest" value="news"/>
+    <label for="news">Newsletter Production</label>
+    <input type="checkbox" id="coo" name="intrest" value="coo"/>
+    <label for="coo">Volunteer Coordination</label>
+    <input type="checkbox" id="web" name="intrest" value="web"/>
+    <label for="web">Website Development & IT</label>
+    <input type="checkbox" id="buss" name="intrest" value="buss"/>
+    <label for="buss">Business Coordination</label>
+   
     <div class="row">
       <h4>Terms and Conditions</h4>
       <div class="input-group">
