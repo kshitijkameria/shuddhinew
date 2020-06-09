@@ -126,7 +126,7 @@ const UserSchema = new Schema({
 
 });
 
-const Usermodel = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 
 const filter = function (req, file, cb) {
