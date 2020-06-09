@@ -204,7 +204,7 @@ const upload = multer({
             res.redirect('/')
             return
         }
-        (_.isEmpty(doc)) {
+      if(_.isEmpty(doc)) {
       let newUser = new Usermodel();
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
