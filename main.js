@@ -198,6 +198,13 @@ const upload = multer({
   res.render('regngo')
 })
   app.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
+      User.findOne({ email: req.body.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        (_.isEmpty(doc)) {
       let newUser = new Usermodel();
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
@@ -224,6 +231,11 @@ const upload = multer({
           }
           res.redirect('/')
       });
+        }
+          else {
+            res.render('regngo', { message: "User already Exists" })
+        }
+    })
      
   })
 
@@ -278,60 +290,7 @@ const RecSchema = new Schema({
 const Rec = mongoose.model('Rec', RecSchema);
 
 
-// const UserSchema = new Schema({
-//     name: String,
-//     phno: {
-//         type: Number,
-//         unique: true,
-//         required: true
-//     },
-//     email: {
-//         type: String,
-//         unique: true,
-//         required: true
-//     },
-//     password: {
-//         type: String,
-//         required: true,
-//         select: false,
-//     },
-//     confirmPassword: {
-//         type: String,
-//         //  validate: function () {
-//         //       return this.password == this.confirmPassword;
-//         //   },
-//         // required: true,
-//     },
-//     regid: {
-//         type: String,
-//         unique: true,
-//         required: true
-//     },
-//     donationtillnow:{
-//         type:Number,
-//         default:0
-//     },
-//     thisMonthDonations:{
-//         type:Number,
-//         default:0
-//     },
-//     lastMonthDonations:{
-//         type:Number,
-//         default:0
-//     },
-//     recentdonors:[{
-//         donor:{
-//             type: String,
-//         },
-//         amount:{
-//             type:Number,
-//         }
-//     }],
-//     logo: String,
 
-// });
-
-// const User = mongoose.model('User', UserSchema);
 
 
 const MemberSchema = new Schema({
@@ -614,38 +573,7 @@ router.post('/createcause', urlencodedParser, singleupload, function (req, res){
     })
 })
 
-router.get('/register', (req, res) => {
-    res.render('register1')
-})
-router.post('/register', urlencodedParser, singleupload, function (req, res) {
-    User.findOne({ email: req.body.email }, function (err, doc) {
-        if (err) {
-            console.log(err, 'error')
-            res.redirect('/')
-            return
-        }
-        if (_.isEmpty(doc)) {
-            let newUser = new User();
-            newUser.name = req.body.name;
-            newUser.regid = req.body.regid;
-            newUser.phno = req.body.phno;
-            newUser.email = req.body.email;
-            newUser.password = req.body.password;
-            newUser.logo = req.file.filename;
-            newUser.save(function (err) {
-                if (err) {
-                    console.log(err, 'error')
-                    return
-                }
-                res.redirect('/')
 
-            });
-        }
-        else {
-            res.render('register1', { message: "User already Exists" })
-        }
-    })
-})
 router.get('/form', (req, res) => {
     res.render('form')
 })
