@@ -197,7 +197,7 @@ const upload = multer({
   router.get('/registerngo', (req, res) => {
   res.render('regngo')
 })
-  app.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
+  router.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
       User.findOne({ email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
