@@ -261,6 +261,30 @@ const upload = multer({
               console.log(err.message);
               return
           }
+           let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: req.body.email,
+                subject: 'Successfull Registration',
+                text: 'Dear NGO,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+               
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
           res.redirect('/')
       });
         }
@@ -331,7 +355,7 @@ const MemberSchema = new Schema({
         required: true,
     },
     educQual: {
-        type: String,
+        type: Array,
     },
     phNum: {
         type: Number,
@@ -375,7 +399,7 @@ const MemberSchema = new Schema({
         unique:true
     },
     interests:{
-        type:String,
+        type:Array,
         // required:true
     },
     totalDonations:{
@@ -390,7 +414,7 @@ const VolunteerSchema = new Schema({
         required: true,
     },
     educQual: {
-        type: String,
+        type: Array,
     },
     phNum: {
         type: Number,
@@ -431,7 +455,7 @@ const VolunteerSchema = new Schema({
         unique:true
     },
     interests:{
-        type:String,
+        type:Array,
         // required:true
     },
     totalDonations:{
@@ -495,6 +519,30 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
                     console.log(err, 'error')
                     return
                 }
+                 let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: req.body.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+               
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
                 res.redirect('/')
 
             });
@@ -536,9 +584,34 @@ router.post('/registermember', urlencodedParser, function (req, res) {
             newMember.password = req.body.password;
             newMember.cnfrmpassword = req.body.cnfrmpassword;
             newMember.save()
+             let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: req.body.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+               
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
             res.render('checkoutmember', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
+             mem = newMember
         }
         else {
             res.render('memberregister', { message: "User already Exists" })
@@ -574,6 +647,30 @@ router.post('/registervolunteer', urlencodedParser, function (req, res) {
                     console.log(err, 'error')
                     return
                 }
+                 let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: req.body.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Volunteer,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+               
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
                 res.redirect('/')
 
             });
@@ -682,7 +779,7 @@ var s = " ";
 router.post('/result', (req, res, next) => {
     console.log("merchantHosted result hit");
     try{
-        const _id=req.session.user._id
+        const _id=ses1._id
     }
     catch(err){
         return res.status(500).render('result', {
@@ -737,7 +834,7 @@ router.post('/result', (req, res, next) => {
                     throw { name: "signature missmatch", message: "there was a missmatch in signatures genereated and received" }
                 }
                 console.log("Success")
-                const _id=req.session.user._id
+                const _id=ses1._id
                 User.findById(_id,(err,user)=>{
                     if(err){
                         return err
@@ -756,7 +853,68 @@ router.post('/result', (req, res, next) => {
                 })
                 
                 receiptno = receiptno + 1
-                return res.status(200).render('receipt1', { data: postData, task: ses, receiptno: receiptno });
+                doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
+                doc.fontSize(20)
+                doc.text("Donor Name :" + " " + ses.name)
+                doc.fontSize(20)
+                doc.text("Receipt No. :" + " " + postData.referenceId)
+                doc.fontSize(20)
+                doc.text("Email :" + " " + ses.email)
+                doc.fontSize(20)
+                doc.text("Ph No. :" + " " + ses.phNum)
+                doc.fontSize(20)
+                doc.text("Amount :" + " " + postData.orderAmount)
+                doc.fontSize(20)
+                doc.text("Type of Donation :" + " " + postData.paymentMode)
+                doc.fontSize(20)
+                doc.text("Description :" + " " + "Donation to " + ses1.name)
+                doc.fontSize(20)
+                doc.text("NGO phone no. :" + " " + ses1.phno)
+
+                doc.end()
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: ses.email,
+                    subject: 'Successfull Donation',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    attachments: [
+                        {
+                            filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
+                        }
+                    ]
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                let newRec = new Rec();
+                newRec.name = ses.name;
+                newRec.email = ses.email;
+                newRec.receipt = postData.referenceId + '.pdf'
+                newRec.save(function (err) {
+                    if (err) {
+                        console.log(err, 'error')
+                        return
+                    }
+                });
+
+
+
+                return res.status(200).render('receipt', { data: postData, task: ses, ngo: ses1 });
+                //return res.status(200).render('receipt1', { data: postData, task: ses, receiptno: receiptno });
             }
         }
     }
@@ -834,8 +992,54 @@ router.post('/resultmember', (req, res, next) => {
                 }
                 console.log("Success")
                 receiptno = receiptno + 1
+                doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
+                doc.fontSize(20)
+                doc.text("Donor Name :" + " " + mem.name)
+                doc.fontSize(20)
+                doc.text("Receipt No. :" + " " + postData.referenceId)
+                doc.fontSize(20)
+                doc.text("Email :" + " " + mem.email)
+                doc.fontSize(20)
+                doc.text("Ph No. :" + " " + mem.phNum)
+                doc.fontSize(20)
+                doc.text("Amount :" + " " + "1500")
+                doc.fontSize(20)
+                doc.text("Type of Payment :" + " " + postData.paymentMode)
+                doc.fontSize(20)
+                doc.text("Life time membership")
+                doc.end()
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: mem.email,
+                    subject: 'Successfull Registration',
+                    text: 'Dear Member,\n\n You are now a member of Shudhi.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    attachments: [
+                        {
+                            filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
+                        }
+                    ]
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+
+                return res.status(200).render('receipt1', { data: postData, task: mem });
                 // return res.status(200).render('receipt', { data: postData, task: ses, receiptno: receiptno });
-                res.redirect('/')
+                
             }
         }
     }
