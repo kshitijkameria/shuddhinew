@@ -122,11 +122,19 @@ const UserSchema = new Schema({
             type:Number,
         }
     }],
-    logo: String,
+    logo: {
+        type: String,
+        default: "/default.png"
+    },
+
+    images:{
+        type: String,
+        default: "/default.png"
+    },
 
 });
 
-const Usermodel = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 
 const filter = function (req, file, cb) {
@@ -161,6 +169,12 @@ const upload = multer({
   },
   {
     name: "fcra", maxCount: 1
+  },
+  {
+      name: "logo" , maxCount: 1
+  },
+  {
+      name: "images" , maxCount: 20
   }
 ]);
 
@@ -183,7 +197,25 @@ const upload = multer({
       await sharp(req.files.fcra[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
         quality: 90
       })
-  
+
+      await sharp(req.files.logo[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
+        quality: 90
+      })
+
+      let promiseArr = [];
+    // start
+    for (let i = 0; i < req.files.images.length; i++) {
+      let filePromise = sharp(req.files.images[i].path)
+        .resize(2000, 1500)
+        .toFormat("jpeg")
+        .jpeg({
+          quality: 90
+        })
+      promiseArr.push(filePromise); 
+    }
+    await Promise.all(promiseArr);
+
+
       console.log("will reach after processing every image");
       res.status(200).json({
         status: "data uploaded successfully"
@@ -197,7 +229,7 @@ const upload = multer({
   router.get('/registerngo', (req, res) => {
   res.render('regngo')
 })
-  app.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
+  router.post('/registerngo', multiImageHandler, uploadFile,urlencodedParser, function (req, res) {
       User.findOne({ email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
@@ -205,7 +237,7 @@ const upload = multer({
             return
         }
       if(_.isEmpty(doc)) {
-      let newUser = new Usermodel();
+      let newUser = new User();
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
       newUser.regcert = req.files.regcert[0].path;
@@ -1218,8 +1250,8 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
 router.get("/imageupload", checkLogIn, (req, res) => {
     res.render("upload")
 })
-router.post('/imageupload', singleupload, urlencodedParser, checkLogIn, (req, res) => {
-    User.update({ email: req.session.work.email }, { logo: req.file.filename }, function (err, writeOpResult) {
+router.post('/imageupload', multiImageHandler, uploadFile , urlencodedParser, checkLogIn, (req, res) => {
+    User.update({ email: req.session.work.email }, { logo: req.files.logo[0].path }, function (err, writeOpResult) {
         if (err) {
             console.log(err, 'error')
             return
