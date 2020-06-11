@@ -595,7 +595,7 @@ router.get('/registermember', (req, res) => {
 })
 
 
-router.post('/registermember', urlencodedParser, function (req, res) {
+router.post('/registermember', urlencodedParser, singleupload, function (req, res) {
     Member.findOne({ email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
@@ -640,20 +640,20 @@ router.post('/registermember', urlencodedParser, function (req, res) {
                 }
 
             });
-            res.render('checkoutmember', {
+            res.render('checkoutmem', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
              mem = newMember
         }
         else {
-            res.render('memberregister', { message: "User already Exists" })
+            res.render('regmember', { message: "User already Exists" })
         }
     })
 })
 router.get('/registervolunteer', (req, res) => {
     res.render('regvolunteer')
 })
-router.post('/registervolunteer', urlencodedParser, function (req, res) {
+router.post('/registervolunteer', urlencodedParser, singleupload , function (req, res) {
     Volunteer.findOne({ email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
@@ -707,7 +707,7 @@ router.post('/registervolunteer', urlencodedParser, function (req, res) {
             });
         }
         else {
-            res.render('memberregister', { message: "User already Exists" })
+            res.render('regvolunteer', { message: "User already Exists" })
         }
     })
 })
