@@ -525,7 +525,7 @@ job.start();
 router.get('/donateforcause/:id',(req,res)=>{
     tostoreid = req.params.id
     res.render('causemember', {
-        postUrl: config.paths[config.enviornment].cashfreePayUrl,
+        postUrl: config.paths[config.enviornment].cashfreePayUrl,member : vol
     });
 })
 
@@ -1325,7 +1325,51 @@ router.post('/resultdonatemem', (req, res, next) => {
                 })
             }
                 receiptno = receiptno + 1
-                res.redirect('/')
+                doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
+                doc.fontSize(20)
+                doc.text("Donor Name :" + " " + vol.name)
+                doc.fontSize(20)
+                doc.text("Receipt No. :" + " " + postData.referenceId)
+                doc.fontSize(20)
+                doc.text("Email :" + " " + vol.email)
+                doc.fontSize(20)
+                doc.text("Ph No. :" + " " + vol.phNum)
+                doc.fontSize(20)
+                doc.text("Amount :" + " " + postData.orderAmount)
+                doc.fontSize(20)
+                doc.text("Type of Donation :" + " " + postData.paymentMode)
+                doc.fontSize(20)
+                doc.text("Description :" + " " + "Donation to SHUDDHI")
+                doc.end()
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: vol.email,
+                    subject: 'Successfull Donation',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    attachments: [
+                        {
+                            filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
+                        }
+                    ]
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                return res.status(200).render('receipt2', { data: postData, task: vol });
         }
         }
     }
@@ -1420,6 +1464,7 @@ router.post('/login', urlencodedParser, (req, res) => {
 
 })
 var tocopyid = ''
+var vol = " "
 router.post('/loginvolunteer', urlencodedParser, (req, res) => {
     Volunteer.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if (err) {
@@ -1439,12 +1484,14 @@ router.post('/loginvolunteer', urlencodedParser, (req, res) => {
                 }
                 else {
                      tocopyid= doc._id
+                    vol = doc
                     res.redirect('/main/cause')
                 }
             })
         }
         else {
              tocopyid= doc._id
+            vol = doc
             res.redirect('/main/cause')
         }
     })
