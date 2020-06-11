@@ -1,11 +1,56 @@
 <html>
     <head>
         <style>
+body{
+background-image:url('https://barbarashdwallpapers.com/wp-content/uploads/2015/01/White-wallpaper-with-dots.jpg');
+background-repeat:no-repeat;
+background-size:cover;
+
+}
+.wrap-login100 {
+  border: 2px solid black;
+padding: 20px;
+ background:#fff;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row-reverse;
+border-radius: 10px;
+}
+.container-login100 {
+  width: 100%;  
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  
+}
+.limiter {
+  width: 100%;
+  margin: 0 auto;
+}
             @media print {
                 #printPageButton{
                     display:none;
                 }
             }
+#printPageButton{
+font-size:20px;
+background:black;
+color:white;
+padding:10px;
+}
         </style>
         <script>
             function myfunction() {
@@ -14,19 +59,25 @@
         </script>
     </head>
     <body>
-        <div style="height: 100%; width: 50%; border:1px solid;box-sizing: border-box; border-right: none;">
-            <div class="info" style="height: 20%">Receipt No.<b> <%=data.referenceId %></b></div>
-            <div class="info" style="height: 20%">Donor Name<b> <%=task.name %></b></div>
-            <div class="info" style="height: 20%"> Email<b> <%=task.email %></b></div>
-            <div class="info" style="height: 20%">Phone<b> <%=task.phNum %></b></div>
-            <div class="info" style="height: 20%">Amount<b> <%=data.orderAmount %></b></div>
-            <div class="info" style="height: 20%">Type of donation<b> <%=data.paymentMode%></b></div>
-            <div class="info" style="height: 20%">Description<b> Donation To SHUDHI</b></div>
-            
+       <div class="limiter">
+<div class="container-login100">
+<div class="wrap-login100">
+        <div style="box-sizing: border-box; border-right: none;font-size:25px;" align="center">
+<img src="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" alt="" width="250" height="200"/>        
+            <div class="info" style="height: 20%">Receipt No. : <b> <%=data.referenceId %></b></div>
+            <div class="info" style="height: 20%">Donor Name : <b> <%=task.name %></b></div>
+            <div class="info" style="height: 20%"> Email : <b> <%=task.email %></b></div>
+            <div class="info" style="height: 20%">Phone : <b> <%=task.phNum %></b></div>
+            <div class="info" style="height: 20%">Amount : <b> <%=data.orderAmount %></b></div>
+            <div class="info" style="height: 20%">Type of donation : <b> <%=data.paymentMode%></b></div>
+            <div class="info" style="height: 20%">Description : <b> Donation To SHUDHI</b></div>
+            </br></br>
             <div class="myclass" style="height: 30px">
                 <button id="printPageButton" type="button" onclick="myfunction()">Print</button>
                 <button id="printPageButton" type="button" onclick="location.href= '/'">Home</button>
-
+</div></br>
+</div>
+</div>
         </div>
     </body>
 </html>
