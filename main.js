@@ -285,11 +285,9 @@ let uploadImagesHandler = upload.fields([{
       newUser.password = req.body.password;
       newUser.confirmPassword = req.body.confirmPassword;
       newUser.description = req.body.description;
-      console.log("Hello guys");
-      console.log(req.files);
       newUser.save(function (err) {
           if (err) {
-              console.log(err.message);
+              console.log(err.message,"err");
               return
           }
            let transporter = nodemailer.createTransport({

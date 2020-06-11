@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
     <head>
@@ -167,7 +168,6 @@ font-family:'cooper';
 </div>        </br>
 <table id="myTable">
               <tr class="header">
-<th style="width:10%;">Logo</th>
     <th style="width:40%;">NGO Name</th>
     <th style="width:25%;">Total Donation</th>
 <th style="width:25%;">Donate</th>  
@@ -175,7 +175,6 @@ font-family:'cooper';
             <% for(var i = 0; i < ngo.length; i++) { %>
             <tr>
             <form method = "post" >
-                <td> <img src = "<%= ngo[i].logo %>"  /> </td>
                 <td><%=ngo[i].name%></td>
                 <td><%=ngo[i].donationtillnow%></td>
                 <br>
@@ -198,7 +197,7 @@ font-family:'cooper';
   tr = table.getElementsByTagName("tr");
 
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
+    td = tr[i].getElementsByTagName("td")[0];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -218,8 +217,8 @@ function sortTable() {
     rows = table.rows;
     for (i = 1; i < (rows.length - 1); i++) {
       shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[1];
-      y = rows[i + 1].getElementsByTagName("TD")[1];
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
       if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
         shouldSwitch = true;
         break;
@@ -231,6 +230,7 @@ function sortTable() {
     }
   }
 }
+window.onload(sortTable());
 </script>
 <footer class="section footer-minimal context-dark">
     <div class="container wow-outer">
