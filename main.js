@@ -383,20 +383,20 @@ const Rec = mongoose.model('Rec', RecSchema);
 const MemberSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
     },
     educQual: {
         type: Array,
     },
     phNum: {
         type: Number,
-        required: true,
+        // required: true,
         trim: true
     },
     email: {
         type: String,
         unique: true,
-        required: true,
+        // required: true,
         trim: true,
         lowercase: true,
         validate(value){
@@ -418,15 +418,15 @@ const MemberSchema = new Schema({
     },
     cityName:{
         type:String,
-        required:true
+        // required:true
     },
     address:{
         type:String,
-        required:true,
+        // required:true,
     },
     idNumber:{
         type:String,
-        required:true,
+        // required:true,
         unique:true
     },
     interests:{
@@ -442,20 +442,20 @@ const Member = mongoose.model('Member', MemberSchema);
 const VolunteerSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
     },
     educQual: {
         type: Array,
     },
     phNum: {
         type: Number,
-        required: true,
+        // required: true,
         trim: true
     },
     email: {
         type: String,
         unique: true,
-        required: true,
+        // required: true,
         trim: true,
         lowercase: true,
         validate(value){
@@ -466,23 +466,23 @@ const VolunteerSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        // required: true
     },
     cnfrmpassword: {
         type: String,
-        required:true
+        // required:true
     },
     cityName:{
         type:String,
-        required:true
+        // required:true
     },
     address:{
         type:String,
-        required:true,
+        // required:true,
     },
     idNumber:{
         type:String,
-        required:true,
+        // required:true,
         unique:true
     },
     interests:{
@@ -659,7 +659,6 @@ router.post('/registervolunteer', urlencodedParser, function (req, res) {
     Volunteer.findOne({ email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
-            res.redirect('/')
             return
         }
         if (_.isEmpty(doc)) {
