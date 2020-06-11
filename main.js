@@ -31,6 +31,9 @@ const secret = 'abcdefg';
 const pdfDocument = require('pdfkit');
 const fs = require('fs');
 const doc = new pdfDocument();
+const accountSid = "<You will find in dashboard>"
+const authToken = "<YOUR AUTH TOKEN"
+const client = require('twilio')(accountSid,authToken);
 
 // const ngodb = require('./db/ngodb')
 // const ngorouter = require('./router/ngorouter'); 
@@ -303,6 +306,12 @@ let uploadImagesHandler = upload.fields([{
                 }
 
             });
+          client.messages.create({
+                    to: req.body.phno,
+                    from :"<YOUR NUMBER>",
+                    body: "Registered successfully"
+                })
+                .then((message)=>console.log(message.sid));
           res.redirect('/')
       });
         }
@@ -564,6 +573,12 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
                 }
 
             });
+                client.messages.create({
+                    to: req.body.phn,
+                    from :"<YOUR NUMBER>",
+                    body: "Registered successfully"
+                })
+                .then((message)=>console.log(message.sid));
                 res.redirect('/')
 
             });
@@ -629,6 +644,12 @@ router.post('/registermember', urlencodedParser, singleupload, function (req, re
                 }
 
             });
+            client.messages.create({
+                    to: req.body.phone,
+                    from :"<YOUR NUMBER>",
+                    body: "Registered successfully"
+                })
+                .then((message)=>console.log(message.sid));
             res.render('checkoutmem', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
@@ -691,6 +712,12 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
                 }
 
             });
+                client.messages.create({
+                    to: req.body.phone,
+                    from :"<YOUR NUMBER>",
+                    body: "Registered successfully"
+                })
+                .then((message)=>console.log(message.sid));
                 res.redirect('/')
 
             });
