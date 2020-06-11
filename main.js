@@ -49,19 +49,19 @@ const UserSchema = new Schema({
     },
     regcert:{
         type: String,
-        default: "./default.png"
+        default: "/images/default.png"
     },
     cert12a:{
         type: String,
-        default: "./default.png"
+        default: "/images/default.png"
     },
     cert80g:{
         type: String,
-        default: "/default.png"
+        default: "/images/default.png"
     },
     fcra:{
         type: String,
-        default: "/default.png"
+        default: "/images/default.png"
     },
     acname:{
         type: String
@@ -124,12 +124,12 @@ const UserSchema = new Schema({
     }],
     logo: {
         type: String,
-        default: "/default.png"
+        default: "/images/default.png"
     },
 
     images:{
-        type: String,
-        default: "/default.png"
+        type: Array,
+        default: ["/default.png"]
     },
 
 });
@@ -170,12 +170,7 @@ const upload = multer({
   {
     name: "fcra", maxCount: 1
   },
-  {
-      name: "logo" , maxCount: 1
-  },
-  {
-      name: "images" , maxCount: 20
-  }
+
 ]);
 
   async function uploadFile(req, res, next) {
@@ -198,24 +193,6 @@ const upload = multer({
         quality: 90
       })
 
-      await sharp(req.files.logo[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
-        quality: 90
-      })
-
-      let promiseArr = [];
-    // start
-    for (let i = 0; i < req.files.images.length; i++) {
-      let filePromise = sharp(req.files.images[i].path)
-        .resize(2000, 1500)
-        .toFormat("jpeg")
-        .jpeg({
-          quality: 90
-        })
-      promiseArr.push(filePromise); 
-    }
-    await Promise.all(promiseArr);
-
-
       console.log("will reach after processing every image");
       res.status(200).json({
         status: "data uploaded successfully"
@@ -225,6 +202,60 @@ const upload = multer({
       console.log(err.message);
     }
   }
+
+  let uploadLogoHandler = upload.fields([{
+          name: "logo" , maxCount: 1
+        }
+])
+
+
+  async function uploadlogo(req, res, next) {
+    try {
+   await sharp(req.files.logo[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
+        quality: 90
+      })
+
+    console.log("will reach after processing every image");
+    res.status(200).json({
+      status: "data uploaded successfully"
+    })
+    next();
+  } 
+  catch (err) {
+    console.log(err.message);
+  }
+}
+
+let uploadImagesHandler = upload.fields([{
+    name: "images" , maxCount: 20
+    }])
+
+    async function uploadimages(req, res, next) {
+        try {
+  let promiseArr = [];
+    // start
+    for (let i = 0; i < req.files.images.length; i++) {
+      let filePromise = sharp(req.files.images[i].path)
+        .resize(2000, 1500)
+        .toFormat("jpeg")
+        .jpeg({
+          quality: 90
+        })
+      promiseArr.push(filePromise); 
+    
+    }
+    await Promise.all(promiseArr);
+    console.log("will reach after processing every image");
+    res.status(200).json({
+      status: "data uploaded successfully"
+    })
+    next();
+  } 
+  catch (err) {
+    console.log(err.message);
+  }
+}
+
 
   router.get('/registerngo', (req, res) => {
   res.render('regngo')
@@ -458,6 +489,9 @@ const VolunteerSchema = new Schema({
         type:Array,
         // required:true
     },
+    role:{
+        type: Array
+    },
     totalDonations:{
         type:Number,
         default:0
@@ -577,12 +611,12 @@ router.post('/registermember', urlencodedParser, function (req, res) {
             newMember.phNum = req.body.phone;
             newMember.email = req.body.email;
             newMember.password = req.body.password;
+            newMember.cnfrmpassword = req.body.cnfrmpassword;
             newMember.cityName = req.body.cityname;
             newMember.address = req.body.address;
             newMember.idNumber = req.body.aadhaar;
             newMember.interests = req.body.intrest;
-            newMember.password = req.body.password;
-            newMember.cnfrmpassword = req.body.cnfrmpassword;
+            
             newMember.save()
              let transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -640,8 +674,8 @@ router.post('/registervolunteer', urlencodedParser, function (req, res) {
             newMember.address = req.body.address;
             newMember.idNumber = req.body.aadhaar;
             newMember.interests = req.body.intrest;
-            newMember.password = req.body.password;
             newMember.cnfrmpassword = req.body.cnfrmpassword;
+            newMember.role = req.body.role;
             newMember.save(function (err) {
                 if (err) {
                     console.log(err, 'error')
@@ -1454,12 +1488,32 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
 router.get("/imageupload", checkLogIn, (req, res) => {
     res.render("upload")
 })
-router.post('/imageupload', multiImageHandler, uploadFile , urlencodedParser, checkLogIn, (req, res) => {
+router.post('/imageupload', uploadLogoHandler, uploadlogo , urlencodedParser, checkLogIn, (req, res) => {
     User.update({ email: req.session.work.email }, { logo: req.files.logo[0].path }, function (err, writeOpResult) {
         if (err) {
-            console.log(err, 'error')
+            console.log(err.message, 'error')
             return
         }
+        res.redirect('/main/welcome')
+    });
+})
+router.get("/manyimagesupload", checkLogIn, (req, res) => {
+    res.render("manyimages")
+})
+router.post('/manyimagesupload', uploadImagesHandler, uploadimages , urlencodedParser, checkLogIn, (req, res) => {
+    // console.log(req.files);
+    let arr = req.session.work.images;
+    for(var i = 0 ; i < req.files.images.length ;i++)
+    {
+        arr.push(req.files.images[i].path);
+    }
+    console.log(arr);
+    User.update({ email: req.session.work.email }, {images:arr}, function (err, writeOpResult) {
+        if (err) {
+            console.log(err.message, 'error')
+            return
+        }
+        
         res.redirect('/main/welcome')
     });
 })

@@ -175,7 +175,9 @@ font-family:'cooper';
             <% for(var i = 0; i < ngo.length; i++) { %>
             <tr>
             <form method = "post" >
+                <td> <img src = "<%= ngo[i].logo %>"  /> </td>
                 <td><%=ngo[i].name%></td>
+                <td><%=ngo[i].donationtillnow%></td>
                 <br>
                 <td><input name = "regid" type="hidden" value = "<%=ngo[i].regid%>">
                     <br>
