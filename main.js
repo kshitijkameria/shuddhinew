@@ -49,19 +49,19 @@ const UserSchema = new Schema({
     },
     regcert:{
         type: String,
-        default: "/images/default.png"
+        default: "images/default.png"
     },
     cert12a:{
         type: String,
-        default: "/images/default.png"
+        default: "images/default.png"
     },
     cert80g:{
         type: String,
-        default: "/images/default.png"
+        default: "images/default.png"
     },
     fcra:{
         type: String,
-        default: "/images/default.png"
+        default: "images/default.png"
     },
     acname:{
         type: String
@@ -124,12 +124,12 @@ const UserSchema = new Schema({
     }],
     logo: {
         type: String,
-        default: "/images/default.png"
+        default: "images/default.png"
     },
 
     images:{
         type: Array,
-        default: ["/default.png"]
+        default: []
     },
 
 });
@@ -191,11 +191,6 @@ const upload = multer({
       await sharp(req.files.fcra[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
         quality: 90
       })
-
-      console.log("will reach after processing every image");
-      res.status(200).json({
-        status: "data uploaded successfully"
-      })
       next();
     } catch (err) {
       console.log(err.message);
@@ -213,11 +208,6 @@ const upload = multer({
    await sharp(req.files.logo[0].path).resize(2000, 1500).toFormat("jpeg").jpeg({
         quality: 90
       })
-
-    console.log("will reach after processing every image");
-    res.status(200).json({
-      status: "data uploaded successfully"
-    })
     next();
   } 
   catch (err) {
@@ -244,10 +234,6 @@ let uploadImagesHandler = upload.fields([{
     
     }
     await Promise.all(promiseArr);
-    console.log("will reach after processing every image");
-    res.status(200).json({
-      status: "data uploaded successfully"
-    })
     next();
   } 
   catch (err) {
@@ -267,13 +253,17 @@ let uploadImagesHandler = upload.fields([{
             return
         }
       if(_.isEmpty(doc)) {
+        const userpath1 = req.files.regcert[0].path.split("\\").splice(1).join("/");
+        const userpath2 = req.files.cert12a[0].path.split("\\").splice(1).join("/");
+        const userpath3 = req.files.cert80g[0].path.split("\\").splice(1).join("/");
+        const userpath4 = req.files.fcra[0].path.split("\\").splice(1).join("/");
       let newUser = new User();
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
-      newUser.regcert = req.files.regcert[0].path;
-      newUser.cert12a =req.files.cert12a[0].path;
-      newUser.cert80g =req.files.cert80g[0].path;
-      newUser.fcra = req.files.fcra[0].path;
+      newUser.regcert = userpath1;
+      newUser.cert12a =userpath2;
+      newUser.cert80g =userpath3;
+      newUser.fcra = userpath4;
       newUser.acname = req.body.acname;
       newUser.acno = req.body.acno;
       newUser.ifsccode = req.body.ifsccode;
@@ -1532,7 +1522,8 @@ router.get("/imageupload", checkLogIn, (req, res) => {
     res.render("upload")
 })
 router.post('/imageupload', uploadLogoHandler, uploadlogo , urlencodedParser, checkLogIn, (req, res) => {
-    User.update({ email: req.session.work.email }, { logo: req.files.logo[0].path }, function (err, writeOpResult) {
+    const userpath = req.files.logo[0].path.split("\\").splice(1).join("/");
+    User.update({ email: req.session.work.email }, { logo: userpath }, function (err, writeOpResult) {
         if (err) {
             console.log(err.message, 'error')
             return
@@ -1546,11 +1537,14 @@ router.get("/manyimagesupload", checkLogIn, (req, res) => {
 router.post('/manyimagesupload', uploadImagesHandler, uploadimages , urlencodedParser, checkLogIn, (req, res) => {
     // console.log(req.files);
     let arr = req.session.work.images;
+    let userpath = "";
     for(var i = 0 ; i < req.files.images.length ;i++)
     {
-        arr.push(req.files.images[i].path);
+
+        userpath = req.files.images[0].path.split("\\").splice(1).join("/");
+        
+        arr.push(userpath);
     }
-    console.log(arr);
     User.update({ email: req.session.work.email }, {images:arr}, function (err, writeOpResult) {
         if (err) {
             console.log(err.message, 'error')
