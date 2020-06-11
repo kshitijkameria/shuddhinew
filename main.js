@@ -147,13 +147,12 @@ const filter = function (req, file, cb) {
 
 const multerStorage = multer.diskStorage({  
         destination: function (req, file, cb) {
-          cb(null, "public/raw")
+          cb(null, "./public/uploads/")
         },
-        filename: function (req, file, cb) {
-      
-          cb(null, `user-${Date.now()}.jpeg`)
-        }
-      })
+        filename: (req, file, cb) => {
+            cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
+      }
+    })
 
 const upload = multer({
     storage: multerStorage,
