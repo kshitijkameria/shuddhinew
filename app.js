@@ -225,6 +225,53 @@ app.post('/calculateSecretKeyvolunteer', (req, res, next)=>{
         }
     }
 });
+app.post('/calculateSecretKeyshu', (req, res, next)=>{
+    const {paymentType} = req.body;
+    var {formObj} = req.body;
+    
+    const secretKey = config.secretKey;
+
+    switch(paymentType){
+        case enums.paymentTypeEnum.checkout: {
+            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/resultshu";
+            formObj.returnUrl = returnUrl;
+            formObj.notifyUrl = "";
+            formObj.appId = config.appId;
+            const signature = helpers.signatureRequest1(formObj, secretKey);
+            additionalFields = {
+                returnUrl,
+                notifyUrl,
+                signature,
+                appId: config.appId,
+            };
+            return res.status(200).send({
+                status:"success",
+                paymentData:formObj,
+                additionalFields,
+            });
+        }
+        case enums.paymentTypeEnum.merchantHosted: {
+            var { formObj } = req.body;
+            formObj.appId = config.appId;
+            formObj.returnUrl = "";
+            formObj.notifyUrl = notifyUrl;
+            formObj.paymentToken = helpers.signatureRequest2(formObj, config.secretKey);
+            return res.status(200).send({
+                status: "success",
+                paymentData: formObj,
+            });
+        }
+
+        default: {
+            console.log("incorrect payment option recieved");
+            console.log("paymentOption:", paymentType);
+            return res.status(200).send({
+                status:"error",
+                message:"incorrect payment type sent"
+            });
+        }
+    }
+});
 app.get("/aboutus",function(req,res){
     res.render('aboutus');
 })
