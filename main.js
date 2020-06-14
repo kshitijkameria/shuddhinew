@@ -31,6 +31,8 @@ const secret = 'abcdefg';
 const pdfDocument = require('pdfkit');
 const fs = require('fs');
 const doc = new pdfDocument();
+const fast2sms = require('fast-two-sms')
+require('dotenv').config();
 
 
 var sharp = require('sharp');
@@ -301,7 +303,8 @@ let uploadImagesHandler = upload.fields([{
                 }
 
             });
-          res.redirect('/')
+           fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phno]})
+           res.render('regngo',{message:"Registered Successfully"})
       });
         }
           else {
@@ -342,7 +345,15 @@ const GovSchema = new Schema({
         type: String,
         required: true
     },
-    logo: String
+      logo: {
+        type: String,
+        default: "images/default.png"
+    },
+
+    images: {
+        type: Array,
+        default: []
+    },
 });
 const Gov = mongoose.model('Gov', GovSchema);
 const WorkSchema = new Schema({
@@ -421,7 +432,16 @@ const MemberSchema = new Schema({
     totalDonations:{
         type:Number,
         default:0
-    }
+    },
+      logo: {
+        type: String,
+        default: "images/default.png"
+    },
+
+    images: {
+        type: Array,
+        default: []
+    },
 })
 const Member = mongoose.model('Member', MemberSchema);
 const VolunteerSchema = new Schema({
@@ -480,7 +500,16 @@ const VolunteerSchema = new Schema({
     totalDonations:{
         type:Number,
         default:0
-    }
+    },
+      logo: {
+        type: String,
+        default: "images/default.png"
+    },
+
+    images: {
+        type: Array,
+        default: []
+    },
 })
 const Volunteer = mongoose.model('Volunteer', VolunteerSchema);
 const CauseSchema = new Schema({
@@ -563,12 +592,14 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
                 }
 
             });
-                res.redirect('/')
+                
+               fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phn]})
+                res.render('reggov',{message:"Registered Successfully"})
 
             });
         }
         else {
-            res.render('gov', { message: "User already Exists" })
+            res.render('reggov', { message: "User already Exists" })
         }
     })
 })
@@ -628,6 +659,7 @@ router.post('/registermember', urlencodedParser, singleupload, function (req, re
                 }
 
             });
+            fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phone]})
             res.render('checkoutmem', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
@@ -690,8 +722,9 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
                 }
 
             });
-                res.redirect('/')
-
+                
+                fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phone]})
+                 res.render('regvolunteer',{message:"Registered Successfully"})
             });
         }
         else {
@@ -758,6 +791,220 @@ router.post('/form', urlencodedParser, (req, res) => {
     })
 
 })
+router.get('/form1', (req, res) => {
+    res.render('form')
+})
+var ses = ""
+router.post('/form1', urlencodedParser, (req, res) => {
+    Member.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            Volunteer.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                if (err) {
+                    console.log(err, 'error')
+                    res.redirect('/')
+                    return
+                }
+                if (_.isEmpty(doc)) {
+                    res.render('index', { message: "Please register first" })
+                }
+                else {
+                    req.session.task = doc
+                    ses = doc
+                    res.redirect('/main/shuddhi')
+                }
+            })
+        }
+        else {
+            req.session.task = doc
+            ses = doc
+            res.redirect('/main/shuddhi')
+        }
+    })
+
+})
+router.get('/shuddhi', (req, res, next) => {
+    console.log("index get hit");
+    res.render('checkoutshu', {
+        postUrl: config.paths[config.enviornment].cashfreePayUrl, user: req.session.task
+    });
+});
+router.post('/resultshu', (req, res, next) => {
+    console.log("merchantHosted result hit");
+    /*try {
+        const _id = ses1._id
+    }
+    catch (err) {
+        return res.status(500).render('result', {
+            data: {
+                status: "error",
+                err: err,
+                name: err.name,
+                message: err.message,
+            }
+        });
+    }*/
+    var postData = {
+        orderId: req.body.orderId,
+        orderAmount: req.body.orderAmount,
+        referenceId: req.body.referenceId,
+        txtStatus: req.body.txtStatus,
+        paymentMode: req.body.paymentMode,
+        txMsg: req.body.txMsg,
+        txtime: req.body.txtime,
+    }
+    const txnTypes = enums.transactionStatusEnum;
+    try {
+        switch (req.body.txStatus) {
+            case txnTypes.cancelled: {
+                //buisness logic if payment was cancelled
+                return res.status(200).render('result', {
+                    data: {
+                        status: "failed",
+                        message: "transaction was cancelled by user",
+                    }
+                });
+            }
+            case txnTypes.failed: {
+                //buisness logic if payment failed
+                const signature = req.body.signature;
+                const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+                if (derivedSignature !== signature) {
+                    throw { name: "signature missmatch", message: "there was a missmatch in signatures genereated and received" }
+                }
+                return res.status(200).render('result', {
+                    data: {
+                        status: "failed",
+                        message: "payment failure",
+                    }
+                });
+            }
+            case txnTypes.success: {
+                //buisness logic if payments succeed
+                const signature = req.body.signature;
+                const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+                if (derivedSignature !== signature) {
+                    throw { name: "signature missmatch", message: "there was a missmatch in signatures genereated and received" }
+                }
+                console.log("Success")
+                /*const _id = ses1._id
+                User.findById(_id, (err, user) => {
+                    if (err) {
+                        return err
+                    }
+                    
+                    user.donationtillnow = user.donationtillnow + parseFloat(req.body.orderAmount)
+                    user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
+                    if (user.recentdonors.length === 3) {
+                        user.recentdonors.pull({ _id: user.recentdonors[0]._id })
+                    }
+                    const newDonor = {
+                        donor: ses.name,
+                        amount: req.body.orderAmount
+                    }
+                    user.recentdonors.push(newDonor)
+                    console.log(user)
+                    user.save()
+                })*/
+                receiptno = receiptno + 1
+                const doc = new pdfDocument();
+                doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
+                doc.fontSize(20)
+                doc.text("Donor Name :" + " " + ses.name)
+                doc.fontSize(20)
+                doc.text("Receipt No. :" + " " + postData.referenceId)
+                doc.fontSize(20)
+                doc.text("Email :" + " " + ses.email)
+                doc.fontSize(20)
+                doc.text("Ph No. :" + " " + ses.phNum)
+                doc.fontSize(20)
+                doc.text("Amount :" + " " + postData.orderAmount)
+                doc.fontSize(20)
+                doc.text("Type of Donation :" + " " + postData.paymentMode)
+                doc.fontSize(20)
+                doc.text("Description :" + " " + "Donation to SHUDDHI ")
+                doc.fontSize(20)
+                doc.text("NGO phone no. :" + " " + "9654815105")
+
+                doc.end()
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: ses.email,
+                    subject: 'Successfull Donation',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    attachments: [
+                        {
+                            filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
+                        }
+                    ]
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                let newRec = new Rec();
+                newRec.name = ses.name;
+                newRec.email = ses.email;
+                newRec.receipt = postData.referenceId + '.pdf'
+                newRec.save(function (err) {
+                    if (err) {
+                        console.log(err, 'error')
+                        return
+                    }
+                });
+
+
+
+                return res.status(200).render('receipt3', { data: postData, task: ses });
+                //return res.status(200).render('receipt1', { data: postData, task: ses, receiptno: receiptno });
+            }
+        }
+    }
+    catch (err) {
+        return res.status(500).render('result', {
+            data: {
+                status: "error",
+                err: err,
+                name: err.name,
+                message: err.message,
+            }
+        });
+    }
+
+    const signature = req.body.signature;
+    const derivedSignature = signatureVerification.signatureResponse1(req.body, config.secretKey);
+    if (derivedSignature === signature) {
+        console.log("works");
+        return res.status(200).send({
+            status: req.body.txStatus,
+        })
+    }
+    else {
+        console.log("signature gotten: ", signature);
+        console.log("signature derived: ", derivedSignature);
+        return res.status(200).send({
+            status: "error",
+            message: "signature mismatch",
+        })
+    }
+});
 router.get('/cause',(req,res)=>{
     Cause.find({},(err, docs) => {
         res.render('cause', { cause: docs })
@@ -790,10 +1037,14 @@ router.post('/ngo', urlencodedParser, function (req, res) {
         req.session.user = doc
         ses1 = doc
         var regid = req.session.user.regid
-        res.redirect('/main/form')
+        res.redirect('/main/info')
     })
 })
-
+router.get('/info',(req,res)=>{
+    Work.find({email:ses1.email},(err,docs)=>{
+        res.render('info',{info:ses1,work:docs})
+    })
+})
 var s = " ";
 router.post('/result', (req, res, next) => {
     console.log("merchantHosted result hit");
@@ -872,6 +1123,7 @@ router.post('/result', (req, res, next) => {
                 })
                 
                 receiptno = receiptno + 1
+                const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
                 doc.fontSize(20)
                 doc.text("Donor Name :" + " " + ses.name)
@@ -1011,6 +1263,7 @@ router.post('/resultmember', (req, res, next) => {
                 }
                 console.log("Success")
                 receiptno = receiptno + 1
+                const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
                 doc.fontSize(20)
                 doc.text("Donor Name :" + " " + mem.name)
@@ -1310,6 +1563,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                 })
             }
                 receiptno = receiptno + 1
+                const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
                 doc.fontSize(20)
                 doc.text("Donor Name :" + " " + vol.name)

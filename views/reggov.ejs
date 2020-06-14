@@ -274,6 +274,9 @@ select option {
     
 <div class="container">
   <form method = "post" enctype="multipart/form-data">
+   <% if(locals.message){ %>
+      <%=message %>
+      <% } %>
     <div class="row">
       <h3>REGISTER AS A GOVERNMENT ORGANISATION</h3>
         <h5>Step towards our nation</h5>
