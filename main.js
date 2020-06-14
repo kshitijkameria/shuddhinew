@@ -32,11 +32,6 @@ const pdfDocument = require('pdfkit');
 const fs = require('fs');
 const doc = new pdfDocument();
 
-// const ngodb = require('./db/ngodb')
-// const ngorouter = require('./router/ngorouter'); 
-// router.use("/registerngo",ngorouter);
-
-
 
 var sharp = require('sharp');
 
@@ -257,6 +252,8 @@ let uploadImagesHandler = upload.fields([{
         const userpath2 = req.files.cert12a[0].path.split("\\").splice(1).join("/");
         const userpath3 = req.files.cert80g[0].path.split("\\").splice(1).join("/");
         const userpath4 = req.files.fcra[0].path.split("\\").splice(1).join("/");
+        // const userpath5 = req.files.logo[0].path.split("\\").splice(1).join("/");
+        
       let newUser = new User();
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
@@ -264,6 +261,7 @@ let uploadImagesHandler = upload.fields([{
       newUser.cert12a =userpath2;
       newUser.cert80g =userpath3;
       newUser.fcra = userpath4;
+    //   newUser.logo = userpath5;
       newUser.acname = req.body.acname;
       newUser.acno = req.body.acno;
       newUser.ifsccode = req.body.ifsccode;
@@ -515,6 +513,7 @@ router.get('/donateforcause/:id',(req,res)=>{
         postUrl: config.paths[config.enviornment].cashfreePayUrl,member : vol
     });
 })
+
 
 router.get('/gov', function (req, res) {
     res.render('reggov')
