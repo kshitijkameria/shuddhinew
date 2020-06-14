@@ -1,0 +1,43 @@
+<htmL>
+
+<head></head>
+
+<body>
+    <img src = "/<%= info.logo %>"style="height:100px;width:100px"/>
+    <h1>Name :<%= info.name %></h1>
+    <h1>EMAIL ID:<%= info.email.id %></h1>
+    <h1>CONTACT NO><%= info.phno %></h1>
+    <h1>DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
+    <h1>THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
+    <h1>LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1>
+    <h1>RECENT DONORS</h1>
+    <h1><%= info.recentdonors.donate %></h1>
+    <h1><%= info.recentdonors.amount %></h1>
+    <a href='/main/form'>DONATE</a>
+    <h1>WORK</h1>
+    <table style="border :3px solid;border-color: black;width:30rem" class="table">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% for(var i = 0; i < work.length; i++) { %>
+        <tr>
+            <td></td>
+            <td style="color :black;border :3px solid;border-color: black;width:30rem"><%=work[i].heading %>
+                </br>
+                </br>
+                <%=work[i].content %>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+    <h1>IMAGES</h1>
+   
+        <% for(var i = 0; i < info.images.length; i++) { %>
+        <img src="/<%= info.images[i] %>" style="height:100px;width:100px" />
+        <% } %>
+   
+</body>
+
+</htmL>
