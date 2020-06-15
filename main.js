@@ -92,9 +92,9 @@ const UserSchema = new Schema({
       },
     confirmPassword: {
         type: String,
-        validate: function () {
-          return this.password == this.confirmPassword;
-        }
+        // validate: function () {
+        //   return this.password == this.confirmPassword;
+        // }
       },
       description:{
         type: String
@@ -257,6 +257,10 @@ let uploadImagesHandler = upload.fields([{
         // const userpath5 = req.files.logo[0].path.split("\\").splice(1).join("/");
         
       let newUser = new User();
+      if(req.body.password !=req.body.confirmPassword)
+      {
+        res.render('regngo',{message:"Password and confirm password soes not mach. Register again!"})
+      }
       newUser.name = req.body.name;
       newUser.regid = req.body.regid;
       newUser.regcert = userpath1;
@@ -279,6 +283,7 @@ let uploadImagesHandler = upload.fields([{
               console.log(err.message,"err");
               return
           }
+    
            let transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -407,9 +412,9 @@ const MemberSchema = new Schema({
     },
     cnfrmpassword: {
         type: String,
-        validate: function () {
-            return this.password == this.confirmPassword;
-        },
+        // validate: function () {
+        //     return this.password == this.confirmPassword;
+        // },
         // required:true
     },
     cityName:{
@@ -1810,10 +1815,13 @@ router.post('/manyimagesupload', uploadImagesHandler, uploadimages , urlencodedP
 router.get('/loginadmin',(req,res)=>{
     res.render('login')
 })
+
 router.post('/loginadmin', urlencodedParser, singleupload,(req,res)=>{
     if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567"){
         res.redirect('/main/createcause')
+       res.redirect('/');
     }
+    
     else{
         res.render('login', { message: "Please check email/password" })
     }
