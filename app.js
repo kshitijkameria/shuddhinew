@@ -294,6 +294,9 @@ app.get("/gallery",function(req,res){
 app.get("/contactus",function(req,res){
     res.render('contacts');
 })
+app.get("/donate",function(req,res){
+    res.render('donate');
+})
 /*app.post('/result', (req,res,next)=>{
     //will have to make generic/payment type based
     console.log("result hit");

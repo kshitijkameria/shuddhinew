@@ -1807,6 +1807,17 @@ router.post('/manyimagesupload', uploadImagesHandler, uploadimages , urlencodedP
         res.redirect('/main/welcome')
     });
 })
+router.get('/loginadmin',(req,res)=>{
+    res.render('login')
+})
+router.post('/loginadmin', urlencodedParser, singleupload,(req,res)=>{
+    if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567"){
+        res.redirect('/main/createcause')
+    }
+    else{
+        res.render('login', { message: "Please check email/password" })
+    }
+})
 router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
