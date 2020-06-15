@@ -82,30 +82,42 @@ span.psw {
   </div>
 
   <div class="container">
-    <label for="orderId"><b>Order Id</b></label>
-    <input type="text" name="orderId" placeholder="Enter orderId" readonly>
-    <label for="orderamount"><b>Order Amount</b></label>  
-    <input type="text" name="orderamount" value="1500" placeholder="amount" readonly>
-    <br>
-    <label for="customerName"><b>Name</b></label>
-    <input type="text" name="customerName" value="<%=user.name %>" >
-    <label for="customerEmail"><b>Email</b></label>
-    <input type="text" name="customerEmail" value="<%= user.email %>"required >
-    <label for="phno"><b>Phone No</b></label> 
-    <input type="text" name="customerPhone" value="<%= user.phNum %>" >
-    <input type="submit" value="pay cashfree" id="payBtn" style="display:none"required >
-    <button value="pay" id="submitBtn3">pay</button>
-    <!-- <button type="submit">Donate</button> -->
-  </div>
-
-
-</form>
-<div id="generatedSignature"></div>
-
-</div>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="/javascripts/helper.js"></script>
-
-<script type="text/javascript" src="/javascripts/script1.js"></script>
+    <table class="mainForm">
+      <tr>
+          <td>order id</td>
+          <td><input type="text" name="orderId" readonly ></td>
+      </tr>
+      <tr>
+          <td>order amount</td>
+          <td><input type="text" name="orderAmount" value="1500" readonly></td>
+      </tr>
+      <td>customer name</td>
+      <td><input type="text" name="customerName" value="<%=user.name %>" readonly></td>
+  </tr>
+  <tr>
+      <td>customer email</td>
+      <td><input type="text" name="customerEmail" value="<%= user.email %>" readonly></td>
+  </tr>
+  <tr>
+      <td>customer phone</td>
+      <td><input type="text" name="customerPhone" value="<%= user.phNum %>" readonly ></td>
+      </tr>
+      
+  </table>
+          <table>
+          <tr>
+              <td colspan="2"><input type="submit" value="pay cashfree" id="payBtn" style="display:none" ></td>
+          </tr>
+          <tr>
+              <td colspan="2"><button value="pay" id="submitBtn3">pay</button></td>
+          </tr>
+          </table>
+      </form>
+      <div id="generatedSignature"></div>
+  </body>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/javascripts/helper.js"></script>
+  
+  <script type="text/javascript" src="/javascripts/script1.js"></script>
 </html>
