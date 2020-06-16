@@ -7,7 +7,7 @@ const enums = require('./helpers/enums');
 
 const main = require('./main');
 const merchantHosted = require('./merchantHosted');
-
+import Cause from './main';
 
 //const notifyUrl = "http://" + ipAdr + ":" + port + "/notify";
 //const notifyUrl = "https://webhook.site/e39bbfdd-6b34-421e-8379-1a2dc9a13238"

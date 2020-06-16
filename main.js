@@ -1653,6 +1653,12 @@ router.get('/loginvolunteer', (req, res) => {
 })
 router.post('/login', urlencodedParser, (req, res) => {
     User.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
+        if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567")
+        {
+            req.session.work = doc;
+            res.redirect('/main/welcomeadmin')
+            return
+        }
         if (err) {
             console.log(err, 'error')
             res.redirect('/')
@@ -1698,6 +1704,7 @@ router.post('/login', urlencodedParser, (req, res) => {
                     req.session.work = doc
                     res.redirect('/main/welcome')
                 }
+        
             })
         }
         else {
@@ -1776,6 +1783,35 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
     });
 
 })
+
+router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
+    Work.find({ postedBy: req.session.work._id }, (err, docs) => {
+        Rec.find({ email: req.session.work.email }, (err, docs1) => {
+            res.render('useradmin', { user: req.session.work, blogs: docs, recs: docs1 })
+
+        })
+
+    })
+})
+
+router.post('/welcomeadmin', urlencodedParser, checkLogIn, (req, res) => {
+    let newWork = new Work()
+    newWork.heading = req.body.heading
+    newWork.content = req.body.content
+    newWork.email = req.session.work.email
+    newWork.name = req.session.work.name
+    newWork.postedBy = req.session.work._id
+    newWork.save(function (err) {
+        if (err) {
+            console.log(err, 'error')
+            return
+        }
+        res.redirect('/main/welcomeadmin')
+
+    });
+
+})
+
 router.get("/imageupload", checkLogIn, (req, res) => {
     res.render("upload")
 })
@@ -1830,4 +1866,5 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
+module.exports = Cause;
 module.exports = router;
