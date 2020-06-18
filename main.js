@@ -32,9 +32,28 @@ const pdfDocument = require('pdfkit');
 const fs = require('fs');
 const doc = new pdfDocument();
 const fast2sms = require('fast-two-sms')
+const uniqid = require('uniqid');
 require('dotenv').config();
 
+const cfSdk = require('cashfree-sdk');
 
+const payout_config = {
+    Payouts:{
+    ClientID: "CF17374DC5JM1FXK36U26M",
+    ClientSecret: "942bdab0ea1f84b92a1a587005458a1963f1ddf1",
+    ENV: "TEST", 
+    }
+};
+
+const handleResponse = (response) => {
+    if(response.status === "ERROR"){
+        throw {name: "handle response error", message: "error returned"};
+    }
+}
+
+const {Payouts} = cfSdk;
+const {Beneficiary, Transfers} = Payouts;
+Payouts.Init(payout_config.Payouts);
 var sharp = require('sharp');
 // const { stringAt } = require('pdfkit/js/data');
 
@@ -255,7 +274,6 @@ let uploadImagesHandler = upload.fields([{
         const userpath2 = req.files.cert12a[0].path.split("\\").splice(1).join("/");
         const userpath3 = req.files.cert80g[0].path.split("\\").splice(1).join("/");
         const userpath4 = req.files.fcra[0].path.split("\\").splice(1).join("/");
-        // const userpath5 = req.files.logo[0].path.split("\\").splice(1).join("/");
         
       let newUser = new User();
       if(req.body.password !=req.body.confirmPassword)
@@ -268,7 +286,6 @@ let uploadImagesHandler = upload.fields([{
       newUser.cert12a =userpath2;
       newUser.cert80g =userpath3;
       newUser.fcra = userpath4;
-    //   newUser.logo = userpath5;
       newUser.acname = req.body.acname;
       newUser.acno = req.body.acno;
       newUser.ifsccode = req.body.ifsccode;
@@ -310,6 +327,26 @@ let uploadImagesHandler = upload.fields([{
 
             });
            fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phno]})
+           const bene = {
+            "beneId": newUser._id, 
+            "name": req.body.acname,
+            "email": req.body.email, 
+            "phone": req.body.phno,
+            "bankAccount": req.body.acno,
+            "ifsc": req.body.ifsccode,    
+            "address1" : req.body.bankadd
+        };
+        try{
+            const response = Beneficiary.Add(bene);
+            console.log("beneficiarry addition response");
+            console.log(response);
+        }
+        catch(err){
+            console.log("err caught in beneficiarry addition");
+            console.log(err);
+            return;
+        }
+            
            res.render('regngo',{message:"Registered Successfully"})
       });
         }
@@ -319,24 +356,6 @@ let uploadImagesHandler = upload.fields([{
     })
      
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const GovSchema = new Schema({
     name: String,
@@ -379,26 +398,23 @@ const RecSchema = new Schema({
 const Rec = mongoose.model('Rec', RecSchema);
 
 
-
-
-
 const MemberSchema = new Schema({
     name: {
         type: String,
-        // required: true,
+        required: true,
     },
     educQual: {
         type: Array,
     },
     phNum: {
         type: Number,
-        // required: true,
+        required: true,
         trim: true
     },
     email: {
         type: String,
         unique: true,
-        // required: true,
+        required: true,
         trim: true,
         lowercase: true,
         validate(value){
@@ -409,31 +425,51 @@ const MemberSchema = new Schema({
     },
     password: {
         type: String,
-        // required: true
+        required: true
     },
     cnfrmpassword: {
         type: String,
         // validate: function () {
         //     return this.password == this.confirmPassword;
         // },
-        // required:true
+        required:true
     },
     cityName:{
         type:String,
-        // required:true
+        required:true
     },
     address:{
         type:String,
-        // required:true,
+        required:true,
+    },
+    thisMonthDonations:{
+        type:Number,
+        default:0
+    },
+    acname:{
+        type: String,
+        required:true,
+    },
+    acno: {
+        required:true,
+        type: Number
+    },
+    ifsccode:{
+        required:true,
+        type: String
+    },
+    bankadd:{
+        required:true,
+        type: String
     },
     idNumber:{
         type:String,
-        // required:true,
+        required:true,
         unique:true
     },
     interests:{
         type:Array,
-        // required:true
+        required:true
     },
     totalDonations:{
         type:Number,
@@ -453,20 +489,20 @@ const Member = mongoose.model('Member', MemberSchema);
 const VolunteerSchema = new Schema({
     name: {
         type: String,
-        // required: true,
+        required: true,
     },
     educQual: {
         type: Array,
     },
     phNum: {
         type: Number,
-        // required: true,
+        required: true,
         trim: true
     },
     email: {
         type: String,
         unique: true,
-        // required: true,
+        required: true,
         trim: true,
         lowercase: true,
         validate(value){
@@ -477,7 +513,7 @@ const VolunteerSchema = new Schema({
     },
     password: {
         type: String,
-        // required: true
+        required: true
     },
     cnfrmpassword: {
         type: String,
@@ -485,20 +521,20 @@ const VolunteerSchema = new Schema({
     },
     cityName:{
         type:String,
-        // required:true
+        required:true
     },
     address:{
         type:String,
-        // required:true,
+        required:true,
     },
     idNumber:{
         type:String,
-        // required:true,
+        required:true,
         unique:true
     },
     interests:{
         type:Array,
-        // required:true
+        required:true
     },
     role:{
         type: Array
@@ -506,6 +542,22 @@ const VolunteerSchema = new Schema({
     totalDonations:{
         type:Number,
         default:0
+    },
+    thisMonthDonations:{
+        type:Number,
+        default:0
+    },
+    acname:{
+        type: String
+    },
+    acno: {
+        type: Number
+    },
+    ifsccode:{
+        type: String
+    },
+    bankadd:{
+        type: String
     },
       logo: {
         type: String,
@@ -534,14 +586,125 @@ const CauseSchema = new Schema({
 const Cause = mongoose.model('Cause', CauseSchema);
 
 var CronJob = require('cron').CronJob;
-var job = new CronJob('00 00 1 * *', function() {
+var job = new CronJob('00 12 1 * *', function() {
+    console.log("check")
     User.find({},(err,users)=>{
         if(err){
             return err
         }
-        // console.log('check')
         users.map(user=>{
+            const transfer = {
+                beneId: user._id,
+                transferId: uniqid('transfer'),
+                amount: (user.thisMonthDonations)*0.90,
+            };
+            (
+                async()=>{
+                    try{
+                        const response = await Transfers.RequestTransfer(transfer);
+                        console.log("request transfer response");
+                    }
+                    catch(err){
+                        console.log("err caught in requesting transfer");
+                        console.log(err);
+                        return; 
+                    }
+                    try{
+                        const response = await Transfers.GetTransferStatus({
+                            "transferId": transfer.transferId,
+                        });
+                        console.log("get transfer status response");
+                        console.log(response);
+                        handleResponse(response);
+                    }
+                    catch(err){
+                        console.log("err caught in getting transfer status");
+                        console.log(err);
+                        return; 
+                    }
+                }
+            )();
             user.lastMonthDonations= user.thisMonthDonations
+            user.thisMonthDonations=0
+            user.save()
+        })
+    })
+    Member.find({},(err,users)=>{
+        if(err){
+            return err
+        }
+        users.map(user=>{
+            const transfer = {
+                beneId: user._id,
+                transferId: uniqid('transfer'),
+                amount: (user.thisMonthDonations)*0.5,
+            };
+            (
+                async()=>{
+                    try{
+                        const response = await Transfers.RequestTransfer(transfer);
+                        console.log("request transfer response");
+                    }
+                    catch(err){
+                        console.log("err caught in requesting transfer");
+                        console.log(err);
+                        return; 
+                    }
+                    try{
+                        const response = await Transfers.GetTransferStatus({
+                            "transferId": transfer.transferId,
+                        });
+                        console.log("get transfer status response");
+                        console.log(response);
+                        handleResponse(response);
+                    }
+                    catch(err){
+                        console.log("err caught in getting transfer status");
+                        console.log(err);
+                        return; 
+                    }
+                }
+            )();
+            user.thisMonthDonations=0
+            user.save()
+        })
+    })
+    Volunteer.find({},(err,users)=>{
+        if(err){
+            return err
+        }
+        users.map(user=>{
+            const transfer = {
+                beneId: user._id,
+                transferId: uniqid('transfer'),
+                amount: (user.thisMonthDonations)*0.5,
+            };
+            (
+                async()=>{
+                    try{
+                        const response = await Transfers.RequestTransfer(transfer);
+                        console.log("request transfer response");
+                    }
+                    catch(err){
+                        console.log("err caught in requesting transfer");
+                        console.log(err);
+                        return; 
+                    }
+                    try{
+                        const response = await Transfers.GetTransferStatus({
+                            "transferId": transfer.transferId,
+                        });
+                        console.log("get transfer status response");
+                        console.log(response);
+                        handleResponse(response);
+                    }
+                    catch(err){
+                        console.log("err caught in getting transfer status");
+                        console.log(err);
+                        return; 
+                    }
+                }
+            )();
             user.thisMonthDonations=0
             user.save()
         })
@@ -618,10 +781,6 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
 })
 
 
-
-
-
-
 router.get('/registermember', (req, res) => {
     res.render('regmember')
 })
@@ -646,7 +805,10 @@ router.post('/registermember', urlencodedParser, singleupload, function (req, re
             newMember.address = req.body.address;
             newMember.idNumber = req.body.aadhaar;
             newMember.interests = req.body.intrest;
-            
+            newMember.acname = req.body.acname;
+            newMember.acno = req.body.acno;
+            newMember.ifsccode = req.body.ifsccode;
+            newMember.bankadd = req.body.bankadd;
             newMember.save()
              let transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -673,6 +835,25 @@ router.post('/registermember', urlencodedParser, singleupload, function (req, re
 
             });
             fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phone]})
+            const bene = {
+                "beneId": newMember._id, 
+                "name": req.body.acname,
+                "email": req.body.email, 
+                "phone": req.body.phno,
+                "bankAccount": req.body.acno,
+                "ifsc": req.body.ifsccode,    
+                "address1" : req.body.address
+            };
+            try{
+                const response = Beneficiary.Add(bene);
+                console.log("beneficiarry addition response");
+                console.log(response);
+            }
+            catch(err){
+                console.log("err caught in beneficiarry addition");
+                console.log(err);
+                return;
+            }
             res.render('checkoutmem', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
@@ -706,6 +887,10 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
             newMember.interests = req.body.intrest;
             newMember.cnfrmpassword = req.body.cnfrmpassword;
             newMember.role = req.body.role;
+            newMember.acname = req.body.acname;
+            newMember.acno = req.body.acno;
+            newMember.ifsccode = req.body.ifsccode;
+            newMember.bankadd = req.body.bankadd;
             newMember.save(function (err) {
                 if (err) {
                     console.log(err, 'error')
@@ -737,6 +922,25 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
             });
                 
                 fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phone]})
+                const bene = {
+                    "beneId": newMember._id, 
+                    "name": req.body.acname,
+                    "email": req.body.email, 
+                    "phone": req.body.phno,
+                    "bankAccount": req.body.acno,
+                    "ifsc": req.body.ifsccode,    
+                    "address1" : req.body.address
+                };
+                try{
+                    const response = Beneficiary.Add(bene);
+                    console.log("beneficiarry addition response");
+                    console.log(response);
+                }
+                catch(err){
+                    console.log("err caught in beneficiarry addition");
+                    console.log(err);
+                    return;
+                }
                  res.render('regvolunteer',{message:"Registered Successfully"})
             });
         }
@@ -1879,6 +2083,10 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
+<<<<<<< HEAD
 module.exports.CauseSchema = CauseSchema;
 module.exports.Cause = mongoose.model('Cause', CauseSchema);
+=======
+// module.exports = Cause;
+>>>>>>> fa959b8da915f7043c6a83b6e55a7a89ff79987d
 module.exports = router;
