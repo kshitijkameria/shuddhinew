@@ -1775,15 +1775,29 @@ router.post('/resultdonatemem', (req, res, next) => {
                 Volunteer.findById(tostoreid,(err,user)=>{
                     console.log(user)
                     user.totalDonations = user.totalDonations + parseFloat( req.body.orderAmount)
+                    user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
                     user.save()
                 })
             }
             catch{
+                try{
                 Member.findById(tostoreid,(err,user)=>{
                     console.log(user)
+                    user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
                     user.totalDonations = user.totalDonations + parseFloat( req.body.orderAmount)
                     user.save()
                 })
+            }
+            catch(e){
+                return res.status(500).render('result', {
+                    data: {
+                        status: "error",
+                        err: err,
+                        name: err.name,
+                        message: err.message,
+                    }
+                });
+            }
             }
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
