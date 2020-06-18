@@ -33,6 +33,7 @@ const fs = require('fs');
 const doc = new pdfDocument();
 const fast2sms = require('fast-two-sms')
 const uniqid = require('uniqid');
+// var popupS = require('popups');
 require('dotenv').config();
 
 const cfSdk = require('cashfree-sdk');
@@ -346,12 +347,15 @@ let uploadImagesHandler = upload.fields([{
             console.log(err);
             return;
         }
-        window.alert("Registered Successfully")
+        // popupS.alert({
+        //     content: 'Hello World!'
+        // });
+        // window.alert("Registered Successfully");
            res.render('regngo')
       });
         }
           else {
-              window.alert("already");
+            //   window.alert("already");
             res.render('regngo')
         }
     })
@@ -995,7 +999,7 @@ router.post('/form', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('index', { message: "Please register first" })
+                    res.render('regvolunteer', { message: "Please register first" })
                 }
                 else {
                     req.session.task = doc
@@ -1031,7 +1035,7 @@ router.post('/form1', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('index', { message: "Please register first" })
+                    res.render('regvolunteer', { message: "Please register first" })
                 }
                 else {
                     req.session.task = doc
@@ -1163,7 +1167,7 @@ router.post('/resultshu', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: ses.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -1377,7 +1381,7 @@ router.post('/result', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: ses.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards,SHUDDHI',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -1514,7 +1518,7 @@ router.post('/resultmember', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: mem.email,
                     subject: 'Successfull Registration',
-                    text: 'Dear Member,\n\n You are now a member of Shudhi.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    text: 'Dear Member,\n\n You are now a member of Shuddhi.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -1532,7 +1536,7 @@ router.post('/resultmember', (req, res, next) => {
 
                 });
 
-                return res.status(200).render('receipt1', { data: postData, task: mem });
+                return res.status(200).render('certificate', { data: postData, task: mem });
                 // return res.status(200).render('receipt', { data: postData, task: ses, receiptno: receiptno });
                 
             }
@@ -1828,7 +1832,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: vol.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDHI',
+                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -2054,7 +2058,8 @@ router.post('/imageupload', uploadLogoHandler, uploadlogo , urlencodedParser, ch
             console.log(err.message, 'error')
             return
         }
-        res.redirect('/main/welcome')
+        req.session.work.logo = userpath;
+        res.redirect('/main/welcome');
     });
 })
 router.get("/manyimagesupload", checkLogIn, (req, res) => {

@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
 
     
     
@@ -259,51 +259,6 @@ ul, li{
             
           </div>  
           </section>
-          <ul id="myUL" >
-
-            <% var modCause = ((Causes.length)%3) %>
-            <% var n = 0 %>
-            <% for(var i = 0; i < (parseInt((Causes.length)/3)); i++) { %>
-            <% for(var j = 0; j < 3; j++) { %>
-  <div class="mediachange" style="width:31%;float:left;margin:1%;">
-    <li class="ngo">
-    <article class="box-causes"
-      style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-      <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %>" /></div>
-      <form method="post">
-        <input name="regid" type="hidden" value="<%=Causes[n].regid%>">
-        <p class="box-causes-donate"> <%=Causes[n].name%><br><b>Description:</b><%=Causes[n].description %><br>
-          <a align="center" class="button button-sm button-primary" href="/main/form1">Donate</a>
-        </li>
-          <% n++ %>
-      </form>
-      </p>
-    </article>
-  </div>
-
-<% } %>
-<br>
-<% } %>
-<% for(var m = 0; m < mod; m++) { %>
-
-    <div class="mediachange" style="width:31%;float:left;margin:1%;">
-        <li class="ngo">
-      <article class="box-causes"
-        style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-        <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %> " /></div>
-        <form method="post">
-          <input name="regid" type="hidden" value="<%=Causes[n].regid%>">
-          <p class="box-causes-donate"> 1<%=Causes[n].name%><br><b>Description:</b><%=Causes[n].description %><br>
-            <a align="center" class="button button-sm button-primary" href="/main/form1">Donate</a>  
-          </li>
-            <% n++ %>
-        </form>
-        </p>
-      </article>
-    </div>
-</ul>
-<% } %>
-
           <section class="parallax-container bg-gray-600" data-parallax-img="http://3.bp.blogspot.com/-BeqvYhce9yg/UrfUjJNUjuI/AAAAAAAANns/UFrGm36cZzw/s1600/Prague+at+Dusk%252C+Czech+Republic+-+1600x1200+-+ID+39476+-+PREMIUM_Historical+Buildings+Wallpaper_Pictures%2540wpshub.blogspot.com045-SNOW.gif">
             <div class="parallax-content section-xxl text-center">
               <div class="container">
@@ -323,7 +278,10 @@ ul, li{
           </section>
 
 
-  
+  <% var mod = ((ngo.length)%3) %>
+  <% var k = 0 %>
+  <% for(var i = 0; i < (parseInt((ngo.length)/3)); i++) { %>
+  <% for(var j = 0; j < 3; j++) { %>
 
   <section class="section section-lg bg-gray-1" style="background: url('https://i.ytimg.com/vi/TyauNrbnmVo/maxresdefault.jpg');background-repeat: no-repeat;background-size: cover;">
     <div class="container">
@@ -340,10 +298,7 @@ ul, li{
                </div>       </br></br>    
                <ul id="myUL" >
 
-                <% var mod = ((ngo.length)%3) %>
-                <% var k = 0 %>
-                <% for(var i = 0; i < (parseInt((ngo.length)/3)); i++) { %>
-                <% for(var j = 0; j < 3; j++) { %>
+
       <div class="mediachange" style="width:31%;float:left;margin:1%;">
         <li class="ngo">
         <article class="box-causes"
@@ -351,7 +306,7 @@ ul, li{
           <div class="box-causes-img"><img src="/<%= ngo[k].logo %>" /></div>
           <form method="post">
             <input name="regid" type="hidden" value="<%=ngo[k].regid%>">
-            <p class="box-causes-donate"> <%=ngo[k].name%><br><b>Total Amount Donated:</b><%=ngo[k].donationtillnow%><br>
+            <p class="box-causes-donate"> 1<%=ngo[k].name%><br><b>Total Amount Donated:</b><%=ngo[k].donationtillnow%><br>
               <button type="submit" style="width:100%;background:black;color:#7FBC4E;">Know More</button>
             </li>
               <% k++ %>
@@ -472,24 +427,11 @@ ul, li{
           </footer>
         </div>
         <div class="snackbars" id="form-output-global"></div>
-          <script src="/javascripts/core.min.js"></script>
-          <script src="/javascripts/script.js"></script>
+          <script src="js/core.min.js"></script>
+          <script src="js/script.js"></script>
         </body>
         </html>
         
   </body>
 
 </html>
-
-
-
-
-
-
-
-
-<!-- <% for(var i = 0; i < Causes.length; i++) { %>
-  <h3><%=Causes[i].name%></h3>
-  <h3><%Causes[i].description %></h3>
-  <img src="/uploads/<%= Causes[i].image %>"/>
-  <% } %> -->

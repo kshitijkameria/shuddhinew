@@ -289,9 +289,9 @@ app.get("/ourpartner",function(req,res){
     res.render('ourpartner');
 })
 
-app.get("/causes",function(req,res){
-    res.render('causesfinal');
-})
+// app.get("/causes",function(req,res){
+//     res.render('causesfinal');
+// })
 
 app.get("/gallery",function(req,res){
     res.render('gallery');
