@@ -196,6 +196,11 @@ font-family:'cooper';
         </table>
 
 </br></br>
+<% for(var i = 0; i < Causes.length; i++) { %>
+  <h3><%=Causes[i].name%></h3>
+  <h3><%Causes[i].description %></h3>
+  <img src="/uploads/<%= Causes[i].image %>"/>
+  <% } %>
 
 
 <script>

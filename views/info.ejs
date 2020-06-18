@@ -1,47 +1,3 @@
-<!-- <htmL>
-
-<head></head>
-
-<body>
-    <img src = "/<%= info.logo %>"style="height:100px;width:100px"/>
-    <h1>Name :<%= info.name %></h1>
-    <h1>EMAIL ID:<%= info.email.id %></h1>
-    <h1>CONTACT NO><%= info.phno %></h1>
-    <h1>DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
-    <h1>THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
-    <h1>LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1>
-    <h1>RECENT DONORS</h1>
-    <h1><%= info.recentdonors.donate %></h1>
-    <h1><%= info.recentdonors.amount %></h1>
-    <a href='/main/form'>DONATE</a>
-    <h1>WORK</h1>
-    <table style="border :3px solid;border-color: black;width:30rem" class="table">
-        <tr>
-            <th></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <% for(var i = 0; i < work.length; i++) { %>
-        <tr>
-            <td></td>
-            <td style="color :black;border :3px solid;border-color: black;width:30rem"><%=work[i].heading %>
-                </br>
-                </br>
-                <%=work[i].content %>
-            </td>
-        </tr>
-        <% } %>
-    </table>
-    <h1>IMAGES</h1>
-   
-        <% for(var i = 0; i < info.images.length; i++) { %>
-        <img src="/<%= info.images[i] %>" style="height:100px;width:100px" />
-        <% } %>
-   
-</body>
-
-</htmL> -->
-
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
   <head>
@@ -51,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/fonts.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
@@ -63,9 +19,13 @@
       font-size:30px;
   }
 
-  table, td, tr{
+   td, tr{
       border:2px solid black;
-    
+
+  }
+  table{
+    background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');
+    box-shadow:10px 10px 10px 10px #888888;
   }
   
   </style>
@@ -121,13 +81,13 @@
       </section>
       <div align="center" style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');background-size:100% 100% ;">
         <img src = "/<%= info.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;"/>
-        <h1>Name : <%= info.name %></h1>
+        <h1>Name :<%= info.name %></h1>
         <div>
         <div style="width: 48%;margin:1%;float:left;">
-            <h1>EMAIL ID: <%= info.email %></h1>
+            <h1>EMAIL ID:<%= info.email.id %></h1>
         </div>
         <div style="width: 48%;margin:1%;float:right;">
-        <h1>CONTACT NO: <%= info.phno %></h1>
+        <h1>CONTACT NO><%= info.phno %></h1>
     </div>    
     </div>
 </br>
@@ -144,27 +104,35 @@
         </div>
     </br></br>
         <h1>WORK</h1>
-        <table align="center" style="width: 35rem;" class="table">
-            <tr>
+        <table align="center" style="width:35rem;"  class="table">
+            <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
                 <th></th>
                 <th></th>
                 <th></th>
             </tr>
             <% for(var i = 0; i < work.length; i++) { %>
-            <tr>
-                <td></td>
-                <td ><%=work[i].heading %>
+            <tr align="center">
+                <td style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
+                <td style="width:30rem;"><%=work[i].heading %>
                     </br>
                     </br>
                     <%=work[i].content %>
                 </td>
+                <td style="background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
             </tr>
             <% } %>
+            <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg')">
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
         </table>
         <h1>IMAGES</h1>
-       
+    </br>
             <% for(var i = 0; i < info.images.length; i++) { %>
-            <img src="/<%= info.images[i] %>" style="height:100px;width:100px" />
+            <img src="/<%= info.images[i] %>" style="height:100px;width:100px;box-shadow: 5px 5px #888888;" />
+          
+      
             <% } %>
       </div>
             <footer class="section footer-minimal context-dark">

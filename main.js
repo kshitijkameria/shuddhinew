@@ -36,6 +36,7 @@ require('dotenv').config();
 
 
 var sharp = require('sharp');
+// const { stringAt } = require('pdfkit/js/data');
 
 const UserSchema = new Schema({
     name: String,
@@ -521,6 +522,13 @@ const CauseSchema = new Schema({
     name:{
         type:String,
         required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    image:{
+        type: String
     }
 })
 const Cause = mongoose.model('Cause', CauseSchema);
@@ -747,8 +755,11 @@ router.get('/createcause',(req,res)=>{
     res.render('createcause')
 })
 router.post('/createcause', urlencodedParser, singleupload, function (req, res){
+    // const userpath = req.files.logo[0].path.split("\\").splice(1).join("/");
     let newCause = new Cause();
-    newCause.name = req.body.name
+    newCause.name = req.body.name;
+    newCause.description = req.body.description;
+    newCause.image = req.file.filename;
     newCause.save(function (err) {
         if (err) {
             console.log(err, 'error')
@@ -1027,8 +1038,10 @@ router.post('/cause', urlencodedParser, function (req, res){
 })
 router.get('/ngo', (req, res) => {
     User.find({}, (err, docs) => {
-        res.render('ngo', { ngo: docs })
+      Cause.find({},(err,docs1)=>{
+        res.render('ngo', { ngo: docs, Causes : docs1 })
     })
+})
 })
 var ses1 = " ";
 router.post('/ngo', urlencodedParser, function (req, res) {
@@ -1866,5 +1879,6 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
-module.exports = Cause;
+module.exports.CauseSchema = CauseSchema;
+module.exports.Cause = mongoose.model('Cause', CauseSchema);
 module.exports = router;

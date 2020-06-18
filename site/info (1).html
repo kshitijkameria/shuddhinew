@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}
+    
+    
+  h1{
+      font-size:30px;
+  }
+
+   td, tr{
+      border:2px solid black;
+
+  }
+  table{
+    background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');
+    box-shadow:10px 10px 10px 10px #888888;
+  }
+  
+  </style>
+    </head>
+    <body>
+        <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+        <p>Loading...</p>
+      </div>
+    </div>
+    <div class="page"><a class="section section-banner d-none d-xl-flex" href="https://www.templatemonster.com/website-templates/monstroid2.html" style="background-image: url(images/banner/background-04-1920x60.jpg); background-image: -webkit-image-set( url(images/banner/background-04-1920x60.jpg) 1x, url(images/banner/background-04-3840x120.jpg) 2x )" target="_blank"></a>
+      <!-- Page Header-->
+      <header class="section page-header">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <div class="rd-navbar-main-outer">
+              <div class="rd-navbar-main">
+                <!-- RD Navbar Panel-->
+                <div class="rd-navbar-panel">
+                  <!-- RD Navbar Toggle-->
+                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                  <!-- RD Navbar Brand-->
+                  <div class="rd-navbar-brand " style="align-items: center;"><a href="#"><img class="brand-logo-light" src="https://shuddhi.org/uploads/3/4/7/9/34791871/shuddhi-ngo-logo.png" alt="" width="207" height="51"/></a></div>
+                </div>
+                <div class="rd-navbar-main-element">
+                    <div class="rd-navbar-nav-wrap">
+                      <!-- RD Navbar Nav-->
+                    
+                    </div>
+                  </div><a class="button button-primary button-sm" href='/main/form'>DONATE</a>
+                
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="parallax-container" data-parallax-img="https://images.unsplash.com/photo-1546865892-a9de1f73692e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2009&q=80">
+        <div class="parallax-content breadcrumbs-custom context-dark">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 col-lg-9">
+                <h2 class="breadcrumbs-custom-title">DASHBOARD</h2>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div align="center" style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');background-size:100% 100% ;">
+        <img src = "/<%= info.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;"/>
+        <h1>Name :<%= info.name %></h1>
+        <div>
+        <div style="width: 48%;margin:1%;float:left;">
+            <h1>EMAIL ID:<%= info.email.id %></h1>
+        </div>
+        <div style="width: 48%;margin:1%;float:right;">
+        <h1>CONTACT NO><%= info.phno %></h1>
+    </div>    
+    </div>
+</br>
+</br>
+</br></br>
+    <div align="center" style="border:2px solid black;width:600px;box-shadow: 10px 10px 10px 10px #888888;background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
+        <h1>DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
+        <h1>THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
+        <h1>LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1></br>
+        <u><h1>RECENT DONORS</h1></u>
+        <h1><%= info.recentdonors.donate %></h1>
+        <h1><%= info.recentdonors.amount %></h1>
+        
+        </div>
+    </br></br>
+        <h1>WORK</h1>
+        <table align="center" style="width:35rem;"  class="table">
+            <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <% for(var i = 0; i < work.length; i++) { %>
+            <tr align="center">
+                <td style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
+                <td style="width:30rem;"><%=work[i].heading %>
+                    </br>
+                    </br>
+                    <%=work[i].content %>
+                </td>
+                <td style="background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
+            </tr>
+            <% } %>
+            <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg')">
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </table>
+        <h1>IMAGES</h1>
+    </br>
+            <% for(var i = 0; i < info.images.length; i++) { %>
+            <img src="/<%= info.images[i] %>" style="height:100px;width:100px;box-shadow: 5px 5px #888888;" />
+          
+      
+            <% } %>
+      </div>
+            <footer class="section footer-minimal context-dark">
+                <div class="container wow-outer">
+                  <div class="wow fadeIn">
+                    <div class="row row-50 row-lg-60">
+                      <div class="col-12"><a href="index.html"><img src="https://shuddhi.org/uploads/3/4/7/9/34791871/shuddhi-ngo-logo.png" alt="" width="207" height="51" /></a></div>
+                      <div class="col-12">
+                        <ul class="footer-minimal-nav">
+                          <li><a href="about-us (1).html">About Us</a></li>
+                          <li><a href="causes.html">Causes</a></li>
+                          <li><a href="Untitled-1.html">Gallery</a></li>
+                        
+                          <li><a href="contacts.html">Contacts</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-12">
+                        <ul class="social-list">
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/shuddhi.org"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="https://www.instagram.com/ngoshuddhi/"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="https://twitter.com/ngoshuddhi"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="https://www.youtube.com/ShuddhiNGO"></a></li>
+                         
+                        </ul>
+                      </div>
+                    </div>
+                   
+                  </div>
+                </div>
+              </footer>
+            </div>
+            <div class="snackbars" id="form-output-global"></div>
+            <script src="js/core.min.js"></script>
+            <script src="js/script.js"></script>
+          </body>
+        </html>

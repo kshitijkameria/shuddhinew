@@ -20,20 +20,23 @@ const app = express();
 app.locals.ipAdr = ip.address();
 app.locals.port = 3000;
 //const returnUrlCheckOut = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/result";
-
-
+const { CauseSchema, Cause } = require('./main.js');
+// const CauseSchema = require('./main.js').model('Cause').schema;
+// const Cause = require('./main.js').model(Cause);
 app.set('views' , path.join(__dirname,'views'));
 app.set('view engine','ejs');
 app.set('view options', {layout: 'layout.ejs'});
 
 //app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use(express.static('public'));x
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 
 app.use('/main',main);
 app.use('/merchantHosted',merchantHosted);
-
+const nodemailer = require('nodemailer');
+var bodyParser = require("body-parser");
+var urlencodedParser = bodyParser.urlencoded({extended:false})
 
 
 
@@ -272,6 +275,9 @@ app.post('/calculateSecretKeyshu', (req, res, next)=>{
         }
     }
 });
+// Cause.find({},function(err,docs){
+//     console.log(docs);
+// })
 app.get("/aboutus",function(req,res){
     res.render('aboutus');
 })
@@ -293,6 +299,32 @@ app.get("/gallery",function(req,res){
 
 app.get("/contactus",function(req,res){
     res.render('contacts');
+})
+app.post('/contactus',urlencodedParser,function(req,res){
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'ngo@shuddhi.org',
+            pass: 'shuddhi321'
+        }
+    });
+    let mailOptions = {
+        from: 'ngo@shuddhi.org',
+        to: 'ngo@shuddhi.org',
+        subject: 'Queries',
+        text: req.body.name + "\n" + req.body.email + "\n" + req.body.phone + "\n" + req.body.message,
+       
+    };
+    transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            console.log('Error Occurs');
+        } else {
+            console.log('Email Sent');
+
+
+        }
+
+    });
 })
 app.get("/donate",function(req,res){
     res.render('donate');
@@ -332,7 +364,9 @@ app.get('/',(req, res, next)=>{
         status: "success",
         message: "work in progress"
     })*/
+    // Cause.find({},(err,docs)=>{
     return res.status(200).render("index");
+    // })
 });
 
 app.use((err, req , res , next)=>{
