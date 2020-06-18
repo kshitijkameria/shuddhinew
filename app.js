@@ -28,7 +28,7 @@ app.set('view engine','ejs');
 app.set('view options', {layout: 'layout.ejs'});
 
 //app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));x
+app.use(express.static('public'));
 app.use(parser.urlencoded({extended: false}));
 app.use(parser.json());
 

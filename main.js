@@ -301,7 +301,7 @@ let uploadImagesHandler = upload.fields([{
               console.log(err.message,"err");
               return
           }
-    
+         
            let transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -346,12 +346,13 @@ let uploadImagesHandler = upload.fields([{
             console.log(err);
             return;
         }
-            
-           res.render('regngo',{message:"Registered Successfully"})
+        window.alert("Registered Successfully")
+           res.render('regngo')
       });
         }
           else {
-            res.render('regngo', { message: "User already Exists" })
+              window.alert("already");
+            res.render('regngo')
         }
     })
      
@@ -2083,10 +2084,6 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
-<<<<<<< HEAD
 module.exports.CauseSchema = CauseSchema;
 module.exports.Cause = mongoose.model('Cause', CauseSchema);
-=======
-// module.exports = Cause;
->>>>>>> fa959b8da915f7043c6a83b6e55a7a89ff79987d
 module.exports = router;
