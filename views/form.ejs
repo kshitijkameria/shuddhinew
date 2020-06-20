@@ -76,6 +76,11 @@ span.psw {
 <div style="padding-left: 35% ; padding-top: 5%; ">
 
 <form  method="post" style="width: 40%; border-color: #01b0d1;">
+  <% if(locals.message){ %>
+    <script>
+    alert("<%=message %>");
+  </script>
+    <% } %>
   <div class="imgcontainer">
     <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar">
   </div>

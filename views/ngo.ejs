@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     
     
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
@@ -47,449 +47,356 @@
      .dropdown:hover .dropdown-content{
        display:block;
      }
-     * {
-  box-sizing: border-box;
-}
-
-#myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-
-#myUL {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display:inline;
-
-}
-
-#myUL li a {
-  
-  background-color: #f6f6f6;
-  
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: inline;
-}
-#myUL li{
-  
-  background-color: #f6f6f6;
-  
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  }
-
-#myUL li a:hover:not(.header) {
-  background-color: #eee;
-}
-ul#menu li {
-    display:inline;
+     #more{
+         display:none;
+     }
     
-  }
-ul, li{
-    display: inline;
-  
-}
-
-#searchbar{ 
-      
-     padding:15px; 
-     border-radius: 10px; 
-     width: 100%;
-   } 
-#more {display: none;}
-@media only screen and (max-width: 992px)
-{
-  [class*=".mediachange"]{
-    width:100%;
-    float:none;
-    
-    
-  }
-}
-   </style>
-  </head>
-
-<body>
-    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    <div class="preloader">
-      <div class="preloader-body">
-        <div class="cssload-container"> 
-          <div class="cssload-speeding-wheel"></div>
-        </div>
-        <p>Loading...</p>
-      </div>
-    </div>
-    <div class="page">
-      <!-- Page Header-->
-      <header class="section page-header">
-        <!-- RD Navbar-->
-        <div class="rd-navbar-wrap">
-          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-main-outer">
-              <div class="rd-navbar-main">
-                <!-- RD Navbar Panel-->
-                <div class="rd-navbar-panel">
-                  <!-- RD Navbar Toggle-->
-                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                  <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand">
-                  </ul>"><img class="brand-logo-light" src="https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/Shuddhi%20Mail%20LOGO.jpg.png" alt="" width="207" height="51"/></a></div>
-                </div>
-                <div class="rd-navbar-main-element">
-                  <div class="rd-navbar-nav-wrap">
-                    <!-- RD Navbar Nav-->
-                    <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
-                      </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
-                          <a href="/aboutus">About Us</a></br>
-                          <a href="/ourpartner">Our Partners</a></br>
-                          <a href="/causes">Causes</a>                
-                        </div>
-                        </div>
-                      </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
-                          <a href="/main/registervolunteer">User</a></br>
-                          <a href="/main/registermember">Member</a></br>
-                          <a href="/main/registerngo">NGO</a></br>
-                          <a href="/main/gov">Govt. Organisation</a>
-                        </div>
-                        </div>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/main/login">Login</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/gallery">Gallery</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/donate">Donate</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="/contactus">Contacts</a>
-                      </li>
-                     
-                    </ul><a class="button button-primary button-sm" href="#">Donate</a>
+     </style>
+     </head>
+     <body>
+       <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+       <div class="preloader">
+         <div class="preloader-body">
+           <div class="cssload-container"> 
+             <div class="cssload-speeding-wheel"></div>
+           </div>
+           <p>Loading...</p>
+         </div>
+       </div>
+       <div class="page">
+         <!-- Page Header-->
+         <header class="section page-header">
+          <!-- RD Navbar-->
+          <div class="rd-navbar-wrap">
+            <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+              <div class="rd-navbar-main-outer">
+                <div class="rd-navbar-main">
+                  <!-- RD Navbar Panel-->
+                  <div class="rd-navbar-panel">
+                    <!-- RD Navbar Toggle-->
+                    <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                    <!-- RD Navbar Brand-->
+                    <div class="rd-navbar-brand">
+                    </ul>"><img class="brand-logo-light" src="/images/Shuddhi Mail LOGO.jpg.png" alt="" width="207" height="51"/></a></div>
                   </div>
-                </div><a class="button button-primary button-sm" href="/main/ngo">Donate</a>
-                <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a>
-              </div>
-            </div>
-          </nav>
-        </div>
-      </header>
-      <section class="section section-lg section-main-bunner section-main-bunner-filter">
-        <div class="main-bunner-img" style="background-image: url('https://scontent.fjai1-2.fna.fbcdn.net/v/t1.0-9/91412018_1422291447951119_8185959842268053504_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_oc=AQmit43_eUI5XTIf09ZIEEW_mF1Yk9WBCzHS5M_cxLg2f1RsY0BVmGXqxyWAjumfecOyObN7zA0IvdaoKFp40KAy&_nc_ht=scontent.fjai1-2.fna&oh=d7843b4860a6c938efbe353d5be26e6a&oe=5F0F7E4A'); background-size: cover;"></div>
-        <div class="main-bunner-inner">
-          <div class="container">
-            <div class="row row-50 justify-content-lg-center align-items-lg-center">
-              <div class="col-lg-12">
-                <div class="bunner-content-modern text-center">
-                  <h1 class="main-bunner-title">NGO LISTS</h1>
-                  <p></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-   
-
-      <section class="section section-lg bg-gray-1">
-        <div class="container">
-          <div class="row justify-content-center text-center">
-            <div class="col-md-9 col-lg-7 wow-outer">
-              <div class="wow slideInDown">
-                <h3>Causes that need your concern</h3>
-                <p>There’s no place for hunger: access to good quality food for all is possible, and essential for a thriving society. Everyone should have access to good food. No one should have to go to bed hungry. At SHUDDHI, we exist to make giving go further, so together we can transform more lives and communities around the world.</p>
-              </div>
-            </div>
-          </div>
-         
-
-          <div class="row row-50">
-
-            <div class="col-md-6 col-lg-4 wow-outer">
-                <div class="wow fadeInUp">
-                  <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-                    <div class="box-causes-img"><img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/15172b50-403a-4672-b092-39d8b1953e4f.jpg" alt="" width="396px" height="372px"/><a class="button button-sm button-primary" href="#">Donate</a>
-                    </div>
-                    <h4 class="font-weight-medium"><a href="#">SWACHH BHARAT</a></h4></br>
-                    <p class="box-causes-donate" style="text-transform: none;">Shuddhi NGO organise cleanliness events with help and support of volunteers and people who wish to make a difference. Your donation make it possible for us make India Clean #swachhbharat
-                    </p>     
-                  </article>
-                </div>
-              </div>
-              <div class="col-md-6 col-lg-4 wow-outer">
-                <div class="wow fadeInUp">
-                  <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-                    <div class="box-causes-img"><img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/1_orig.jpeg" alt="" width="396px" height="372px"><a class="button button-sm button-primary" href="#">Donate</a>
-                    </div>
-                    <h4 class="font-weight-medium"><a href="#">CORONA FIGHTERS</a></h4></br>
-                    <p class="box-causes-donate" style="text-transform: none;">Shuddhi NGO is distributing face masks and installing sanitisers all over India & Globally to contain and Fight corona virus. Your small donation can save everyone from this deadly disease.
-                    </p>
-                  </article>
-                  
-                 
-                </div>
-              </div>
+                  <div class="rd-navbar-main-element">
+                    <div class="rd-navbar-nav-wrap">
+                      <!-- RD Navbar Nav-->
+                      <ul class="rd-navbar-nav">
+                        <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
+                        </li>
+                        <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                          <div class="dropdown-content">
+                            <a href="/aboutus">About Us</a></br>
+                            <a href="/ourpartner">Our Partners</a>
+                            <!-- <a href="/causes">Causes</a>                 -->
+                          </div>
+                          </div>
+                        </li>
+                        <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                          <div class="dropdown-content">
+                            <a href="/main/registervolunteer">Volunteer</a></br>
+                            <a href="/main/registermember">Member</a></br>
+                            <a href="/main/registerngo">NGO</a></br>
+                            <a href="/main/gov">CSR/Donor</a>
+                          </div>
+                          </div>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/main/login">Login</a>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/gallery">Gallery</a>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/contactus" style="margin-right: 2rem;">Contacts</a>
+                        </li>
+                        <!-- <li class="rd-nav-item"><a class="rd-nav-link" href="/donate">Donate To Shuddhi</a>
+                        </li> -->
+                      <a class="button button-primary button-sm" href="/donate">Donate To Shuddhi</a>
   
-              <div class="col-md-6 col-lg-4 wow-outer">
-                <div class="wow fadeInUp">
-                  <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-                    <div class="box-causes-img"><img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/ngo-membership-india-shuddhi-online_1_orig.jpg" alt="" width="396px" height="372px"/><a class="button button-sm button-primary" href="#">Donate</a>
+                       
+                      <!-- </ul><a class="button button-primary button-sm" href="#">Donate</a> -->
                     </div>
-                    <h4 class="font-weight-medium"><a href="#">WOMEN & CHILDREN</a></h4></br>
-                    <p class="box-causes-donate" style="text-transform: none;">Shuddhi NGO support Women Empowerment and Education programs by organising social programs and events. Your donation can make a difference and lift life of women across India and Globally
-                    </p>
-                  </article>
+                  </div><a class="button button-primary button-sm" href="/main/ngo">Causes and Donate To Other NGOs</a>
+                  <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> -->
                 </div>
               </div>
-</div>
-            </br></br>
-            <div align="center" style="background:url('https://i.ytimg.com/vi/TyauNrbnmVo/maxresdefault.jpg');color:white;border-radius:50%;"><button style="background: black;font-size:20px;font-family:'cooper';padding:5px;"><a href="causes.html">See More Causes</a></button></div> 
-            
-          </div>  
-          </section>
-          <ul id="myUL" >
+            </nav>
+          </div>
+        </header>
+         <section class="section section-lg section-main-bunner section-main-bunner-filter">
+           <div class="main-bunner-img" style="background-image: url('https://scontent.fjai1-2.fna.fbcdn.net/v/t1.0-9/91412018_1422291447951119_8185959842268053504_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_oc=AQmit43_eUI5XTIf09ZIEEW_mF1Yk9WBCzHS5M_cxLg2f1RsY0BVmGXqxyWAjumfecOyObN7zA0IvdaoKFp40KAy&_nc_ht=scontent.fjai1-2.fna&oh=d7843b4860a6c938efbe353d5be26e6a&oe=5F0F7E4A'); background-size: cover;"></div>
+           <div class="main-bunner-inner">
+             <div class="container">
+               <div class="row row-50 justify-content-lg-center align-items-lg-center">
+                 <div class="col-lg-12">
+                   <div class="bunner-content-modern text-center">
+                     <h1 class="main-bunner-title">NGO LISTS</h1>
+                     <p></p>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </section>
+         <section class="section section-lg bg-gray-1">
+           <div class="container">
+             <div class="row justify-content-center text-center">
+               <div class="col-md-9 col-lg-7 wow-outer">
+                 <div class="wow slideInDown">
+                   <h3>Causes that need your concern</h3>
+                   <p>There’s no place for hunger: access to good quality food for all is possible, and essential for a thriving society. Everyone should have access to good food. No one should have to go to bed hungry. At SHUDDHI, we exist to make giving go further, so together we can transform more lives and communities around the world.</p>
+                 </div>
+               </div>
+             </div>
+             <div class="row row-50" id="myUL">
+      
 
-            <% var modCause = ((Causes.length)%3) %>
-            <% var n = 0 %>
-            <% for(var i = 0; i < (parseInt((Causes.length)/3)); i++) { %>
-            <% for(var j = 0; j < 3; j++) { %>
-  <div class="mediachange" style="width:31%;float:left;margin:1%;">
-    <li class="ngo">
-    <article class="box-causes"
-      style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-      <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %>" /></div>
-      <form method="post">
-        <input name="regid" type="hidden" value="<%=Causes[n].regid%>">
-        <p class="box-causes-donate"> <%=Causes[n].name%><br><b>Description:</b><%=Causes[n].description %><br>
-          <a align="center" class="button button-sm button-primary" href="/main/form1">Donate</a>
-        </li>
-          <% n++ %>
-      </form>
-      </p>
-    </article>
-  </div>
+              <% var mod = ((Causes.length)%3) %>
+              <% var n = 0 %>
+              <% for(var i = 0; i < (parseInt((Causes.length)/3)); i++) { %>
+              <% for(var j = 0; j < 3; j++) { %>
 
+              <div class="col-md-6 col-lg-4 wow-outer">
+                  <div class="wow fadeInUp">
+                    
+                    <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                      
+                        <input name="regid" type="hidden" value="<%=Causes[n].regid%>">
+                      <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %>" alt="" width="396px" height="372px"/><a class="button button-sm button-primary" href="/main/form1">Donate</a>
+                      </div>
+                      
+                      <h4 class="font-weight-medium"><%=Causes[n].name %></h4></br>
+                      <p class="box-causes-donate" style="text-transform: none;">Description :<%=Causes[n].description%>
+                      </br></p>
+                      <% n++ %>
+                  
+                </article>
+                  </div>
+                </div>
 <% } %>
 <br>
-<% } %>
+<% } %> 
+
 <% for(var m = 0; m < mod; m++) { %>
 
-    <div class="mediachange" style="width:31%;float:left;margin:1%;">
-        <li class="ngo">
-      <article class="box-causes"
-        style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-        <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %> " /></div>
-        <form method="post">
+  <div class="col-md-6 col-lg-4 wow-outer">
+    <div class="wow fadeInUp">
+      
+      <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+        
           <input name="regid" type="hidden" value="<%=Causes[n].regid%>">
-          <p class="box-causes-donate"> 1<%=Causes[n].name%><br><b>Description:</b><%=Causes[n].description %><br>
-            <a align="center" class="button button-sm button-primary" href="/main/form1">Donate</a>  
-          </li>
-            <% n++ %>
-        </form>
-        </p>
-      </article>
+        <div class="box-causes-img"><img src="/uploads/<%= Causes[n].image %>" alt="" width="396px" height="372px"/><a class="button button-sm button-primary" href="/main/form1">Donate</a>
+        </div>
+        
+        <h4 class="font-weight-medium"><%=Causes[n].name %></h4></br>
+        <p class="box-causes-donate" style="text-transform: none;">Description :<%=Causes[n].description%>
+        </br></p>
+        <% n++ %>
+    
+  </article>
     </div>
-</ul>
+  </div>
 <% } %>
-
-          <section class="parallax-container bg-gray-600" data-parallax-img="http://3.bp.blogspot.com/-BeqvYhce9yg/UrfUjJNUjuI/AAAAAAAANns/UFrGm36cZzw/s1600/Prague+at+Dusk%252C+Czech+Republic+-+1600x1200+-+ID+39476+-+PREMIUM_Historical+Buildings+Wallpaper_Pictures%2540wpshub.blogspot.com045-SNOW.gif">
-            <div class="parallax-content section-xxl text-center">
-              <div class="container">
-                <div class="row justify-content-md-center">
-                  <div class="col-md-9 col-lg-8 col-xl-8 wow-outer">
-                    <div class="innset-xl-right-30 innset-xl-left-30">
-                      <div class="wow slideInDown">
-                        <h3>Charity never humiliated him who profited from it, nor ever bound him by the chains of gratitude, since it was not to him but to God that the gift was made.</h3>
-                      </br>
-                        <a align="center" class="button button-sm button-primary" href="causes.html">More Causes to donate</a>
+               <section class="parallax-container bg-gray-600" style="background:rgb(75, 184, 211);" data-parallax-img="https://cdn.pixabay.com/photo/2016/08/06/14/11/money-1574450_1280.png">
+                <div class="parallax-content section-xxl text-center">
+                  <div class="container">
+                    <div class="row justify-content-md-center">
+                      <div class="col-md-9 col-lg-8 col-xl-8 wow-outer">
+                        <div class="innset-xl-right-30 innset-xl-left-30">
+                          <div class="wow slideInDown">
+                            <h3>Charity never humiliated him who profited from it, nor ever bound him by the chains of gratitude, since it was not to him but to God that the gift was made.</h3>
+                          </br>
+                            <a align="center" class="button button-sm button-primary" href="causes.html">More Causes to donate</a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
 
 
-  
 
-  <section class="section section-lg bg-gray-1" style="background: url('https://i.ytimg.com/vi/TyauNrbnmVo/maxresdefault.jpg');background-repeat: no-repeat;background-size: cover;">
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-md-9 col-lg-7 wow-outer">
-              <div class="wow slideInDown">
-                <h3>NGO LIST</h3>
+
+
+            <section class="section section-lg bg-gray-1">
+              <div class="container">
+                <div class="row justify-content-center text-center">
+                  <div class="col-md-9 col-lg-7 wow-outer">
+                    <div class="wow slideInDown">
+                      <h3>NGO LISTS</h3>
+                      <p>SHUDDHI NGO is a registered NGO</br>
+                        Non Governmental Organisation
+                        ​working together with Partners, other NGOs &
+                        ​Local Communities in India &
+                        ​Globally to improve 
+                        Environment ​& Human Well-Being.</p>
+                        <br>
+                        <div align="center"><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png" style="height:50px;width:50px;">
+                        <input id="searchbar"  onkeyup="search_ngo()" type="text" name="search" style="outline:0;border:0;border-radius:0;width:50%;background:transparent;border-bottom:2px solid black;" placeholder="Search NGO.."> 
+                        </div>       </br></br>  
+                    </div>
+                  </div>
                 </div>
-                </div>
-               </div>
-               <br>
-               <div align="center"><img src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png" style="height:50px;width:50px;">
-               <input id="searchbar"  onkeyup="search_ngo()" type="text" name="search" style="outline:0;border:0;border-radius:0;width:50%;background:transparent;border-bottom:2px solid black;" placeholder="Search NGO.."> 
-               </div>       </br></br>    
-               <ul id="myUL" >
+                
+                <div class="row row-50" id="myUL">
+      
 
-                <% var mod = ((ngo.length)%3) %>
-                <% var k = 0 %>
-                <% for(var i = 0; i < (parseInt((ngo.length)/3)); i++) { %>
-                <% for(var j = 0; j < 3; j++) { %>
-      <div class="mediachange" style="width:31%;float:left;margin:1%;">
-        <li class="ngo">
-        <article class="box-causes"
-          style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-          <div class="box-causes-img"><img src="/<%= ngo[k].logo %>" /></div>
-          <form method="post">
-            <input name="regid" type="hidden" value="<%=ngo[k].regid%>">
-            <p class="box-causes-donate"> <%=ngo[k].name%><br><b>Total Amount Donated:</b><%=ngo[k].donationtillnow%><br>
-              <button type="submit" style="width:100%;background:black;color:#7FBC4E;">Know More</button>
-            </li>
-              <% k++ %>
-          </form>
-          </p>
-        </article>
-      </div>
-    
+                  <% var mod = ((ngo.length)%3) %>
+                  <% var k = 0 %>
+                  <% for(var i = 0; i < (parseInt((ngo.length)/3)); i++) { %>
+                  <% for(var j = 0; j < 3; j++) { %>
+
+                  <div class="col-md-6 col-lg-4 wow-outer">
+                      <div class="wow fadeInUp">
+                        
+                        <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                          <form method="post">
+                            <input name="regid" type="hidden" value="<%=ngo[k].regid%>">
+                          <div class="box-causes-img"><img src="/<%= ngo[k].logo %>" alt="" width="396px" height="372px"/><button type="submit" class="button button-sm button-primary">Know More</button>
+                          </div>
+                          
+                          <h4 class="font-weight-medium"><%=ngo[k].name %></h4></br>
+                          <p class="box-causes-donate" style="text-transform: none;">Total Amount Donated:<%=ngo[k].donationtillnow%>
+                          </br></p>
+                          <% k++ %>
+                      </form>
+                    </article>
+                      </div>
+                    </div>
   <% } %>
   <br>
-  <% } %>
-  <% for(var m = 0; m < mod; m++) { %>
-  
-        <div class="mediachange" style="width:31%;float:left;margin:1%;">
-            <li class="ngo">
-          <article class="box-causes"
-            style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
-            <div class="box-causes-img"><img src="/<%= ngo[k].logo %> " /></div>
-            <form method="post">
-              <input name="regid" type="hidden" value="<%=ngo[k].regid%>">
-              <p class="box-causes-donate"> 1<%=ngo[k].name%><br><b>Total Amount Donated:</b><%=ngo[k].donationtillnow%><br>
-                <button type="submit" style="width:100%;background:black;color:#7FBC4E;">Know More</button>
-              </li>
-                <% k++ %>
-            </form>
-            </p>
-          </article>
-        </div>
-    </ul>
-      </div>
-    </section>
-    <% } %>
+  <% } %> 
 
-    <script>
-        function search_ngo() { 
-            let input = document.getElementById('searchbar').value 
-            input=input.toLowerCase(); 
-            let x = document.getElementsByClassName('ngo'); 
-              
-            for (i = 0; i < x.length; i++) {  
-                if (!x[i].innerHTML.toLowerCase().includes(input)) { 
-                    x[i].style.display="none"; 
-                } 
-                else { 
-                    x[i].style.display="inline-block";                  
-                } 
-            } 
-        } 
-        function sortList() {
-          var list, i, switching, b, shouldSwitch;
-          list = document.getElementById("myUL");
-          switching = true;
-          while (switching) {
-            switching = false;
-            b = list.getElementsByTagName("LI");
-            for (i = 0; i < (b.length - 1); i++) {
-              shouldSwitch = false;
-              if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
-              }
-            }
-            if (shouldSwitch) {
-              b[i].parentNode.insertBefore(b[i + 1], b[i]);
-              switching = true;
-            }
-          }
-        }
-        //window.onload(sortList());
-        function myFunction() {
-          var dots = document.getElementById("dots");
-          var moreText = document.getElementById("more");
-          var btnText = document.getElementById("myBtn");
+  <% for(var m = 0; m < mod; m++) { %>
+    
+    <div class="col-md-6 col-lg-4 wow-outer">
+      <div class="wow fadeInUp">
         
-          if (dots.style.display === "none") {
-            dots.style.display = "inline";
-            btnText.innerHTML = "Show more"; 
-            moreText.style.display = "none";
-            window.onload(sortList());
-            window.refresh;
-          } else {
-            dots.style.display = "none";
-            btnText.innerHTML = "Show less"; 
-            moreText.style.display = "inline";
-            //window.onload(sortList());
-          }
-        }
-        </script>
-          <!-- Page Footer-->
-          <footer class="section footer-minimal context-dark">
-            <div class="container wow-outer">
-              <div class="wow fadeIn">
-                <div class="row row-50 row-lg-60">
-                  <div class="col-12"><a href="/"><img src="https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/Shuddhifooter.png" alt="" width="207" height="51"/></a></div>
-                  <p>Shuddhi is a Global Platform developed for People, Organisations and NGOs to Build Network of Social Workers, Raise Funds Online, Shop GoGreen Products, Organise Events etc. by using the most secure and transparent platform.</p>
-                  <div class="col-12">
-                    <ul class="footer-minimal-nav">
-                      <li><a href="/aboutus">About Us</a></li>
-                      <li><a href="/causes">Causes</a></li>
-                      <li><a href="/gallery">Gallery</a></li>
-                      <li><a href="/main/registervolunteer">Volunteer</a></li>
-                      <li><a href="/contactus">Contacts</a></li>
-                    </ul>
-                  </div>
-                  <div class="col-12">
-                    <ul class="social-list">
-                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/shuddhi.org"></a></li>
-                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="https://www.instagram.com/ngoshuddhi/"></a></li>
-                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="https://twitter.com/ngoshuddhi"></a></li>
-                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="https://www.youtube.com/ShuddhiNGO"></a></li>
-                      
-                    </ul>
+        <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+          <form method="post">
+            <input name="regid" type="hidden" value="<%=ngo[k].regid%>">
+          <div class="box-causes-img"><img src="/<%= ngo[k].logo %>" alt="" width="396px" height="372px"/><button type="submit" class="button button-sm button-primary">Know More</button>
+          </div>
+          
+          <h4 class="font-weight-medium"><%=ngo[k].name %></h4></br>
+          <p class="box-causes-donate" style="text-transform: none;">Total Amount Donated:<%=ngo[k].donationtillnow%>
+          </br></p>
+          <% k++ %>
+      </form>
+    </article>
+      </div>
+    </div>
+<% } %>
+
+                    
+                    <span id="dots"></span><span id="more">
+                       
+                    </span>
+                        <!-- <button onclick="myFunction()" id="myBtn" style="background: green;color:white;font-size: 25px;padding:5px;border-radius:50%;">Show more</button></div> -->
+                  </br>
+                  
+            
+                  </div>  
+                  </section>
+
+                  
+
+
+
+
+
+
+                  <script>
+                    function search_ngo() { 
+                        let input = document.getElementById('searchbar').value 
+                        input=input.toLowerCase(); 
+                        let x = document.getElementsByClassName('col-md-6'); 
+                          
+                        for (i = 0; i < x.length; i++) {  
+                            if (!x[i].innerHTML.toLowerCase().includes(input)) { 
+                                x[i].style.display="none"; 
+                            } 
+                            else { 
+                                x[i].style.display="inline-block";                  
+                            } 
+                        } 
+                    } 
+                  function sortList(){
+                      var list, i, switching, b, shouldSwitch;
+                      list=document.getElementById("myUL");
+                      switching=true;
+                      while(switching){
+                          switching=false;
+                          b=list.getElementsByTagName("h4");
+                          for(i=0;i<(b.length-1);i++){
+                              shouldSwitch=false;
+                              if(b[i].innerHTML.toLowerCase()>b[i+1].innerHTML.toLocaleLowerCase()){
+                                  shouldSwitch=true;
+                                  break;
+                              }
+                          }
+                          if(shouldSwitch){
+                              b[i].parentNode.parentNode.parentNode.insertBefore(b[i+1].parentNode.parentNode, b[i].parentNode.parentNode);
+                              switching=true;
+                          }
+                      }
+                  }
+
+
+                    //window.onload(sortList());
+                    function myFunction() {
+                      var dots = document.getElementById("dots");
+                      var moreText = document.getElementById("more");
+                      var btnText = document.getElementById("myBtn");
+                    
+                      if (dots.style.display === "none") {
+                        dots.style.display = "inline";
+                        btnText.innerHTML = "Show more"; 
+                        moreText.style.display = "none";
+                      window.onload(sortList());
+                       //window.refresh;
+                      } else {
+                        dots.style.display = "none";
+                        btnText.innerHTML = "Show less"; 
+                        moreText.style.display = "inline";
+                        //window.onload(sortList());
+                      }
+                    }
+                    </script>
+
+              <!-- Page Footer-->
+              <footer class="section footer-minimal context-dark">
+                <div class="container wow-outer">
+                  <div class="wow fadeIn">
+                    <div class="row row-50 row-lg-60">
+                      <div class="col-12"><a href="/"><img src="/images/Shuddhifooter.png" alt="" width="207" height="51"/></a></div>
+                      <p>Shuddhi is a Global Platform developed for People, Organisations and NGOs to Build Network of Social Workers, Raise Funds Online, Shop GoGreen Products, Organise Events etc. by using the most secure and transparent platform.</p>
+                      <div class="col-12">
+                        <ul class="footer-minimal-nav">
+                          <li><a href="/aboutus">About Us</a></li>
+                          <li><a href="/causes">Causes</a></li>
+                          <li><a href="/gallery">Gallery</a></li>
+                          <li><a href="/main/registervolunteer">Volunteer</a></li>
+                          <li><a href="/contactus">Contacts</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-12">
+                        <ul class="social-list">
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/shuddhi.org"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="https://www.instagram.com/ngoshuddhi/"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="https://twitter.com/ngoshuddhi"></a></li>
+                          <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="https://www.youtube.com/ShuddhiNGO"></a></li>
+                          
+                        </ul>
+                      </div>
+                    </div>
+                   
                   </div>
                 </div>
-               
-              </div>
-            </div>
-          </footer>
-        </div>
-        <div class="snackbars" id="form-output-global"></div>
-          <script src="/javascripts/core.min.js"></script>
-          <script src="/javascripts/script.js"></script>
-        </body>
-        </html>
-        
-  </body>
-
+              </footer>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+  <script src="/javascripts/core.min.js"></script>
+  <script src="/javascripts/script.js"></script>
+</body>
 </html>
-
-
-
-
-
-
-
-
-<!-- <% for(var i = 0; i < Causes.length; i++) { %>
-  <h3><%=Causes[i].name%></h3>
-  <h3><%Causes[i].description %></h3>
-  <img src="/uploads/<%= Causes[i].image %>"/>
-  <% } %> -->

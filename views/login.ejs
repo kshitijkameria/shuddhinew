@@ -376,9 +376,11 @@
 						<h2 style="margin-right: -2rem; margin-left: -1rem; margin-bottom: -2rem; color: #0a69f0; font-weight: 600;">WELCOME BACK !!</h2></br></br></br>
 					</span>
 					<div class="form-group">
-						<% if(locals.message){ %>
-						<%=message %>
-						<% } %>
+            <% if(locals.message){ %>
+              <script>
+              alert("<%=message %>");
+            </script>
+              <% } %>
 						<label for="email" style="margin-left:6rem; font-size: 1.5rem;">Email</label><br>
 						<input type="email" id="email" name="email" required="required" placeholder=" Your Email" style="width: 18rem; height: 2rem;" />
 					  </div>

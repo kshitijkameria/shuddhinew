@@ -274,8 +274,10 @@ select option {
     
 <div class="container">
   <form method = "post" enctype="multipart/form-data">
-   <% if(locals.message){ %>
-      <%=message %>
+    <% if(locals.message){ %>
+      <script>
+      alert("<%=message %>");
+    </script>
       <% } %>
     <div class="row">
       <h3>REGISTER AS A GOVERNMENT ORGANISATION</h3>
@@ -283,7 +285,9 @@ select option {
         
       <div class="input-group input-group-icon">
         <% if(locals.message){ %>
-          <%=message %>
+          <script>
+          alert("<%=message %>");
+        </script>
           <% } %>
         <input type="text" name="name" style="color: white" placeholder="Full Name"/>
         <div class="input-icon"><i class="fa fa-user"></i></div>

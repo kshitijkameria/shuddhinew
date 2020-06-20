@@ -347,16 +347,11 @@ let uploadImagesHandler = upload.fields([{
             console.log(err);
             return;
         }
-        // popupS.alert({
-        //     content: 'Hello World!'
-        // });
-        // window.alert("Registered Successfully");
-           res.render('regngo')
+           res.render('index',{message:"Registered Successfully"})
       });
         }
           else {
-            //   window.alert("already");
-            res.render('regngo')
+            res.render('regngo',{message:"Already registered"})
         }
     })
      
@@ -532,11 +527,7 @@ const VolunteerSchema = new Schema({
         type:String,
         required:true,
     },
-    idNumber:{
-        type:String,
-        required:true,
-        unique:true
-    },
+    
     interests:{
         type:Array,
         required:true
@@ -775,7 +766,7 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
             });
                 
                fast2sms.sendMessage({authorization : process.env.API_KEY,message : "Registered Successfully",numbers:[req.body.phn]})
-                res.render('reggov',{message:"Registered Successfully"})
+                res.render('index',{message:"Registered Successfully"})
 
             });
         }
@@ -946,7 +937,7 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
                     console.log(err);
                     return;
                 }
-                 res.render('regvolunteer',{message:"Registered Successfully"})
+                 res.render('index',{message:"Registered Successfully"})
             });
         }
         else {
@@ -999,7 +990,7 @@ router.post('/form', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('regvolunteer', { message: "Please register first" })
+                    res.render('index', { message: "Please register first" })
                 }
                 else {
                     req.session.task = doc
@@ -1035,7 +1026,7 @@ router.post('/form1', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('regvolunteer', { message: "Please register first" })
+                    res.render('index', { message: "Please register first" })
                 }
                 else {
                     req.session.task = doc
@@ -1080,7 +1071,7 @@ router.post('/resultshu', (req, res, next) => {
         txtStatus: req.body.txtStatus,
         paymentMode: req.body.paymentMode,
         txMsg: req.body.txMsg,
-        txtime: req.body.txtime,
+        txTime: req.body.txTime,
     }
     const txnTypes = enums.transactionStatusEnum;
     try {
@@ -1295,7 +1286,7 @@ router.post('/result', (req, res, next) => {
         txtStatus: req.body.txtStatus,
         paymentMode: req.body.paymentMode,
         txMsg: req.body.txMsg,
-        txtime: req.body.txtime,
+        txTime: req.body.txTime,
     }
     const txnTypes = enums.transactionStatusEnum;
     try {
@@ -1453,7 +1444,7 @@ router.post('/resultmember', (req, res, next) => {
         txtStatus: req.body.txtStatus,
         paymentMode: req.body.paymentMode,
         txMsg: req.body.txMsg,
-        txtime: req.body.txtime,
+        txTime: req.body.txTime,
     }
     const txnTypes = enums.transactionStatusEnum;
     try {
@@ -1581,7 +1572,7 @@ router.post('/resultdonatevol', (req, res, next) => {
         txtStatus: req.body.txtStatus,
         paymentMode: req.body.paymentMode,
         txMsg: req.body.txMsg,
-        txtime: req.body.txtime,
+        txTime: req.body.txTime,
     }
     const txnTypes = enums.transactionStatusEnum;
     try {
@@ -1738,7 +1729,7 @@ router.post('/resultdonatemem', (req, res, next) => {
         txtStatus: req.body.txtStatus,
         paymentMode: req.body.paymentMode,
         txMsg: req.body.txMsg,
-        txtime: req.body.txtime,
+        txTime: req.body.txTime,
     }
     const txnTypes = enums.transactionStatusEnum;
     try {

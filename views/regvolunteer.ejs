@@ -266,8 +266,10 @@ select option {
     
 <div class="container">
   <form method = "post" enctype="multipart/form-data">
-   <% if(locals.message){ %>
-      <%=message %>
+    <% if(locals.message){ %>
+      <script>
+      alert("<%=message %>");
+    </script>
       <% } %>
     <div class="row">
       <h4 style="text-align: center; font-size: 1.2em">REGISTER AS A VOLUNTEER</h4>
