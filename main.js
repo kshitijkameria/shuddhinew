@@ -710,7 +710,7 @@ var job = new CronJob('00 12 1 * *', function() {
 job.start();
 router.get('/donateforcause/:id',(req,res)=>{
     tostoreid = req.params.id
-    res.render('causemember', {
+    res.render('ngo', {
         postUrl: config.paths[config.enviornment].cashfreePayUrl,member : vol
     });
 })
@@ -2094,6 +2094,9 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
+
+
+
 module.exports.CauseSchema = CauseSchema;
 module.exports.Cause = mongoose.model('Cause', CauseSchema);
 module.exports = router;
