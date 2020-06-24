@@ -2107,17 +2107,35 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
 router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
     
             Volunteer.find({}, (err, docs2) => {
-            res.render('useradmin', { Volunteer: docs2 })
+            res.render('useradmin', { user: req.session.work,Volunteer: docs2 })
 
 })
 });
 
 router.post('/welcomeadmin', urlencodedParser, checkLogIn, (req, res) => {
     
-        res.redirect('/main/welcomeadmin')
-
+        // res.redirect('/main/welcomeadmin')
+        Volunteer.findOne({ email: req.body.email }, function (err, doc) {
+            if (err) {
+                console.log(err, 'error')
+                res.redirect('/main/welcomeadmin')
+                return
+            }
+            console.log("button hit");
+            console.log(req.body.email);
+            req.session.user = doc
+            ses2 = doc
+            var email = ses2.email
+            console.log(email);
+            res.redirect('/main/infovol')
+        })
     });
-
+router.get('/infovol',(req,res)=>
+{
+    console.log("render hit");
+    Work.find({email:ses2.email},(err,docs)=>{
+        res.render('infovol',{info:ses2,work:docs})
+    })
 })
 
 router.get("/imageupload", checkLogIn, (req, res) => {
