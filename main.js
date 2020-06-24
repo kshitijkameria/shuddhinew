@@ -420,7 +420,7 @@ GovSchema.methods.createResetToken = function () {
     return resetToken;
   
   }
-
+ 
 
   GovSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
     this.password = password;
@@ -445,7 +445,33 @@ const RecSchema = new Schema({
 
 })
 const Rec = mongoose.model('Rec', RecSchema);
+const DonorSchema = new Schema({
+    name: String,
+    email: {
+        type: String,
+        unique: true
+    },
+    phNum: Number,
+    pan: Number,
+    amount: Number,
+    address: String,
+    password: String,
+    logo: {
+        type: String,
+        default: "images/default.png"
+    },
 
+    images: {
+        type: Array,
+        default: []
+    },
+    t :{
+        type:String,
+        default : "D"
+    }
+
+})
+const Donor = mongoose.model('Donor', DonorSchema);
 
 const MemberSchema = new Schema({
     name: {
@@ -533,6 +559,11 @@ const MemberSchema = new Schema({
         type: Array,
         default: []
     },
+    t :{
+        type:String,
+        default : "M"
+    },
+
     resetToken:String,
     resetTokenExpires: Date
 });
@@ -635,6 +666,11 @@ const VolunteerSchema = new Schema({
         type: Array,
         default: []
     },
+    t :{
+        type:String,
+        default : "V"
+    },
+
     resetToken:String,
     resetTokenExpires: Date
 });
@@ -1083,7 +1119,7 @@ router.post('/form', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('index', { message: "Please register first" })
+                     res.render('form', { message: "Donate one time" });
                 }
                 else {
                     req.session.task = doc
@@ -1100,6 +1136,65 @@ router.post('/form', urlencodedParser, (req, res) => {
     })
 
 })
+var ses = " "
+router.post('/one', urlencodedParser, (req, res) => {
+    Donor.findOne({ email: req.body.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            const pass = cryto.randomBytes(6).toString("hex");
+            let newDonor = new Donor();
+            newDonor.name = req.body.name;
+            newDonor.email = req.body.email;
+            newDonor.phNum = req.body.phone;
+            newDonor.password = pass;
+            newDonor.pan = req.body.pan;
+            newDonor.amount = req.body.amount;
+            newDonor.address = req.body.address;
+            newDonor.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: req.body.email,
+                    subject: 'Donor Password',
+                    text: 'Dear Donor,\n\n Your Password is. ' + newDonor.password + ' \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.redirect('/main/index')
+            });
+            req.session.task = newDonor;
+            ses = newDonor;
+        }
+        else {
+            res.render('form', { message: "Donor already Exists" })
+        }
+
+    })
+})
+
 router.get('/form1', (req, res) => {
     res.render('form')
 })
@@ -1971,6 +2066,7 @@ router.get('/login', (req, res) => {
 router.get('/loginvolunteer', (req, res) => {
     res.render('login')
 })
+var w = " "
 router.post('/login', urlencodedParser, (req, res) => {
     User.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567")
@@ -2006,7 +2102,21 @@ router.post('/login', urlencodedParser, (req, res) => {
                                     return
                                 }
                                 if (_.isEmpty(doc)) {
-                                    res.render('login', { message: "Please check email/password" })
+                                    Donor.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
+                                        if (err) {
+                                            console.log(err, 'error')
+                                            res.redirect('/')
+                                            return
+                                        }
+                                        if (_.isEmpty(doc)) {
+                                            res.render('login', { message: "Please check email/password" })
+                                        }
+                                        else {
+                                            req.session.work = doc
+                                            w = doc
+                                            res.redirect('/main/welcome')
+                                        }
+                                    })
                                 }
                                 else {
                                     req.session.work = doc
@@ -2102,6 +2212,125 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
 
     });
 
+})
+router.get('/member', checkLogIn, (req, res) => {
+    res.render('member')
+})
+router.post('/member', checkLogIn, urlencodedParser, singleupload, (req, res) => {
+    Member.findOne({ email: w.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            let newMember = new Member();
+            newMember.name = w.name;
+            newMember.educQual = req.body.vol;
+            newMember.phNum = w.phNum;
+            newMember.email = w.email;
+            newMember.password = w.password;
+            newMember.cnfrmpassword = w.password;
+            newMember.cityName = req.body.cityname;
+            newMember.address = w.address;
+            newMember.idNumber = req.body.aadhaar;
+            newMember.interests = req.body.intrest;
+
+            newMember.save()
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: w.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
+            res.render('checkoutmem', {
+                postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
+            });
+            mem = newMember
+        }
+        else {
+            res.render('member', { message: "User already Exists" })
+        }
+    })
+})
+router.get('/volunteer', checkLogIn, (req, res) => {
+    res.render('volunteer')
+})
+router.post('/volunteer', urlencodedParser, singleupload, function (req, res) {
+    Volunteer.findOne({ email: w.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            return
+        }
+        if (_.isEmpty(doc)) {
+
+            let newMember = new Volunteer();
+            newMember.name = w.name;
+            newMember.educQual = req.body.vol;
+            newMember.phNum = w.phNum;
+            newMember.email = w.email;
+            newMember.password = w.password;
+            newMember.cityName = req.body.cityname;
+            newMember.address = w.address;
+            newMember.idNumber = req.body.aadhaar;
+            newMember.interests = req.body.intrest;
+            newMember.cnfrmpassword = w.cnfrmpassword;
+            newMember.role = req.body.role;
+            newMember.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: w.email,
+                    subject: 'Successfull Registration',
+                    text: 'Dear Volunteer,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.render('volunteer', { message: "Registered Successfully" })
+
+            });
+        }
+        else {
+            res.render('volunteer', { message: "User already Exists" })
+        }
+    })
 })
 
 router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
