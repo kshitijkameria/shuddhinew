@@ -15,6 +15,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 var multer = require('multer')
 var path = require('path')
+const cryto = require("crypto");
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
     filename: (req, file, cb) => {
@@ -56,6 +57,7 @@ const {Payouts} = cfSdk;
 const {Beneficiary, Transfers} = Payouts;
 Payouts.Init(payout_config.Payouts);
 var sharp = require('sharp');
+const { token } = require('morgan');
 // const { stringAt } = require('pdfkit/js/data');
 
 const UserSchema = new Schema({
@@ -149,10 +151,35 @@ const UserSchema = new Schema({
         type: Array,
         default: []
     },
-
+    resetToken:String,
+    resetTokenExpires: Date
 });
 
+UserSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  UserSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
+
+
+
 const User = mongoose.model('User', UserSchema);
+
 
 
 const filter = function (req, file, cb) {
@@ -379,7 +406,29 @@ const GovSchema = new Schema({
         type: Array,
         default: []
     },
+    resetToken:String,
+    resetTokenExpires: Date
 });
+GovSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  GovSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Gov = mongoose.model('Gov', GovSchema);
 const WorkSchema = new Schema({
     heading: String,
@@ -484,7 +533,29 @@ const MemberSchema = new Schema({
         type: Array,
         default: []
     },
-})
+    resetToken:String,
+    resetTokenExpires: Date
+});
+MemberSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  MemberSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Member = mongoose.model('Member', MemberSchema);
 const VolunteerSchema = new Schema({
     name: {
@@ -564,7 +635,29 @@ const VolunteerSchema = new Schema({
         type: Array,
         default: []
     },
-})
+    resetToken:String,
+    resetTokenExpires: Date
+});
+VolunteerSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  VolunteerSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Volunteer = mongoose.model('Volunteer', VolunteerSchema);
 const CauseSchema = new Schema({
     name:{
@@ -2012,27 +2105,15 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
 })
 
 router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
-    Work.find({ postedBy: req.session.work._id }, (err, docs) => {
-        Rec.find({ email: req.session.work.email }, (err, docs1) => {
-            res.render('useradmin', { user: req.session.work, blogs: docs, recs: docs1 })
+    
+            Volunteer.find({}, (err, docs2) => {
+            res.render('useradmin', { Volunteer: docs2 })
 
-        })
-
-    })
 })
+});
 
 router.post('/welcomeadmin', urlencodedParser, checkLogIn, (req, res) => {
-    let newWork = new Work()
-    newWork.heading = req.body.heading
-    newWork.content = req.body.content
-    newWork.email = req.session.work.email
-    newWork.name = req.session.work.name
-    newWork.postedBy = req.session.work._id
-    newWork.save(function (err) {
-        if (err) {
-            console.log(err, 'error')
-            return
-        }
+    
         res.redirect('/main/welcomeadmin')
 
     });
@@ -2094,9 +2175,169 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
+async function forgetPassword(req, res) {
+//   let { email } = req.body.email;
+var user;
+  try {
+      if(await User.findOne({ email: req.body.email })){
+     user = await User.findOne({ email: req.body.email });
+    }
+    else if(await Gov.findOne({ email: req.body.email })){
+         user = await Gov.findOne({ email: req.body.email })
+    }
+    else if(await Volunteer.findOne({ email: req.body.email })){
+         user = await Volunteer.findOne({ email: req.body.email })
+    }
+    else if(await Member.findOne({ email: req.body.email })){
+        user = await Member.findOne({ email: req.body.email })
+    }
+
+    if (user) {
+      // create token
+      const resetToken = user.createResetToken();
+      // confirm password
+      await user.save({ validateBeforeSave: false });
+      resetPath = "http://localhost:3000/main/resetpassword/" + resetToken;
+        let useremail = req.body.email;
+      // send Mail
+
+    //   let html,subject;
+    //   html="this is the link to reset password - "+resetPath;
+    //   subject="Reset Password";
+    //   let options = {
+    //     to: user.email,
+    //     html:html,
+    //     subject:subject
+    //   }
+    //   await emailHelper(options);
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'ngo@shuddhi.org',
+            pass: 'shuddhi321'
+        }
+    });
+    let mailOptions = {
+        from: 'ngo@shuddhi.org',
+        to: req.body.email,
+        subject: 'Forget Password',
+        text: 'This is your link - ' +  resetPath,
+       
+    };
+    transporter.sendMail(mailOptions, function (err, data) {
+        if (err) {
+            console.log('Error Occurs');
+        } else {
+            console.log('Email Sent');
 
 
+        }
+    });
 
+    
+       return res.status(200).json({
+        resetPath,
+        resetToken,
+        useremail,
+        status: "Token sent to your email",
+      })
+    } else {
+      throw new Error("User not found");
+    }
+
+
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).json({
+      err,
+      status: "cannot reset password"
+    }
+    )
+  }
+}
+async function resetPassword(req, res) {
+  try {
+    const token = req.params.token;
+    console.log(token);
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    var user;
+    if(await User.findOne({
+        resetToken: token,
+        resetTokenExpires: { $gt: Date.now() }
+      })){
+     user = await User.findOne({
+      resetToken: token,
+      resetTokenExpires: { $gt: Date.now() }
+    })
+}
+else if(await Gov.findOne({
+    resetToken: token,
+    resetTokenExpires: { $gt: Date.now() }
+  })){
+ user = await Gov.findOne({
+  resetToken: token,
+  resetTokenExpires: { $gt: Date.now() }
+})
+}
+else if(await Volunteer.findOne({
+    resetToken: token,
+    resetTokenExpires: { $gt: Date.now() }
+  })){
+ user = await Volunteer.findOne({
+  resetToken: token,
+  resetTokenExpires: { $gt: Date.now() }
+})
+}
+else if(await Member.findOne({
+    resetToken: token,
+    resetTokenExpires: { $gt: Date.now() }
+  })){
+ user = await Member.findOne({
+  resetToken: token,
+  resetTokenExpires: { $gt: Date.now() }
+})
+}
+    if (user) {
+      user.resetPasswordhandler(password, confirmPassword)
+    // User.update(user,{
+    //     password:newpassword,
+    //     confirmPassword:newconfirmPassword
+    // });
+      // db save 
+      await user.save();
+      res.redirect('/');
+    } else {
+      throw new Error("Not a valid token");
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(200).json({
+      status: "Some error occurred",
+      err
+    })
+  }
+}
+
+router.get('/forgotpassword',(req,res)=>
+{
+    res.render("forget");
+})
+
+router.post('/forgotpassword', (req,res)=>{
+    const backres = forgetPassword(req,res);
+})
+
+router.get("/resetPassword/:token",(req,res)=>{
+    console.log("reset render is running");
+    res.render("reset")
+})
+
+router.post("/resetPassword/:token", (req,res) => {
+    console.log("reset is running");
+    const backres = resetPassword(req,res);
+
+})
 module.exports.CauseSchema = CauseSchema;
 module.exports.Cause = mongoose.model('Cause', CauseSchema);
 module.exports = router;
