@@ -92,7 +92,14 @@ font-size:16px;
  table, tr, td{
      border:1px solid black;
  } 
+ div.vol{
+   display:none;
+ }
+ div.mem{
+   display:none;
+ }
 </style>
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   </head>
   <body style="background-image: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');">
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
@@ -144,16 +151,27 @@ font-size:16px;
         </div>
       </section>
     </br>
-     <button onclick ="location.href= '/main/member'" type="button">Member</button>
-      <button onclick ="location.href= '/main/volunteer'"  type="button">Volunteer</button>
+   <!--  <button onclick ="location.href= '/main/member'" type="button">Member</button>
+      <button onclick ="location.href= '/main/volunteer'"  type="button">Volunteer</button> -->
       <div align="center">
         <img src="/<%= user.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;" />
       </br><a href="/main/imageupload" style="font-size: 1.5rem;"> Upload Logo </a>
       </br> <h1> <%= user.name %> </h1>
-    
-      <div style="float: center;"><a class="button button-primary button-sm vol" href="" style="width: 30%; font-size: 15px;">Join as a Volunteer</a></div><br> 
-      <div style="float: center;"></div><a class="button button-primary button-sm mem" href="" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
+    <br>
+      <div style="float: center;" class="vol"><a class="button button-primary button-sm vol"  href="/main/member" style="width: 30%; font-size: 15px;">Join as a Volunteer</a></div>
+     <br> <div style="float: center;" class="mem"><a class="button button-primary button-sm mem" href="/main/volunteer" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
 </div>
+<script>
+  //var x = document.getElementById("vol");
+  //var y = document.getElementById("mem");
+  if(user.t=="D"){
+    $("div.vol").show();
+    $("div.mem").show();
+  } 
+  if(user.t=="V"){
+    $("div.mem").show();
+  }
+</script>
 <div class="limiter">
 <div class="container-login100">
 <div class="wrap-login100"></br>
@@ -303,7 +321,9 @@ slideShow(0);
                  
                 </ul>
               </div>
-            </div>
+            </div><br>
+            <center><div>Share this page to:</div></center><br>
+            <div class="sharethis-inline-share-buttons"></div>
            
           </div>
         </div>
