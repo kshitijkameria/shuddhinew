@@ -238,6 +238,29 @@
                 </div>
                 
                 <div class="row row-50" id="myUL">
+                  
+                  <% for(var x = ngo.length -1 ; x > ngo.length-4 ; x--) { %>
+                    <div class="col-md-6 col-lg-4 wow-outer">
+                      <div class="wow fadeInUp">
+                        
+                        <article class="box-causes" style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
+                          <form method="post">
+                            <input name="regid" type="hidden" value="<%=ngo[x].regid%>">
+                          <div class="box-causes-img"><img src="/<%= ngo[x].logo %>" alt="" width="396px" height="372px"/><button type="submit" class="button button-sm button-primary">Know More</button>
+                          </div>
+                          
+                          <h4 class="font-weight-medium"><%=ngo[x].name %></h4></br>
+                          <p class="box-causes-donate" style="text-transform: none;">Total Amount Donated:<%=ngo[x].donationtillnow%>
+                          </br></p>
+                      </form>
+                    </article>
+                      </div>
+                    </div>
+  <% } %>
+</div>
+
+
+                <div class="row row-50" id="myUL">
       
 
                   <% var mod = ((ngo.length)%3) %>
