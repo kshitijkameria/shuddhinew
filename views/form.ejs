@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;
-    background-image:url('/images/backlogin5.jpg');
+    background-image:url('https://hdqwalls.com/wallpapers/anime-cityscape-landscape-scenery-5k-r6.jpg');
 
 background-repeat:no-repeat;
 
@@ -48,6 +48,7 @@ button:hover {
 
 img.avatar {
   width: 40%;
+  border-radius: 50%;
 }
 
 .container {
@@ -73,16 +74,21 @@ span.psw {
 </head>
 <body>
 
+
 <div style="padding-left: 35% ; padding-top: 2%; padding-bottom: 2%; ">
 
 <form  method="post" style="width: 40%; border-color: #01b0d1;">
   <% if(locals.message){ %>
     <script>
-    alert("<%=message %>");
-  </script>
+   alert("<%= message %>");
+   </script>
     <% } %>
+
+<div style="padding-left: 35% ; padding-top: 5%; ">
+
+<form  method="post" style="width: 40%; border-color: #01b0d1;" action = "/main/form">
   <div class="imgcontainer">
-    <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar">
+    <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
   </div>
 
   <div class="container">
@@ -100,6 +106,31 @@ span.psw {
     <input type="text" placeholder="Enter Amount" name="amount" required>
     <label for="address"><b>Address</b></label>
     <input type="text" placeholder="Enter Address" name="address" required>
+    <button type="submit">Donate</button>
+  </div>
+
+
+</form>
+<h1>One time donation </h1>
+<form  method="post" style="width: 40%; border-color: #01b0d1;" action = "/main/one">
+  <div class="imgcontainer">
+    <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="container">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name" required>
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+    <label for="phone"><b>Phone</b></label>
+    <input type="number"  name="phone" required>
+    <label for="pan"><b>Pan Card Number</b></label>
+    <input type="number"  name="pan" >
+    <label for="amount"><b>Amount</b></label>
+    <input type="number"  name="amount" required >
+    <label for="address"><b>Address</b></label>
+    <input type="text"  name="address" required>
+        
     <button type="submit">Donate</button>
   </div>
 

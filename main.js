@@ -15,6 +15,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 var multer = require('multer')
 var path = require('path')
+const cryto = require("crypto");
 var storage = multer.diskStorage({
     destination: "./public/uploads/",
     filename: (req, file, cb) => {
@@ -56,6 +57,7 @@ const {Payouts} = cfSdk;
 const {Beneficiary, Transfers} = Payouts;
 Payouts.Init(payout_config.Payouts);
 var sharp = require('sharp');
+const { token } = require('morgan');
 // const { stringAt } = require('pdfkit/js/data');
 
 const UserSchema = new Schema({
@@ -149,10 +151,35 @@ const UserSchema = new Schema({
         type: Array,
         default: []
     },
-
+    resetToken:String,
+    resetTokenExpires: Date
 });
 
+UserSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  UserSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
+
+
+
 const User = mongoose.model('User', UserSchema);
+
 
 
 const filter = function (req, file, cb) {
@@ -379,7 +406,29 @@ const GovSchema = new Schema({
         type: Array,
         default: []
     },
+    resetToken:String,
+    resetTokenExpires: Date
 });
+GovSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+ 
+
+  GovSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Gov = mongoose.model('Gov', GovSchema);
 const WorkSchema = new Schema({
     heading: String,
@@ -396,7 +445,33 @@ const RecSchema = new Schema({
 
 })
 const Rec = mongoose.model('Rec', RecSchema);
+const DonorSchema = new Schema({
+    name: String,
+    email: {
+        type: String,
+        unique: true
+    },
+    phNum: Number,
+    pan: Number,
+    amount: Number,
+    address: String,
+    password: String,
+    logo: {
+        type: String,
+        default: "images/default.png"
+    },
 
+    images: {
+        type: Array,
+        default: []
+    },
+    t :{
+        type:String,
+        default : "D"
+    }
+
+})
+const Donor = mongoose.model('Donor', DonorSchema);
 
 const MemberSchema = new Schema({
     name: {
@@ -484,7 +559,34 @@ const MemberSchema = new Schema({
         type: Array,
         default: []
     },
-})
+    t :{
+        type:String,
+        default : "M"
+    },
+
+    resetToken:String,
+    resetTokenExpires: Date
+});
+MemberSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  MemberSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Member = mongoose.model('Member', MemberSchema);
 const VolunteerSchema = new Schema({
     name: {
@@ -564,7 +666,34 @@ const VolunteerSchema = new Schema({
         type: Array,
         default: []
     },
-})
+    t :{
+        type:String,
+        default : "V"
+    },
+
+    resetToken:String,
+    resetTokenExpires: Date
+});
+VolunteerSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  VolunteerSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
 const Volunteer = mongoose.model('Volunteer', VolunteerSchema);
 const CauseSchema = new Schema({
     name:{
@@ -990,7 +1119,7 @@ router.post('/form', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('index', { message: "Please register first" })
+                     res.render('form', { message: "Donate one time" });
                 }
                 else {
                     req.session.task = doc
@@ -1007,6 +1136,65 @@ router.post('/form', urlencodedParser, (req, res) => {
     })
 
 })
+var ses = " "
+router.post('/one', urlencodedParser, (req, res) => {
+    Donor.findOne({ email: req.body.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            const pass = cryto.randomBytes(6).toString("hex");
+            let newDonor = new Donor();
+            newDonor.name = req.body.name;
+            newDonor.email = req.body.email;
+            newDonor.phNum = req.body.phone;
+            newDonor.password = pass;
+            newDonor.pan = req.body.pan;
+            newDonor.amount = req.body.amount;
+            newDonor.address = req.body.address;
+            newDonor.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: req.body.email,
+                    subject: 'Donor Password',
+                    text: 'Dear Donor,\n\n Your Password is. ' + newDonor.password + ' \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.redirect('/main/index')
+            });
+            req.session.task = newDonor;
+            ses = newDonor;
+        }
+        else {
+            res.render('form', { message: "Donor already Exists" })
+        }
+
+    })
+})
+
 router.get('/form1', (req, res) => {
     res.render('form')
 })
@@ -1878,6 +2066,7 @@ router.get('/login', (req, res) => {
 router.get('/loginvolunteer', (req, res) => {
     res.render('login')
 })
+var w = " "
 router.post('/login', urlencodedParser, (req, res) => {
     User.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567")
@@ -1913,7 +2102,21 @@ router.post('/login', urlencodedParser, (req, res) => {
                                     return
                                 }
                                 if (_.isEmpty(doc)) {
-                                    res.render('login', { message: "Please check email/password" })
+                                    Donor.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
+                                        if (err) {
+                                            console.log(err, 'error')
+                                            res.redirect('/')
+                                            return
+                                        }
+                                        if (_.isEmpty(doc)) {
+                                            res.render('login', { message: "Please check email/password" })
+                                        }
+                                        else {
+                                            req.session.work = doc
+                                            w = doc
+                                            res.redirect('/main/welcome')
+                                        }
+                                    })
                                 }
                                 else {
                                     req.session.work = doc
@@ -2010,33 +2213,158 @@ router.post('/welcome', urlencodedParser, checkLogIn, (req, res) => {
     });
 
 })
+router.get('/member', checkLogIn, (req, res) => {
+    res.render('member')
+})
+router.post('/member', checkLogIn, urlencodedParser, singleupload, (req, res) => {
+    Member.findOne({ email: w.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            let newMember = new Member();
+            newMember.name = w.name;
+            newMember.educQual = req.body.vol;
+            newMember.phNum = w.phNum;
+            newMember.email = w.email;
+            newMember.password = w.password;
+            newMember.cnfrmpassword = w.password;
+            newMember.cityName = req.body.cityname;
+            newMember.address = w.address;
+            newMember.idNumber = req.body.aadhaar;
+            newMember.interests = req.body.intrest;
 
-router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
-    Work.find({ postedBy: req.session.work._id }, (err, docs) => {
-        Rec.find({ email: req.session.work.email }, (err, docs1) => {
-            res.render('useradmin', { user: req.session.work, blogs: docs, recs: docs1 })
+            newMember.save()
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: w.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
 
-        })
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
 
+
+                }
+
+            });
+            res.render('checkoutmem', {
+                postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
+            });
+            mem = newMember
+        }
+        else {
+            res.render('member', { message: "User already Exists" })
+        }
     })
 })
-
-router.post('/welcomeadmin', urlencodedParser, checkLogIn, (req, res) => {
-    let newWork = new Work()
-    newWork.heading = req.body.heading
-    newWork.content = req.body.content
-    newWork.email = req.session.work.email
-    newWork.name = req.session.work.name
-    newWork.postedBy = req.session.work._id
-    newWork.save(function (err) {
+router.get('/volunteer', checkLogIn, (req, res) => {
+    res.render('volunteer')
+})
+router.post('/volunteer', urlencodedParser, singleupload, function (req, res) {
+    Volunteer.findOne({ email: w.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
             return
         }
-        res.redirect('/main/welcomeadmin')
+        if (_.isEmpty(doc)) {
 
+            let newMember = new Volunteer();
+            newMember.name = w.name;
+            newMember.educQual = req.body.vol;
+            newMember.phNum = w.phNum;
+            newMember.email = w.email;
+            newMember.password = w.password;
+            newMember.cityName = req.body.cityname;
+            newMember.address = w.address;
+            newMember.idNumber = req.body.aadhaar;
+            newMember.interests = req.body.intrest;
+            newMember.cnfrmpassword = w.cnfrmpassword;
+            newMember.role = req.body.role;
+            newMember.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: w.email,
+                    subject: 'Successfull Registration',
+                    text: 'Dear Volunteer,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.render('volunteer', { message: "Registered Successfully" })
+
+            });
+        }
+        else {
+            res.render('volunteer', { message: "User already Exists" })
+        }
+    })
+})
+
+router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
+    
+            Volunteer.find({}, (err, docs2) => {
+            res.render('useradmin', { user: req.session.work,Volunteer: docs2 })
+
+})
+});
+
+router.post('/welcomeadmin', urlencodedParser, checkLogIn, (req, res) => {
+    
+        // res.redirect('/main/welcomeadmin')
+        Volunteer.findOne({ email: req.body.email }, function (err, doc) {
+            if (err) {
+                console.log(err, 'error')
+                res.redirect('/main/welcomeadmin')
+                return
+            }
+            console.log("button hit");
+            console.log(req.body.email);
+            req.session.user = doc
+            ses2 = doc
+            var email = ses2.email
+            console.log(email);
+            res.redirect('/main/infovol')
+        })
     });
-
+router.get('/infovol',(req,res)=>
+{
+    console.log("render hit");
+    Work.find({email:ses2.email},(err,docs)=>{
+        res.render('infovol',{info:ses2,work:docs})
+    })
 })
 
 router.get("/imageupload", checkLogIn, (req, res) => {
@@ -2094,6 +2422,7 @@ router.get('/logout', (req, res) => {
     req.session.destroy
     res.redirect('/')
 })
+
 module.exports.CauseSchema = CauseSchema;
 module.exports.Cause = mongoose.model('Cause', CauseSchema);
 module.exports = router;
