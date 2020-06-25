@@ -73,6 +73,11 @@ span.psw {
 </style>
 </head>
 <body>
+
+
+<div style="padding-left: 35% ; padding-top: 2%; padding-bottom: 2%; ">
+
+<form  method="post" style="width: 40%; border-color: #01b0d1;">
   <% if(locals.message){ %>
     <script>
    alert("<%= message %>");
@@ -93,7 +98,14 @@ span.psw {
     <input type="text" placeholder="Enter Email" name="email" required>
     <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
-        
+    <label for="phone"><b>Phone Number</b></label>
+    <input type="text" placeholder="Enter Number" name="phone" required>
+    <label for="pan"><b>Pan Card Number</b></label>
+    <input type="text" placeholder="Enter PAN" name="pan" required>    
+    <label for="amount"><b>Amount</b></label>
+    <input type="text" placeholder="Enter Amount" name="amount" required>
+    <label for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" name="address" required>
     <button type="submit">Donate</button>
   </div>
 
