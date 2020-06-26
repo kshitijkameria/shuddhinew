@@ -184,6 +184,11 @@ img.avatar {
         
     </head>
     <body>
+        <% if(locals.message){ %>
+            <script>
+            alert("<%=message %>");
+          </script>
+            <% } %>
        <div class="container">
         <div class="image">
             <div class="content">
@@ -196,7 +201,7 @@ img.avatar {
                
                </div>
                 
-                <form id="form1" style="color:black;float:right;">
+                <form id="form1" style="color:black;float:right;" action="/main/1">
                   <center><h3>Donate Here</h3></center>
                     <input type="text" name="name" placeholder="Name"></br>
                     </br>
@@ -238,7 +243,7 @@ img.avatar {
                  }
                }
             </script>
-            <form id="form" style="color:black;float:left;">
+            <form id="form" style="color:black;float:left;" action="/main/form">
               <center><h3>Donate Here</h3></center>
                 <input type="text" name="name" placeholder="Name"></br></br>
                 

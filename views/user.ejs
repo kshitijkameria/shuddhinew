@@ -157,13 +157,22 @@ font-size:16px;
         <img src="/<%= user.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;" />
       </br><a href="/main/imageupload" style="font-size: 1.5rem;"> Upload Logo </a>
       </br> <h1> <%= user.name %> </h1>
-      <h1> <%= user.type %> </h1>
+    
     <br>
       <div style="float: center; display: none;" class="vol"><a class="button button-primary button-sm vol"  href="/main/member" style="width: 30%; font-size: 15px;">Join as a Volunteer</a></div>
-     <br> <div style="float: center; display: none;" class="mem"><a class="button button-primary button-sm mem" href="/main/volunteer" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
+     <br> <div style="float: center;display:none;" class="mem"><a class="button button-primary button-sm mem" href="/main/volunteer" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>  
+     <br> <div style="float: center;display:none;" class="mem1"><a class="button button-primary button-sm mem" href="/" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
 </div>
+<script>
+  if("<%= user.t %>"=="D"){
+    $("div.vol").show();
+    $("div.mem").show();
+  } 
+  if("<%= user.t %>" =="V"){
+    $("div.mem1").show();
+  }
 
-<h2><%= user.type %></h2>
+</script>
 <div class="limiter">
 <div class="container-login100">
 <div class="wrap-login100"></br>
@@ -324,16 +333,6 @@ slideShow(0);
     <div class="snackbars" id="form-output-global"></div>
     <script src="/javascripts/core.min.js"></script>
     <script src="/javascripts/script.js"></script>
-    <script>
-      console.log(user);
-      if("<%= user.type %>"=="D"){
-        $("div.vol").show();
-        $("div.mem").show();
-      } 
-      if("<%= user.type %>" =="V"){
-        $("div.mem").show();
-      }
     
-    </script>
   </body>
 </html>
