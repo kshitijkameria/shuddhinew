@@ -286,6 +286,13 @@ let uploadImagesHandler = upload.fields([{
   }
 }
 
+router.get("/gallery",function(req,res){
+
+    Gallery.findById({},(err,docs) => {
+        res.render('gallery',{Gal:docs})
+    })
+})
+
 
   router.get('/registerngo', (req, res) => {
   res.render('regngo')
@@ -445,6 +452,15 @@ const RecSchema = new Schema({
 
 })
 const Rec = mongoose.model('Rec', RecSchema);
+
+const GallerySchema = new Schema({
+    description:String,
+    image:{
+        type:String
+    },
+})
+const Gallery = mongoose.model('Gallery',GallerySchema);
+
 const DonorSchema = new Schema({
     name: String,
     email: {
@@ -1074,6 +1090,23 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
         }
     })
 })
+router.get('/galleryupdate',function(req,res){
+        res.render('reggal')    
+})
+router.post('/galleryupdate',urlencodedParser,singleupload,function(req,res){
+    let newGal = new Gallery();
+    newGal.description = req.body.description;
+    newGal.image = req.file.filename;
+    newGal.save(function (err) {
+        if (err) {
+            console.log(err, 'error')
+            return
+        }
+        res.render('index',{message:"Photo updated"});
+})
+});
+
+
 router.get('/index', (req, res, next) => {
     console.log("index get hit");
     res.render('checkout', {
@@ -1094,7 +1127,7 @@ router.post('/createcause', urlencodedParser, singleupload, function (req, res){
             console.log(err, 'error')
             return
         }
-        res.redirect('/')
+        res.render('index',{message:"Cause updated"})
 
     })
 })
@@ -2336,7 +2369,7 @@ router.post('/volunteer', urlencodedParser, singleupload, function (req, res) {
 router.get('/welcomeadmin', checkLogIn, (req, res, next) => {
     
             Volunteer.find({}, (err, docs2) => {
-            res.render('useradmin', { user: req.session.work,Volunteer: docs2 })
+            res.render('useradmin', { user: req.session.work , Volunteer: docs2 })
 
 })
 });
@@ -2482,24 +2515,24 @@ async function forgetPassword(req, res) {
         });
     
         
-           return res.status(200).json({
-            resetPath,
-            resetToken,
-            useremail,
-            status: "Token sent to your email",
-          })
+        //    return res.status(200).json({
+        //     resetPath,
+        //     resetToken,
+        //     useremail,
+        //     status: "Token sent to your email",
+        //   })
         } else {
-          throw new Error("User not found");
+        //   throw new Error("User not found");
         }
     
     
       } catch (err) {
         console.log(err.message);
-        res.status(400).json({
-          err,
-          status: "cannot reset password"
-        }
-        )
+        // res.status(400).json({
+        //   err,
+        //   status: "cannot reset password"
+        // }
+        // )
       }
     }
     async function resetPassword(req, res) {
@@ -2573,6 +2606,7 @@ async function forgetPassword(req, res) {
     
     router.post('/forgotpassword', (req,res)=>{
         const backres = forgetPassword(req,res);
+        res.redirect('/');
     })
     
     router.get("/resetPassword/:token",(req,res)=>{

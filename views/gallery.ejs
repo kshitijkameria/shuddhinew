@@ -515,10 +515,53 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-12 sol-sm-12">
+                <br>  <div class="maintitle">
+                      <h3 class="section-title" style="font-family: Georgia;">Our New Photos</h3>
 
+
+                      <% var mod = ((Gal.length)%3) %>
+                      <% var n = 0 %>
+                      <% for(var i = 0; i < (parseInt((Gal.length)/3)); i++) { %>
+                      <% for(var j = 0; j < 3; j++) { %>
+
+
+                      <div class="col-md-4">
+                        <a href="/<%= Gal[n].image %>">
+                        <img src="/<%= Gal[n].image %>" alt="" style="height:210px;" class="image-responsive">
+                            <div class="description">
+                                <span class="caption"><B><%=Gal[n].description %></B></span> 
+                                
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                        <% n++ %>
+                    </div>
+                    <% } %>
+                    <br>
+                    <% } %> 
+
+                    <% for(var m = 0; m < mod; m++) { %>
+                        <div class="col-md-4">
+                            <a href="/<%= Gal[n].image %>">
+                            <img src="/<%= Gal[n].image %>" alt="" style="height:210px;" class="image-responsive">
+                                <div class="description">
+                                    <span class="caption"><B><%=Gal[n].description %></B></span> 
+                                    
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <% n++ %>
+                        </div>
+                        <% } %>
+
+                    
+                  </br>
+                  <br>
+                  </div>
                 </div>
-                <center><a class="button button-primary button-sm" href="" style="width: 30%; font-size: 15px;">Add a Photo</a>
-                </center>
+                </div>
+                
             </div>
         </div>  
         

@@ -293,9 +293,9 @@ app.get("/ourpartner",function(req,res){
 //     res.render('causesfinal');
 // })
 
-app.get("/gallery",function(req,res){
-    res.render('gallery');
-})
+// app.get("/gallery",function(req,res){
+//     res.render('gallery');
+// })
 
 app.get("/contactus",function(req,res){
     res.render('contacts');
@@ -325,6 +325,7 @@ app.post('/contactus',urlencodedParser,function(req,res){
         }
 
     });
+    res.render('contacts',{ message: "Thank you for your query.We will get back to you very soon."})
 })
 app.get("/donate",function(req,res){
     res.render('donate');

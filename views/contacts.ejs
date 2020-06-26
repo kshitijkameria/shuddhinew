@@ -113,6 +113,11 @@
           </nav>
         </div>
       </header>
+      <% if(locals.message){ %>
+        <script>
+        alert("<%=message %>");
+      </script>
+        <% } %>
       <section class="parallax-container" data-parallax-img="images/gif.gif">
         <div class="parallax-content breadcrumbs-custom context-dark">
           <div class="container">
@@ -191,7 +196,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <div class="col-12 col-sm-7 col-lg-5">
-                    <button class="button button-block button-lg button-primary" type="submit">Send</button>
+                    <button class="button button-block button-lg button-primary" type="submit" onclick="alert('Your Query has been recorded successfully. We will contact you soon.')">Send</button>
                   </div>
                 </div>
               </form>

@@ -134,6 +134,12 @@ font-size:16px;
           </nav>
         </div>
       </header>
+      <% if(locals.message){ %>
+        <script>
+        alert("<%=message %>");
+      </script>
+        <% } %>
+
       <section class="parallax-container" data-parallax-img="https://images.unsplash.com/photo-1546865892-a9de1f73692e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2009&q=80">
         <div class="parallax-content breadcrumbs-custom context-dark">
           <div class="container">
@@ -156,6 +162,9 @@ font-size:16px;
 </div>
 <div style="text-align: center; font-size: 2rem;">
     <a href="/main/createcause">Upload Cause</a>
+</div>
+<div style="text-align: center; font-size: 2rem;">
+  <a href="/main/galleryupdate">Gallery Update</a>
 </div>
 <div class="limiter">
 <div class="container-login100">
