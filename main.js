@@ -288,7 +288,7 @@ let uploadImagesHandler = upload.fields([{
 
 router.get("/gallery",function(req,res){
 
-    Gallery.findById({},(err,docs) => {
+    Gallery.find({},(err,docs) => {
         res.render('gallery',{Gal:docs})
     })
 })
