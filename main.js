@@ -2100,6 +2100,7 @@ router.get('/loginvolunteer', (req, res) => {
     res.render('login')
 })
 var w = " "
+var v = " "
 router.post('/login', urlencodedParser, (req, res) => {
     User.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if(req.body.email==="myadmin@gmail.com" && req.body.password==="1234567")
@@ -2153,6 +2154,7 @@ router.post('/login', urlencodedParser, (req, res) => {
                                 }
                                 else {
                                     req.session.work = doc
+                                    v = doc
                                     res.redirect('/main/welcome')
                                 }
                             })
@@ -2362,6 +2364,66 @@ router.post('/volunteer', urlencodedParser, singleupload, function (req, res) {
         }
         else {
             res.render('volunteer', { message: "User already Exists" })
+        }
+    })
+})
+router.get('/mem',checkLogIn,(req,res)=>{
+    res.render('mem')
+})
+router.post('/mem', checkLogIn, urlencodedParser, singleupload, (req, res) => {
+    Member.findOne({ email: v.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            let newMember = new Member();
+            newMember.name = v.name;
+            newMember.educQual = v.eduQual;
+            newMember.phNum = v.phNum;
+            newMember.email = v.email;
+            newMember.password = v.password;
+            newMember.cnfrmpassword = v.cnfrmpassword;
+            newMember.cityName = v.cityname;
+            newMember.address = v.address;
+            newMember.idNumber = v.idNumber;
+            newMember.interests = v.interests;
+            newMember.images = v.images;
+            newMember.logo = v.logo;
+
+            newMember.save()
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ngo@shuddhi.org',
+                    pass: 'shuddhi321'
+                }
+            });
+            let mailOptions = {
+                from: 'ngo@shuddhi.org',
+                to: v.email,
+                subject: 'Successfull Registration',
+                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+            };
+            transporter.sendMail(mailOptions, function (err, data) {
+                if (err) {
+                    console.log('Error Occurs');
+                } else {
+                    console.log('Email Sent');
+
+
+                }
+
+            });
+            res.render('checkoutmem', {
+                postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
+            });
+            mem = newMember
+        }
+        else {
+            res.render('mem', { message: "User already Exists" })
         }
     })
 })
