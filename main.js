@@ -1229,7 +1229,7 @@ router.post('/one', urlencodedParser, (req, res) => {
 })
 
 router.get('/form1', (req, res) => {
-    res.render('form')
+    res.render('form1')
 })
 var ses = ""
 router.post('/form1', urlencodedParser, (req, res) => {
@@ -1263,6 +1263,64 @@ router.post('/form1', urlencodedParser, (req, res) => {
         }
     })
 
+})
+var ses = " "
+router.post('/oneo', urlencodedParser, (req, res) => {
+    Donor.findOne({ email: req.body.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            const pass = cryto.randomBytes(6).toString("hex");
+            let newDonor = new Donor();
+            newDonor.name = req.body.name;
+            newDonor.email = req.body.email;
+            newDonor.phNum = req.body.phone;
+            newDonor.password = pass;
+            newDonor.pan = req.body.pan;
+            newDonor.amount = req.body.amount;
+            newDonor.address = req.body.address;
+            newDonor.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: req.body.email,
+                    subject: 'Donor Password',
+                    text: 'Dear Donor,\n\n Your Password is. ' + newDonor.password + ' \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.redirect('/main/shuddhi')
+            });
+            req.session.task = newDonor;
+            ses = newDonor;
+        }
+        else {
+            res.render('form1', { message: "Donor already Exists" })
+        }
+
+    })
 })
 router.get('/shuddhi', (req, res, next) => {
     console.log("index get hit");
