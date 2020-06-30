@@ -484,9 +484,34 @@ const DonorSchema = new Schema({
     t :{
         type:String,
         default : "D"
-    }
+    },
+
+    resetToken:String,
+    resetTokenExpires: Date
 
 })
+
+DonorSchema.methods.createResetToken = function () {
+    // token generate
+    const resetToken = cryto.randomBytes(32).toString("hex");
+  
+    this.resetToken = resetToken;
+  
+    this.resetTokenExpires = Date.now() + 1000 * 10 * 60;
+  
+    return resetToken;
+  
+  }
+
+
+  DonorSchema.methods.resetPasswordhandler = function(password, confirmPassword) {
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.resetToken = undefined;
+    this.resetTokenExpires = undefined;
+  
+  }
+
 const Donor = mongoose.model('Donor', DonorSchema);
 
 const MemberSchema = new Schema({
@@ -855,7 +880,7 @@ var job = new CronJob('00 12 1 * *', function() {
 job.start();
 router.get('/donateforcause/:id',(req,res)=>{
     tostoreid = req.params.id
-    res.render('causemember', {
+    res.render('form', {
         postUrl: config.paths[config.enviornment].cashfreePayUrl,member : vol
     });
 })
@@ -2533,6 +2558,9 @@ async function forgetPassword(req, res) {
         else if(await Member.findOne({ email: req.body.email })){
             user = await Member.findOne({ email: req.body.email })
         }
+        else if(await Donor.findOne({ email: req.body.email })){
+            user = await Donor.findOne({ email: req.body.email })
+        }
     
         if (user) {
           // create token
@@ -2541,6 +2569,7 @@ async function forgetPassword(req, res) {
           await user.save({ validateBeforeSave: false });
           resetPath = "http://localhost:3000/main/resetpassword/" + resetToken;
             let useremail = req.body.email;
+            
           // send Mail
     
         //   let html,subject;
@@ -2640,8 +2669,18 @@ async function forgetPassword(req, res) {
       resetTokenExpires: { $gt: Date.now() }
     })
     }
+    else if(await Donor.findOne({
+        resetToken: token,
+        resetTokenExpires: { $gt: Date.now() }
+      })){
+     user = await Donor.findOne({
+      resetToken: token,
+      resetTokenExpires: { $gt: Date.now() }
+    })
+    }
         if (user) {
           user.resetPasswordhandler(password, confirmPassword)
+          
         // User.update(user,{
         //     password:newpassword,
         //     confirmPassword:newconfirmPassword
