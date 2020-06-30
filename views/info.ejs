@@ -62,7 +62,7 @@
                       <!-- RD Navbar Nav-->
                     
                     </div>
-                  </div><a class="button button-primary button-sm" href='/main/form'>DONATE</a>
+                  </div><a class="button button-primary button-sm" href='/main/form' style="font-family: initial;">DONATE</a>
                 
               </div>
             </div>
@@ -74,7 +74,7 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-12 col-lg-9">
-                <h2 class="breadcrumbs-custom-title">DASHBOARD</h2>
+                <h2 class="breadcrumbs-custom-title" style="font-family: initial;">DASHBOARD</h2>
                
               </div>
             </div>
@@ -83,29 +83,33 @@
       </section>
       <div align="center" style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');background-size:100% 100% ;">
         <img src = "/<%= info.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;"/>
-        <h1>Name :<%= info.name %></h1>
+        <h1 style="font-family: initial;">Name :<%= info.name %></h1>
         <div>
         <div style="width: 48%;margin:1%;float:left;">
-            <h1>EMAIL ID:<%= info.email %></h1>
+            <h1 style="font-family: initial;">EMAIL ID:<%= info.email %></h1>
         </div>
         <div style="width: 48%;margin:1%;float:right;">
-        <h1>CONTACT NO:<%= info.phno %></h1>
+        <h1 style="font-family: initial;">CONTACT NO:<%= info.phno %></h1>
     </div>    
     </div>
 </br>
 </br>
 </br></br>
     <div align="center" style="border:2px solid black;width:600px;box-shadow: 10px 10px 10px 10px #888888;background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
-        <h1>DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
-        <h1>THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
-        <h1>LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1></br>
-        <u><h1>RECENT DONORS</h1></u>
-        <h1><%= info.recentdonors.donate %></h1>
-        <h1><%= info.recentdonors.amount %></h1>
-        
+        <h1 style="font-family: initial;">DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
+        <h1 style="font-family: initial;">THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
+        <h1 style="font-family: initial;">LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1></br>
+        <u><h1 style="font-family: initial;">RECENT DONORS</h1></u>
+      
+        <% for(var i = 0; i < info.recentdonors.length; i++) { %>
+        <h1><%= info.recentdonors[i].donor %></h1>
+        <h1><%= info.recentdonors[i].amount %></h1>
+
+        <% } %>
+     
         </div>
     </br></br>
-        <h1>WORK</h1>
+        <h1 style="font-family: initial;">WORK</h1>
         <table align="center" style="width:35rem;"  class="table">
             <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
                 <th></th>
@@ -115,10 +119,10 @@
             <% for(var i = 0; i < work.length; i++) { %>
             <tr align="center">
                 <td style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
-                <td style="width:30rem;"><%=work[i].heading %>
+                <td style="width:30rem;font-family: initial;"><%=work[i].heading %>
                     </br>
                     </br>
-                    <%=work[i].content %>
+                   <div style="font-family: initial;"> <%=work[i].content %></div>
                 </td>
                 <td style="background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
             </tr>
@@ -129,7 +133,7 @@
                 <th></th>
             </tr>
         </table>
-        <h1>IMAGES</h1>
+        <h1 style="font-family: initial;">IMAGES</h1>
     </br>
             <% for(var i = 0; i < info.images.length; i++) { %>
             <img src="/<%= info.images[i] %>" style="height:100px;width:100px;box-shadow: 5px 5px #888888;" />

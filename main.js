@@ -1564,6 +1564,7 @@ router.post('/ngo', urlencodedParser, function (req, res) {
 })
 router.get('/info',(req,res)=>{
     Work.find({email:ses1.email},(err,docs)=>{
+    
         res.render('info',{info:ses1,work:docs})
     })
 })
@@ -1642,6 +1643,7 @@ router.post('/result', (req, res, next) => {
                     }
                     user.recentdonors.push(newDonor)
                     user.save()
+                    
                 })
                 
                 receiptno = receiptno + 1
