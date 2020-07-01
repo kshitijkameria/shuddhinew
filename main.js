@@ -1198,7 +1198,21 @@ router.post('/form', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                     res.render('form', { message: "Donate one time" });
+                      Donor.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                        if (err) {
+                            console.log(err, 'error')
+                            res.redirect('/')
+                            return
+                        }
+                        if (_.isEmpty(doc)) {
+                             res.render('form', { message: "Donate one time" });
+                        }
+                        else {
+                            req.session.task = doc
+                            ses = doc
+                            res.redirect('/main/index')
+                        }
+                    })
                 }
                 else {
                     req.session.task = doc
@@ -1293,7 +1307,21 @@ router.post('/form1', urlencodedParser, (req, res) => {
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    res.render('index', { message: "Please register first" })
+                    Donor.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                        if (err) {
+                            console.log(err, 'error')
+                            res.redirect('/')
+                            return
+                        }
+                        if (_.isEmpty(doc)) {
+                            res.render('form1', { message: "Donate one time" })
+                        }
+                        else {
+                            req.session.task = doc
+                            ses = doc
+                            res.redirect('/main/shuddhi')
+                        }
+                    })
                 }
                 else {
                     req.session.task = doc
