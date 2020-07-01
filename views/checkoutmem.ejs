@@ -1,105 +1,38 @@
 <!DOCTYPE html>
 <html>
+  <title>
+    Cashfree Payment
+</title>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;
-    background-image:url('https://hdqwalls.com/wallpapers/anime-cityscape-landscape-scenery-5k-r6.jpg');
 
-background-repeat:no-repeat;
-
-background-size:cover;
-}
-form {border: 3px solid #f1f1f1; }
-
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
 </head>
-<body>
+<body style="background-image: url('/images/backlogin5.jpg'););">
 
-<div style="padding-left: 35% ; padding-top: 5%; ">
-
-<form style="width: 40%; border-color: #01b0d1;" id="checkoutForm" name="checkoutForm" method="POST" action= <%= postUrl %>>
-  <div class="imgcontainer">
-    <img src="/images/img_avatar2.png" alt="Avatar" class="avatar">
+<form style="width: 40%; border-color: #01b0d1;" id="checkoutForm" name="checkoutForm" method="POST" style="position: relative; top: 35vh; left: 40vw; " action= <%= postUrl %>>
+  <h2 style="font-family: initial; position: relative; left: -2rem;">Please Enter Amount You Want To Donate</h2>
+  
   </div>
 
   <div class="container">
     <table class="mainForm">
       <tr>
-          <td>order id</td>
+          <td>Order id</td>
           <td><input type="text" name="orderId" readonly ></td>
       </tr>
       <tr>
-          <td>order amount</td>
+          <td>Order amount</td>
           <td><input type="text" name="orderAmount" value="1500" readonly></td>
       </tr>
-      <td>customer name</td>
+      <td>Customer name</td>
       <td><input type="text" name="customerName" value="<%=user.name %>" readonly></td>
   </tr>
   <tr>
-      <td>customer email</td>
+      <td>Customer email</td>
       <td><input type="text" name="customerEmail" value="<%= user.email %>" readonly></td>
   </tr>
   <tr>
-      <td>customer phone</td>
+      <td>Customer phone</td>
       <td><input type="text" name="customerPhone" value="<%= user.phNum %>" readonly ></td>
   </tr>
 
@@ -110,7 +43,7 @@ span.psw {
               <td colspan="2"><input type="submit" value="pay cashfree" id="payBtn" style="display:none" ></td>
           </tr>
           <tr>
-              <td colspan="2"><button value="pay" id="submitBtn3">pay</button></td>
+              <td colspan="2"><button value="pay" id="submitBtn3" style="background-color: rgba(11, 192, 11, 0.986); width: 17rem; height: 2rem; border-radius: 0.5rem;">pay</button></td>
           </tr>
           </table>
       </form>

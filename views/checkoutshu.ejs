@@ -1,29 +1,29 @@
 <title>
-    cashfree collect payments
+    Cashfree Payment
 </title>
-<body>
-    <form id="checkoutForm" name="checkoutForm" method="POST" action= <%= postUrl %>>
-        
+<body style="background-image: url('/images/backlogin5.jpg'););">
+    <form id="checkoutForm" name="checkoutForm" method="POST" style="position: relative; top: 35vh; left: 40vw; " action= <%= postUrl %>>
+        <h2 style="font-family: initial; position: relative; left: -2rem;">Please Enter Amount You Want To Donate</h2>
     <table class="mainForm">
     <tr>
-        <td>order id</td>
-        <td><input type="text" name="orderId"  ></td>
+        <td>Order id</td>
+        <td><input type="text" name="orderId" readonly ></td>
     </tr>
     <tr>
-        <td>order amount</td>
-        <td><input type="text" name="orderAmount" value="<%=user.amount %>" ></td>
+        <td>Order amount</td>
+        <td><input type="text" name="orderAmount" value="<%=user.amount %>" placeholder="Enter Amount" ></td>
     </tr>
     <tr>
-        <td>customer name</td>
-        <td><input type="text" name="customerName" value="<%=user.name %>" ></td>
+        <td>Customer name</td>
+        <td><input type="text" name="customerName" value="<%=user.name %>" readonly ></td>
     </tr>
     <tr>
-        <td>customer email</td>
-        <td><input type="text" name="customerEmail" value="<%= user.email %>" ></td>
+        <td>Customer email</td>
+        <td><input type="text" name="customerEmail" value="<%= user.email %>" readonly ></td>
     </tr>
     <tr>
-        <td>customer phone</td>
-        <td><input type="text" name="customerPhone" value="<%= user.phNum %>" ></td>
+        <td>Customer phone</td>
+        <td><input type="text" name="customerPhone" value="<%= user.phNum %>" readonly ></td>
         </tr>
 </table>
         <table>
@@ -31,7 +31,7 @@
             <td colspan="2"><input type="submit" value="pay cashfree" id="payBtn" style="display:none" ></td>
         </tr>
         <tr>
-            <td colspan="2"><button value="pay" id="submitBtn4">pay</button></td>
+            <td colspan="2"><button value="pay" id="submitBtn4" style="background-color: rgba(11, 192, 11, 0.986); width: 17rem; height: 2rem; border-radius: 0.5rem;">pay</button></td>
         </tr>
         </table>
     </form>
