@@ -448,6 +448,7 @@ const Work = mongoose.model('Work', WorkSchema);
 const RecSchema = new Schema({
     name: String,
     email: String,
+    date : String,
     receipt: String
 
 })
@@ -1482,6 +1483,7 @@ router.post('/resultshu', (req, res, next) => {
                 let newRec = new Rec();
                 newRec.name = ses.name;
                 newRec.email = ses.email;
+                newRec.date = postData.txTime;
                 newRec.receipt = postData.referenceId + '.pdf'
                 newRec.save(function (err) {
                     if (err) {
@@ -1698,6 +1700,7 @@ router.post('/result', (req, res, next) => {
                 let newRec = new Rec();
                 newRec.name = ses.name;
                 newRec.email = ses.email;
+                newRec.date = postData.txTime;
                 newRec.receipt = postData.referenceId + '.pdf'
                 newRec.save(function (err) {
                     if (err) {
