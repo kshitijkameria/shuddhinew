@@ -371,16 +371,20 @@ router.get("/gallery",function(req,res){
             "ifsc": req.body.ifsccode,    
             "address1" : req.body.bankadd
         };
-        try{
-            const response = Beneficiary.Add(bene);
-            console.log("beneficiarry addition response");
-            console.log(response);
-        }
-        catch(err){
-            console.log("err caught in beneficiarry addition");
-            console.log(err);
-            return;
-        }
+        (
+            async()=>{
+                try{
+                    const response =await Beneficiary.Add(bene);
+                    console.log("beneficiarry addition response");
+                    console.log(response);
+                }
+                catch(err){
+                    console.log("err caught in beneficiarry addition");
+                    console.log(err);
+                    return;
+                }
+            }
+        )();
            res.render('index',{message:"Registered Successfully"})
       });
         }
@@ -880,9 +884,7 @@ var job = new CronJob('00 12 1 * *', function() {
 job.start();
 router.get('/donateforcause/:id',(req,res)=>{
     tostoreid = req.params.id
-    res.render('form', {
-        postUrl: config.paths[config.enviornment].cashfreePayUrl,member : vol
-    });
+    res.redirect("/main/form2")
 })
 
 
@@ -1010,16 +1012,20 @@ router.post('/registermember', urlencodedParser, singleupload, function (req, re
                 "ifsc": req.body.ifsccode,    
                 "address1" : req.body.address
             };
-            try{
-                const response = Beneficiary.Add(bene);
-                console.log("beneficiarry addition response");
-                console.log(response);
-            }
-            catch(err){
-                console.log("err caught in beneficiarry addition");
-                console.log(err);
-                return;
-            }
+            (
+                async()=>{
+                    try{
+                        const response =await Beneficiary.Add(bene);
+                        console.log("beneficiarry addition response");
+                        console.log(response);
+                    }
+                    catch(err){
+                        console.log("err caught in beneficiarry addition");
+                        console.log(err);
+                        return;
+                    }
+                }
+            )();
             res.render('checkoutmem', {
                 postUrl: config.paths[config.enviornment].cashfreePayUrl, user: newMember
             });
@@ -1097,6 +1103,20 @@ router.post('/registervolunteer', urlencodedParser, singleupload , function (req
                     "ifsc": req.body.ifsccode,    
                     "address1" : req.body.address
                 };
+                (
+                    async()=>{
+                        try{
+                            const response =await Beneficiary.Add(bene);
+                            console.log("beneficiarry addition response");
+                            console.log(response);
+                        }
+                        catch(err){
+                            console.log("err caught in beneficiarry addition");
+                            console.log(err);
+                            return;
+                        }
+                    }
+                )();
                 try{
                     const response = Beneficiary.Add(bene);
                     console.log("beneficiarry addition response");
@@ -1353,6 +1373,106 @@ router.get('/shuddhi', (req, res, next) => {
         postUrl: config.paths[config.enviornment].cashfreePayUrl, user: req.session.task
     });
 });
+router.get('/form2', (req, res) => {
+    res.render('form2')
+})
+var ses = ""
+router.post('/form2', urlencodedParser, (req, res) => {
+    Member.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            Volunteer.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                if (err) {
+                    console.log(err, 'error')
+                    res.redirect('/')
+                    return
+                }
+                if (_.isEmpty(doc)) {
+                    res.render('index', { message: "Please register first" })
+                }
+                else {
+                    req.session.task = doc
+                    ses = doc
+                    res.redirect('/main/referral')
+                }
+            })
+        }
+        else {
+            req.session.task = doc
+            ses = doc
+            res.redirect('/main/referral')
+        }
+    })
+
+})
+var ses = " "
+router.post('/one2', urlencodedParser, (req, res) => {
+    Donor.findOne({ email: req.body.email }, function (err, doc) {
+        if (err) {
+            console.log(err, 'error')
+            res.redirect('/')
+            return
+        }
+        if (_.isEmpty(doc)) {
+            const pass = cryto.randomBytes(6).toString("hex");
+            let newDonor = new Donor();
+            newDonor.name = req.body.name;
+            newDonor.email = req.body.email;
+            newDonor.phNum = req.body.phone;
+            newDonor.password = pass;
+            newDonor.pan = req.body.pan;
+            newDonor.amount = req.body.amount;
+            newDonor.address = req.body.address;
+            newDonor.save(function (err) {
+                if (err) {
+                    console.log(err, 'error')
+                    return
+                }
+                let transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'ngo@shuddhi.org',
+                        pass: 'shuddhi321'
+                    }
+                });
+                let mailOptions = {
+                    from: 'ngo@shuddhi.org',
+                    to: req.body.email,
+                    subject: 'Donor Password',
+                    text: 'Dear Donor,\n\n Your Password is. ' + newDonor.password + ' \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+
+                };
+                transporter.sendMail(mailOptions, function (err, data) {
+                    if (err) {
+                        console.log('Error Occurs');
+                    } else {
+                        console.log('Email Sent');
+
+
+                    }
+
+                });
+                res.redirect('/main/referral')
+            });
+            req.session.task = newDonor;
+            ses = newDonor;
+        }
+        else {
+            res.render('form1', { message: "Donor already Exists" })
+        }
+
+    })
+})
+router.get('/referral', (req, res, next) => {
+    console.log("referral get hit");
+    res.render('checkoutmember', {
+        postUrl: config.paths[config.enviornment].cashfreePayUrl, user: req.session.task
+    });
+});
 router.post('/resultshu', (req, res, next) => {
     console.log("merchantHosted result hit");
     /*try {
@@ -1411,25 +1531,6 @@ router.post('/resultshu', (req, res, next) => {
                     throw { name: "signature missmatch", message: "there was a missmatch in signatures genereated and received" }
                 }
                 console.log("Success")
-                /*const _id = ses1._id
-                User.findById(_id, (err, user) => {
-                    if (err) {
-                        return err
-                    }
-                    
-                    user.donationtillnow = user.donationtillnow + parseFloat(req.body.orderAmount)
-                    user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
-                    if (user.recentdonors.length === 3) {
-                        user.recentdonors.pull({ _id: user.recentdonors[0]._id })
-                    }
-                    const newDonor = {
-                        donor: ses.name,
-                        amount: req.body.orderAmount
-                    }
-                    user.recentdonors.push(newDonor)
-                    console.log(user)
-                    user.save()
-                })*/
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
@@ -2071,10 +2172,10 @@ router.post('/resultdonatemem', (req, res, next) => {
                     throw { name: "signature missmatch", message: "there was a missmatch in signatures genereated and received" }
                 }
                 console.log("Success")
-                console.log(tostoreid)
+                // console.log(tostoreid)
                 try{
                 Volunteer.findById(tostoreid,(err,user)=>{
-                    console.log(user)
+                    // console.log(user)
                     user.totalDonations = user.totalDonations + parseFloat( req.body.orderAmount)
                     user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
                     user.save()
@@ -2083,7 +2184,7 @@ router.post('/resultdonatemem', (req, res, next) => {
             catch{
                 try{
                 Member.findById(tostoreid,(err,user)=>{
-                    console.log(user)
+                    // console.log(user)
                     user.thisMonthDonations = user.thisMonthDonations + parseFloat(req.body.orderAmount)
                     user.totalDonations = user.totalDonations + parseFloat( req.body.orderAmount)
                     user.save()
@@ -2100,17 +2201,20 @@ router.post('/resultdonatemem', (req, res, next) => {
                 });
             }
             }
+            console.log("*******")
+            console.log(ses.name)
+            console.log("*******")
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
                 doc.fontSize(20)
-                doc.text("Donor Name :" + " " + vol.name)
+                doc.text("Donor Name :" + " " + ses.name)
                 doc.fontSize(20)
                 doc.text("Receipt No. :" + " " + postData.referenceId)
                 doc.fontSize(20)
-                doc.text("Email :" + " " + vol.email)
+                doc.text("Email :" + " " + ses.email)
                 doc.fontSize(20)
-                doc.text("Ph No. :" + " " + vol.phNum)
+                doc.text("Ph No. :" + " " + ses.phNum)
                 doc.fontSize(20)
                 doc.text("Amount :" + " " + postData.orderAmount)
                 doc.fontSize(20)
@@ -2127,7 +2231,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                 });
                 let mailOptions = {
                     from: 'ngo@shuddhi.org',
-                    to: vol.email,
+                    to: ses.email,
                     subject: 'Successfull Donation',
                     text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                     attachments: [

@@ -1,0 +1,265 @@
+<html>
+    <head>
+        <title>Donate as much as you can !!!</title>
+        
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" type="image/x-icon">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Niconne&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: url('/images/backlogin5.jpg');
+    background-size:cover;
+}
+.container {
+    height: 600px;
+    width: 1000px;
+    box-shadow: 0px 30px 40px black;
+    display: flex;
+    border-radius: 10px;
+}
+.image {
+    flex: 50%;
+    background: url('right.jpg');
+    background-size: 100% 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.image h1 {
+    margin-top: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+.image1 {
+    flex: 50%;
+    background: url('left.jpg');
+    background-size: 100% 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.image1 h1 {
+    margin-top: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+span {
+    color: chartreuse;
+}
+.content {
+    flex: 50%;
+    padding:10%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.content h1 {
+    padding: 40px;
+    padding-top: 30px;
+    font-family: 'Niconne', cursive;
+    font-size: 40px;
+    color: #c446c9;
+}
+.content1 {
+    flex: 50%;
+    padding:10%;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.content1 h1 {
+    padding: 40px;
+    padding-top: 30px;
+    font-family: 'Niconne', cursive;
+    font-size: 40px;
+    color: #c446c9;
+}
+#txt {
+    margin: 10px;
+    padding: 5px;
+    border: none;
+    background-color: rgba(156, 77, 156, 0.3);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: small;
+    font-family: 'Montserrat', sans-serif;
+    color: #aa38a4;
+}
+label {
+    font-weight: bold;
+    font-size: small;
+}
+#txt:focus {
+    outline: none;
+}
+.fp {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: small;
+    transition: 0.3s;
+}
+.fp:hover {
+    color: #c446c9;
+}
+button {
+    padding: 30px 50px;
+    margin-top: 20px;
+    border: none;
+    background: #33C9FF;
+    border-radius: 10px;
+    transition: 0.3s;
+    font-size:20px;
+    border:1.5px solid green;
+}
+button:hover {
+    transform: scale(1.05);
+}
+button a {
+    text-decoration: none;
+    color: green;
+}
+#form{
+    display:none;
+}
+#form1{
+    display:none;
+}
+input{
+    padding: 2px;
+    margin-top: 15px;
+    border: none;
+    background: ;
+    border-radius: 0px;
+    transition: 0.3s;
+    font-size:18px;
+    border:1px solid black;
+    
+}
+::placeholder{
+    color:black;
+}
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+img.avatar {
+  width: 40%;
+}
+</style>
+        
+    </head>
+    <body>
+        <% if(locals.message){ %>
+            <script>
+            alert("<%=message %>");
+          </script>
+            <% } %>
+       <div class="container">
+        <div class="image">
+            <div class="content">
+            <div>
+              <br>
+              <div class="imgcontainer" id="myDIV">
+                <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar" ><br>
+              </div>
+                <button type="button" onclick="myFunction2()" class="btn" id="button" style="background-color: #33C9FF;"><a href="">One Time Payment</a></button></br>
+               
+               </div>
+                
+                <form id="form1" style="color:black;float:right;" method = "post" action="/main/form2">
+                  <center><h3>Donate Here</h3></center>
+                    <input type="text" name="name" placeholder="Name"></br>
+                    </br>
+                    <input type="text" name="email" placeholder="Email"></br>
+                    </br>
+                    <input type="password" name="password" placeholder="Password"></br>
+                  
+                    
+                    
+                    
+    <button style="padding:10px;">Donate</button>
+                </form>
+            </div>
+        </div>
+        <div class="image1">
+        <div class="content1">
+           <div>
+            <br>
+            <div class="imgcontainer" id="myDIV2">
+              <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar" ><br>
+            </div>
+            <button type="button" onclick="myFunction()" class="btn" id="button1"><a href="">Existing Payment</a></button></br>
+            </div>
+            <script>
+              function myFunction() {
+                 var x = document.getElementById("myDIV");
+                 if (x.style.display === "none") {
+                     x.style.display = "block";
+                 } else {
+                     x.style.display = "none";
+                 }
+               }
+               function myFunction2() {
+                 var x = document.getElementById("myDIV2");
+                 if (x.style.display === "none") {
+                     x.style.display = "block";
+                 } else {
+                     x.style.display = "none";
+                 }
+               }
+            </script>
+            <form id="form" style="color:black;float:left;"method = "post" action="/main/one2">
+              <center><h3>Donate Here</h3></center>
+                <input type="text" name="name" placeholder="Name"></br></br>
+                
+                <input type="text" name="email" placeholder="Email"></br></br>
+                
+                <input type="tel" name="phone" placeholder="Phone Number"></br></br>
+            
+                <input type="number" name="pan" placeholder="PAN Number(Optional)"></br></br>
+                
+                <input type="number" name="amount" placeholder="Donation Amount"></br></br>
+                
+                <input type="text" name="address" placeholder="Address"></br></br>
+<button style="padding:10px;">Donate</a></button>
+
+            </form>
+        </div>
+        </div>
+    </div>
+        
+    </body>
+    <script>
+       $(document).ready(function(){
+           $("#button").click(function(){
+               $("#button1").toggle();
+               $("#form").toggle();
+               return false;
+           });
+       });
+       $(document).ready(function(){
+           $("#button1").click(function(){
+               $("#button").toggle();
+               $("#form1").toggle();
+               return false;
+           });
+       });
+    </script>
+</html>
