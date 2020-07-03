@@ -49,7 +49,7 @@ app.post('/calculateSecretKey', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + "/main/result";
+            const returnUrl = app.locals.ipAdr + "/main/result";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -96,7 +96,7 @@ app.post('/calculateSecretKeymemberregister', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultmember";
+            const returnUrl = app.locals.ipAdr + "/main/resultmember";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -143,7 +143,7 @@ app.post('/calculateSecretKeymember', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultdonatemem";
+            const returnUrl = app.locals.ipAdr + "/main/resultdonatemem";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -190,7 +190,7 @@ app.post('/calculateSecretKeyvolunteer', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultdonatevol";
+            const returnUrl = app.locals.ipAdr + "/main/resultdonatevol";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -237,7 +237,7 @@ app.post('/calculateSecretKeyshu', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultshu";
+            const returnUrl = app.locals.ipAdr + "/main/resultshu";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
