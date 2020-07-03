@@ -4,7 +4,7 @@ const ip = require('ip');
 const config = require('./config.json');
 const helpers = require('./helpers/signatureCreation');
 const enums = require('./helpers/enums');
-
+const server = require('http').createServer();
 const main = require('./main');
 const merchantHosted = require('./merchantHosted');
 // import Cause from './main';
@@ -18,7 +18,8 @@ const path = require('path');
 const app = express();
 
 app.locals.ipAdr = ip.address();
-app.locals.port = 3000;
+const port = process.env.PORT || 3000;
+app.locals.port = port;
 //const returnUrlCheckOut = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/result";
 const { CauseSchema, Cause } = require('./main.js');
 // const CauseSchema = require('./main.js').model('Cause').schema;
@@ -378,8 +379,8 @@ app.use((err, req , res , next)=>{
         err: err.message,
     });
 })
-const port = process.env.PORT || 3000;
-app.listen('port', ()=>{
+// const port = process.env.PORT || 8080;
+app.listen(port , ()=>{
     console.log("server running");
    // console.log("config is", config);
 })

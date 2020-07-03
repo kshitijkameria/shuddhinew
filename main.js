@@ -7,7 +7,7 @@ var signatureVerification = require('./helpers/signatureCreation');
 var enums = require('./helpers/enums');
 const mongoose = require('mongoose');
 const secrets = require("./config/secrets.js");
-mongoose.connect('secrets.DB_LINK', { useNewUrlParser: true,
+mongoose.connect(secrets.DB_LINK, { useNewUrlParser: true,
 useCreateIndex: true,
 useUnifiedTopology: true});
 var session = require('express-session')
