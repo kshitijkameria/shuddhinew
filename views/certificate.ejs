@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="" style="background-image: url('/images/backlogin1.jpeg');">
+<html lang="" style="background:url('/images/Cert.png') no-repeat; background-size: 100%;">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -132,12 +132,12 @@ div#cert-verify {
 </h2>
 
 
-<p style="position: absolute; bottom:-1.5rem; left: 23%;">Date</p><h3><%= data.txTime %></h3>
+<p style="position: absolute; bottom:-1.5rem; left: 23%;">Date</p><h3 style="position: relative; left: 10rem;top: 2rem;"><%= data.txTime %></h3>
     <p style="position: absolute; bottom:-1.5rem; right: 23%;">signature</p>
 
-<div class="myclass" style="height:30px">
-  <button id="printPageButton" type="button" onclick="myfunction()">Print</button>
-  <button id="printPageButton" type="button" onclick="location.href='http://localhost:3000'">Home</button>
+<div class="myclass" style="height:30px;position: relative;top: 5rem;left: 25rem;">
+  <button id="printPageButton" type="button" onclick="myfunction()" style="height: 2rem; width: 5rem;background-color: rgb(62, 255, 4);border-radius: 0.5rem">Print</button>
+  <button id="printPageButton" type="button" onclick="location.href='http://localhost:3000'" style="height: 2rem; width: 5rem;background-color: rgb(62, 255, 4);border-radius: 0.5rem">Home</button>
 </div>
 
 
