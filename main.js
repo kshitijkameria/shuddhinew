@@ -6,7 +6,8 @@ const validator= require('validator')
 var signatureVerification = require('./helpers/signatureCreation');
 var enums = require('./helpers/enums');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://creativeprotocol:creativeprotocol@cluster0-kdlho.mongodb.net/<dbname>?retryWrites=true&w=majority', { useNewUrlParser: true,
+const secrets = require("./config/secrets.js");
+mongoose.connect('secrets.DB_LINK', { useNewUrlParser: true,
 useCreateIndex: true,
 useUnifiedTopology: true});
 var session = require('express-session')
