@@ -17,9 +17,9 @@ const path = require('path');
 
 const app = express();
 
-app.locals.ipAdr = ip.address();
+app.locals.ipAdr = "https://hishuddhi.herokuapp.com/";
 const port = process.env.PORT || 3000;
-app.locals.port = port;
+// app.locals.port = port;
 //const returnUrlCheckOut = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/result";
 const { CauseSchema, Cause } = require('./main.js');
 // const CauseSchema = require('./main.js').model('Cause').schema;
@@ -49,7 +49,7 @@ app.post('/calculateSecretKey', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/result";
+            const returnUrl = "http://" + app.locals.ipAdr + "/main/result";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -96,7 +96,7 @@ app.post('/calculateSecretKeymemberregister', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/resultmember";
+            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultmember";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -143,7 +143,7 @@ app.post('/calculateSecretKeymember', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/resultdonatemem";
+            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultdonatemem";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -190,7 +190,7 @@ app.post('/calculateSecretKeyvolunteer', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/resultdonatevol";
+            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultdonatevol";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
@@ -237,7 +237,7 @@ app.post('/calculateSecretKeyshu', (req, res, next)=>{
 
     switch(paymentType){
         case enums.paymentTypeEnum.checkout: {
-            const returnUrl = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/main/resultshu";
+            const returnUrl = "http://" + app.locals.ipAdr + "/main/resultshu";
             formObj.returnUrl = returnUrl;
             formObj.notifyUrl = "";
             formObj.appId = config.appId;
