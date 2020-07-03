@@ -17,7 +17,7 @@ const path = require('path');
 
 const app = express();
 
-app.locals.ipAdr = "https://hishuddhi.herokuapp.com/";
+app.locals.ipAdr = "https://hishuddhi.herokuapp.com";
 const port = process.env.PORT || 3000;
 // app.locals.port = port;
 //const returnUrlCheckOut = "http://" + app.locals.ipAdr + ":" + app.locals.port + "/result";
