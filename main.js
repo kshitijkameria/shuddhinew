@@ -611,6 +611,9 @@ const MemberSchema = new Schema({
         type:String,
         default : "M"
     },
+    certimem:{
+        type:String
+    },
 
     resetToken:String,
     resetTokenExpires: Date
@@ -2053,7 +2056,8 @@ router.post('/resultmember', (req, res, next) => {
                     }
 
                 });
-
+                mem.certimem = postData.referenceId + '.pdf';
+                mem.save()
                 return res.status(200).render('certificate', { data: postData, task: mem });
                 // return res.status(200).render('receipt', { data: postData, task: ses, receiptno: receiptno });
                 
@@ -2340,7 +2344,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                  
            });
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,200,{
+               doc.text("Donor Name :" + " " + vol.name,50,200,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -2348,11 +2352,11 @@ router.post('/resultdonatemem', (req, res, next) => {
                    align:'center'
                });
                doc.fontSize(20)
-               doc.text("Email :" + " " + ses.email,{
+               doc.text("Email :" + " " + vol.email,{
                    align:'center'
                });
                doc.fontSize(20)
-               doc.text("Ph No. :" + " " + ses.phNum,{
+               doc.text("Ph No. :" + " " + vol.phNum,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -2381,7 +2385,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                 });
                 let mailOptions = {
                     from: 'ngo@shuddhi.org',
-                    to: ses.email,
+                    to: vol.email,
                     subject: 'Successfull Donation',
                     text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                     attachments: [
@@ -2400,6 +2404,18 @@ router.post('/resultdonatemem', (req, res, next) => {
                     }
 
                 });
+                let newRec = new Rec();
+                newRec.name = vol.name;
+                newRec.email = vol.email;
+                newRec.date = postData.txTime;
+                newRec.receipt = postData.referenceId + '.pdf'
+                newRec.save(function (err) {
+                    if (err) {
+                        console.log(err, 'error')
+                        return
+                    }
+                });
+
                 return res.status(200).render('receipt2', { data: postData, task: vol });
         }
         }
