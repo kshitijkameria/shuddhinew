@@ -205,6 +205,8 @@ const upload = multer({
     storage: multerStorage,
     fileFilter: filter
   })
+
+  
   let multiImageHandler = upload.fields([{
     name: "regcert", maxCount: 1
   }, {
