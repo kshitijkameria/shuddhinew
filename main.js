@@ -43,9 +43,9 @@ const cfSdk = require('cashfree-sdk');
 
 const payout_config = {
     Payouts:{
-    ClientID: "CF17374DC5JM1FXK36U26M",
-    ClientSecret: "942bdab0ea1f84b92a1a587005458a1963f1ddf1",
-    ENV: "TEST", 
+    ClientID: "CF46765CWVC9W5U68Q6YA6",
+    ClientSecret: "a7cb5bd335d7383cde32544401c96c9c1632a580",
+    ENV: "PROD", 
     }
 };
 
