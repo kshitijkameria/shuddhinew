@@ -7,9 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   <style>
     body{
@@ -42,7 +43,9 @@
      }
      .dropdown:hover .dropdown-content{
        display:block;
+      
      }
+     
      .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 500px;
@@ -55,6 +58,8 @@
   color: grey;
   font-size: 18px;
 }
+
+
   </style>
   <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   
@@ -91,16 +96,16 @@
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop1">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content1">
                           <a href="/aboutus">About Us</a></br>
                           <a href="/ourpartner">Our Partners</a>
                           <!-- <a href="/causes">Causes</a>                 -->
                         </div>
                         </div>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop2"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content2">
                           <a href="/main/registervolunteer">Volunteer</a></br>
                           <a href="/main/registermember">Member</a></br>
                           <a href="/main/registerngo">NGO</a></br>
@@ -128,6 +133,18 @@
           </nav>
         </div>
       </header>
+      <script>
+        $(document).ready(function(){
+           $("#drop1").click(function(){
+        $("#content1").toggle();
+           });
+          });
+          $(document).ready(function(){
+           $("#drop2").click(function(){
+        $("#content2").toggle();
+           });
+          });
+        </script>
       <section class="parallax-container" data-parallax-img="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/42411160_1016089131904688_8139504582641319936_o.jpg?_nc_cat=105&_nc_sid=cdbe9c&_nc_oc=AQnrsca_LKMqEZYQ6n3uxqlZ1CHgS35OGICoShcuFges1f2TlPj4hFnchUyUrY2Nqvw&_nc_ht=scontent.fdel12-1.fna&oh=2ccacc1fe138b688c795e0e9eafc9ce2&oe=5F1831B7">
         <div class="parallax-content breadcrumbs-custom context-dark">
           <div class="container">
@@ -231,7 +248,7 @@
       
       <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:30px;margin-left:0px;margin-right:0px;text-align:center">
       
-      <img src="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/42388195_1016090128571255_6455323016820686848_o.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_oc=AQnroPDiXWy_-ilM6f068hM4QcTLbDehs2GjA_PYub4clYXT-kNNtdJ4eMOiAJzDYfI&_nc_ht=scontent.fdel12-1.fna&oh=1726866aca710b1b78f68bc19d7aacc1&oe=5F163CA6" alt="Picture" style="width:100%;max-width:100%;height:300px;" />
+      <img class="mobile" src="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/42388195_1016090128571255_6455323016820686848_o.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_oc=AQnroPDiXWy_-ilM6f068hM4QcTLbDehs2GjA_PYub4clYXT-kNNtdJ4eMOiAJzDYfI&_nc_ht=scontent.fdel12-1.fna&oh=1726866aca710b1b78f68bc19d7aacc1&oe=5F163CA6" alt="Picture" style="width:100%;max-width:100%;" />
       </a>
       <div style="display:block;font-size:90%"></div>
       </div></div>
@@ -244,7 +261,7 @@
       
       <div><div class="wsite-image wsite-image-border-none " style="padding-top:0px;padding-bottom:px;margin-left:0px;margin-right:0px;text-align:center;">
       
-      <img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/published/donate-shuddhi-ngo-by-paytm-qr-india-donation.jpg?1575567290" alt="Picture" style="width:100%;max-width:100%;height:300px;" />
+      <img class="mobile" src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/published/donate-shuddhi-ngo-by-paytm-qr-india-donation.jpg?1575567290" alt="Picture" style="width:100%;max-width:100%;" />
       </a>
       <div style="display:block;font-size:90%"></div>
       </div></div>
@@ -257,7 +274,7 @@
       
       <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center;">
       <a>
-      <img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/published/donate-ngo-india-paytm-upi-bhim-qr-code-80g-corona.jpg?1585648152" alt="Picture" style="width:100%;max-width:100%;height:300px;" />
+      <img class="mobile" src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/published/donate-ngo-india-paytm-upi-bhim-qr-code-80g-corona.jpg?1585648152" alt="Picture" style="width:100%;max-width:100%;" />
       </a>
       <div style="display:block;font-size:90%"></div>
       </div></div>
@@ -272,7 +289,7 @@
       
       <div><div class="wsite-image wsite-image-border-none " style="padding-top:10px;padding-bottom:10px;margin-left:0;margin-right:0;text-align:center">
       <a>
-      <img src="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/39227361_989688831211385_4208948940831195136_o.jpg?_nc_cat=111&_nc_sid=cdbe9c&_nc_oc=AQlVWTNjpTjf7jFvRTjJ55UIdIHPuSF8FTyXFxGDQ1i0J13QQyi4xBuVtKfLwC-B7bg&_nc_ht=scontent.fdel12-1.fna&oh=1a6a11414feef3ae37fc5f5d536ef27e&oe=5F1726B3" alt="Picture" style="width:100%;max-width:100%;height:300px;" />
+      <img class="mobile" src="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/39227361_989688831211385_4208948940831195136_o.jpg?_nc_cat=111&_nc_sid=cdbe9c&_nc_oc=AQlVWTNjpTjf7jFvRTjJ55UIdIHPuSF8FTyXFxGDQ1i0J13QQyi4xBuVtKfLwC-B7bg&_nc_ht=scontent.fdel12-1.fna&oh=1a6a11414feef3ae37fc5f5d536ef27e&oe=5F1726B3" alt="Picture" style="width:100%;max-width:100%;" />
       </a>
       <div style="display:block;font-size:90%"></div>
       </div></div>
@@ -365,10 +382,11 @@
               <div class="col-12">
                 <ul class="footer-minimal-nav">
                   <li><a href="/aboutus">About Us</a></li>
-                  <li><a href="/causes">Causes</a></li>
+                 <!-- <li><a href="/causes">Causes</a></li>-->
                   <li><a href="/main/gallery">Gallery</a></li>
                   <li><a href="/main/registervolunteer">Volunteer</a></li>
                   <li><a href="/contactus">Contacts</a></li>
+                  <li><a href="https://shuddhi.org/index.html">Old Website</a></li>
                 </ul>
               </div>
               <div class="col-12">
@@ -389,7 +407,7 @@
       </footer>
 </div>
 <div class="snackbars" id="form-output-global"></div>
-<script src="javascripts/core.min.js"></script>
-<script src="javascripts/script.js"></script>
+<script src="/javascripts/core.min.js"></script>
+<script src="/javascripts/script.js"></script>
 </body>
 </html>

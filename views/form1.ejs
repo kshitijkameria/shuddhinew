@@ -1,265 +1,327 @@
-<html>
-    <head>
-        <title>Donate as much as you can !!!</title>
-        
- <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+  <head>
+    <title>Donate as much as you can !</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" href="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" type="image/x-icon">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Niconne&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<style>
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-body {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    background: url('/images/backlogin5.jpg');
-    background-size:cover;
-}
-.container {
-    height: 600px;
-    width: 1000px;
-    box-shadow: 0px 30px 40px black;
-    display: flex;
-    border-radius: 10px;
-}
-.image {
-    flex: 50%;
-    background: url('right.jpg');
-    background-size: 100% 100%;
-    text-align: center;
-    color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.image h1 {
-    margin-top: 50%;
-    padding-left: 20px;
-    padding-right: 20px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-.image1 {
-    flex: 50%;
-    background: url('left.jpg');
-    background-size: 100% 100%;
-    text-align: center;
-    color: white;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.image1 h1 {
-    margin-top: 50%;
-    padding-left: 20px;
-    padding-right: 20px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-span {
-    color: chartreuse;
-}
-.content {
-    flex: 50%;
-    padding:10%;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-}
-.content h1 {
-    padding: 40px;
-    padding-top: 30px;
-    font-family: 'Niconne', cursive;
-    font-size: 40px;
-    color: #c446c9;
-}
-.content1 {
-    flex: 50%;
-    padding:10%;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-}
-.content1 h1 {
-    padding: 40px;
-    padding-top: 30px;
-    font-family: 'Niconne', cursive;
-    font-size: 40px;
-    color: #c446c9;
-}
-#txt {
-    margin: 10px;
-    padding: 5px;
-    border: none;
-    background-color: rgba(156, 77, 156, 0.3);
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: small;
-    font-family: 'Montserrat', sans-serif;
-    color: #aa38a4;
-}
-label {
-    font-weight: bold;
-    font-size: small;
-}
-#txt:focus {
-    outline: none;
-}
-.fp {
-    text-decoration: none;
-    font-weight: bold;
-    font-size: small;
-    transition: 0.3s;
-}
-.fp:hover {
-    color: #c446c9;
-}
-button {
-    padding: 30px 50px;
-    margin-top: 20px;
-    border: none;
-    background: #33C9FF;
-    border-radius: 10px;
-    transition: 0.3s;
-    font-size:20px;
-    border:1.5px solid green;
-}
-button:hover {
-    transform: scale(1.05);
-}
-button a {
-    text-decoration: none;
-    color: green;
-}
-#form{
-    display:none;
-}
-#form1{
-    display:none;
-}
-input{
-    padding: 2px;
-    margin-top: 15px;
-    border: none;
-    background: ;
-    border-radius: 0px;
-    transition: 0.3s;
-    font-size:18px;
-    border:1px solid black;
-    
-}
-::placeholder{
-    color:;
-}
-.imgcontainer {
+    <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
+  <style>
+    body{
+      background: #fff;
+    }
+    .dropdown{
+       position:relative;
+       display:inline-block;
+       
+     }
+     .dropdown-content{
+       display:none;
+       position:absolute;
+       background-color:#f9f9f9;
+       min-width:300px;
+       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+       padding: 12px 16px;
+       z-index:1;
+       font-size:20px;
+       BACKGROUND:BLACK;
+     }
+     .dropdown-content a{
+      color:#7FBC4E;
+      padding: 12px 12px;
+      text-decoration:none;
+      display:block;
+     }
+     .dropdown-content a:hover{
+       background-color:#ddd;
+     }
+     .dropdown:hover .dropdown-content{
+       display:block;
+      
+     }
+     
+     .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: auto;
   text-align: center;
-  margin: 24px 0 12px 0;
+  padding:10px;
 }
-img.avatar {
-  width: 40%;
-}
-</style>
-        
-    </head>
-    <body>
-        <% if(locals.message){ %>
-            <script>
-            alert("<%=message %>");
-          </script>
-            <% } %>
-       <div class="container">
-        <div class="image">
-            <div class="content">
-            <div>
-              <br>
-              <div class="imgcontainer" id="myDIV">
-                <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar" ><br>
-              </div>
-                <button type="button" onclick="myFunction2()" class="btn" id="button" style="background-color: #33C9FF;"><a href="">One Time Payment</a></button></br>
-               
-               </div>
-                
-                <form id="form1" style="color:black;float:right;" method = "post" action="/main/form1">
-                  <center><h3>Donate Here</h3></center>
-                    <input type="text" name="name" placeholder="Name"></br>
-                    </br>
-                    <input type="text" name="email" placeholder="Email"></br>
-                    </br>
-                    <input type="password" name="password" placeholder="Password"></br>
-                  
-                    
-                    
-                    
-    <button style="padding:10px;">Donate</button>
-                </form>
-            </div>
-        </div>
-        <div class="image1">
-        <div class="content1">
-           <div>
-            <br>
-            <div class="imgcontainer" id="myDIV2">
-              <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar" ><br>
-            </div>
-            <button type="button" onclick="myFunction()" class="btn" id="button1"><a href="">Existing Payment</a></button></br>
-            </div>
-            <script>
-              function myFunction() {
-                 var x = document.getElementById("myDIV");
-                 if (x.style.display === "none") {
-                     x.style.display = "block";
-                 } else {
-                     x.style.display = "none";
-                 }
-               }
-               function myFunction2() {
-                 var x = document.getElementById("myDIV2");
-                 if (x.style.display === "none") {
-                     x.style.display = "block";
-                 } else {
-                     x.style.display = "none";
-                 }
-               }
-            </script>
-            <form id="form" style="color:black;float:left;"method = "post" action="/main/oneo">
-              <center><h3>Donate Here</h3></center>
-                <input type="text" name="name" placeholder="Name"></br></br>
-                
-                <input type="text" name="email" placeholder="Email"></br></br>
-                
-                <input type="tel" name="phone" placeholder="Phone Number"></br></br>
-            
-                <input type="number" name="pan" placeholder="PAN Number(Optional)"></br></br>
-                
-                <input type="number" name="amount" placeholder="Donation Amount"></br></br>
-                
-                <input type="text" name="address" placeholder="Address"></br></br>
-<button style="padding:10px;">Donate</a></button>
 
-            </form>
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.square{
+    font-size:25px;
+    width: 50px;
+    border-color: rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.2);
+    background: rgba(0,0,0,.3);
+}
+.togglethis{
+    display:none;
+
+}
+  </style>
+  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
+  
+  </head>
+  <body>
+    <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
+    <div class="preloader">
+      <div class="preloader-body">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
         </div>
-        </div>
+        <p>Loading...</p>
+      </div>
     </div>
-        
-    </body>
-    <script>
-       $(document).ready(function(){
+    <div class="page"><a class="section section-banner d-none d-xl-flex" href="https://www.templatemonster.com/website-templates/monstroid2.html" style="background-image: url(images/banner/background-04-1920x60.jpg); background-image: -webkit-image-set( url(images/banner/background-04-1920x60.jpg) 1x, url(images/banner/background-04-3840x120.jpg) 2x )" target="_blank"></a>
+        <!-- Page Header-->
+        <header class="section page-header">
+          <!-- RD Navbar-->
+          <div class="rd-navbar-wrap">
+            <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+              <div class="rd-navbar-main-outer">
+                <div class="rd-navbar-main">
+                  <!-- RD Navbar Panel-->
+                  <div class="rd-navbar-panel">
+                    <!-- RD Navbar Toggle-->
+                    <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                    <!-- RD Navbar Brand-->
+                    <div class="rd-navbar-brand">
+                    </ul>"><img class="brand-logo-light" src="/images/Shuddhi Mail LOGO.jpg.png" alt="" width="207" height="51"/></a></div>
+                  </div>
+                  <div class="rd-navbar-main-element">
+                    <div class="rd-navbar-nav-wrap">
+                      <!-- RD Navbar Nav-->
+                      <ul class="rd-navbar-nav">
+                        <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
+                        </li>
+                        <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                          <div class="dropdown-content">
+                            <a href="/aboutus">About Us</a></br>
+                            <a href="/ourpartner">Our Partners</a>
+                            <!-- <a href="/causes">Causes</a>                 -->
+                          </div>
+                          </div>
+                        </li>
+                        <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                          <div class="dropdown-content">
+                            <a href="/main/registervolunteer">Volunteer</a></br>
+                            <a href="/main/registermember">Member</a></br>
+                            <a href="/main/registerngo">NGO</a></br>
+                            <a href="/main/gov">CSR/Donor</a>
+                          </div>
+                          </div>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/main/login">Login</a>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/main/gallery">Gallery</a>
+                        </li>
+                        <li class="rd-nav-item"><a class="rd-nav-link" href="/contactus" style="margin-right: 2rem;">Contacts</a>
+                        </li>
+                        <!-- <li class="rd-nav-item"><a class="rd-nav-link" href="/donate">Donate To Shuddhi</a>
+                        </li> -->
+                      <a class="button button-primary button-sm" href="/donate">Donate To Shuddhi</a>
+  
+                       
+                      <!-- </ul><a class="button button-primary button-sm" href="#">Donate</a> -->
+                    </div>
+                  </div><a class="button button-primary button-sm" href="/main/ngo" style="background-color: #33C9FF;">Fundraiser</a>
+                  <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> -->
+                </div>
+              </div>
+            </nav>
+          </div>
+        </header>
+        <section class="parallax-container" data-parallax-img="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/42411160_1016089131904688_8139504582641319936_o.jpg?_nc_cat=105&_nc_sid=cdbe9c&_nc_oc=AQnrsca_LKMqEZYQ6n3uxqlZ1CHgS35OGICoShcuFges1f2TlPj4hFnchUyUrY2Nqvw&_nc_ht=scontent.fdel12-1.fna&oh=2ccacc1fe138b688c795e0e9eafc9ce2&oe=5F1831B7">
+          <div class="parallax-content breadcrumbs-custom context-dark">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-12 col-lg-9">
+                  <h2 class="breadcrumbs-custom-title">DONATE</h2>
+                  <ul class="breadcrumbs-custom-path">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Donate</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="parallax-container bg-gray-600" data-parallax-img="https://images5.alphacoders.com/439/439550.jpg" >
+            <div class="parallax-content section-xxl text-center">
+              <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col-md-9 col-lg-8 col-xl-8 wow-outer">
+                    <div class="innset-xl-right-30 innset-xl-left-30">
+                      <div class="wow slideInDown">
+                         
+                        <div>
+                            <div style="float:left;width: 50%;">
+                        <button align="center" id="button" class="button button-sm button-primary" style="font-size: 19px;">Existing Donor</button></div>
+                        <div style="float:left;width: 50%;">
+                        <button align="center" id="button1" class="button button-sm button-primary" style="font-size: 19px;">First Time Donor</button></div>
+                        </div></br></br>
+                       
+                       <div class="togglethis1">
+                        <form id="form" method = "post" action="/main/one">
+                            <center><h3>Donate Here</h3></center>
+                              <input type="text" name="name" placeholder="Name"></br></br>
+                              
+                              <input type="text" name="email" placeholder="Email"></br></br>
+                              
+                              <input type="tel" name="phone" placeholder="Phone Number"></br></br>
+                          
+                              <input type="number" name="pan" placeholder="PAN Number(Optional)"></br></br>
+                              
+                              <input type="number" name="amount" placeholder="Donation Amount"></br></br>
+                              
+                              <input type="text" name="address" placeholder="Address"></br></br>
+              <button style="padding:10px;">Donate</a></button>
+              
+                          </form>
+                       </div>
+
+                       <div class="togglethis">
+ 
+                        <form id="form1" method = "post" action="/main/form">
+                            <center><h3>Donate Here</h3></center>
+                              <input type="text" name="name" placeholder="Name"></br>
+                              </br>
+                              <input type="text" name="email" placeholder="Email"></br>
+                              </br>
+                              <input type="password" name="password" placeholder="Password"></br> </br>
+              <button style="padding:10px;">Donate</button>
+                          </form>
+                       </div>
+                        
+
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+<script>
+ $(document).ready(function(){
            $("#button").click(function(){
-               $("#button1").toggle();
-               $("#form").toggle();
+               $(".togglethis").show();
+               $(".togglethis1").hide();
+               $("#button").css("background", "red");
+               $("#button1").css("background", "#7FBC4E");
                return false;
            });
        });
        $(document).ready(function(){
            $("#button1").click(function(){
-               $("#button").toggle();
-               $("#form1").toggle();
+               $(".togglethis").hide();
+               $(".togglethis1").show();
+               $("#button1").css("background", "red");
+               $("#button").css("background", "#7FBC4E");
                return false;
            });
        });
-    </script>
-</html>
+</script>
+        <section class="section section-lg bg-gray-1">
+            <div class="container">
+              <div class="row justify-content-center text-center">
+                <div class="col-md-9 col-lg-7 wow-outer">
+                  <div class="wow slideInDown">
+                    <h3>Causes that need your concern</h3>
+                    <p>There’s no place for hunger: access to good quality food for all is possible, and essential for a thriving society. Everyone should have access to good food. No one should have to go to bed hungry. At SHUDDHI, we exist to make giving go further, so together we can transform more lives and communities around the world.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row row-50">
+    
+              
+                <div class="col-md-6 col-lg-4 wow-outer">
+                  <div class="wow fadeInUp">
+                    <article class="box-causes">
+                      <div class="box-causes-img"><img src="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/39119355_987473218099613_8882947590329466880_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_oc=AQkdDBIxQXYB0wG7Q9wQHWELLRmgFPnKRz8lr4j4EwMDK5HW2k3AWwUtN76P1dPehwo&_nc_ht=scontent.fdel12-1.fna&oh=cc6b36ea051ab8f84551ba8cde1660e1&oe=5F162449" width="396px" height="372px" alt="" ><a class="button button-sm button-primary" href="/main/form1">Donate</a>
+                      </div>
+                      <h4 class="font-weight-medium"><a href="/main/form1">Women Empowerment</a></h4>
+                    <!--  <p class="box-causes-donate"><span class="box-causes-donate-complete">$92,160</span> of <span>$100,000</span> raised
+                      </p>   https://scontent.fdel12-1.fna.fbcdn.net/v/t31.0-8/28617188_876929182487351_8122191660608622357_o.jpg?_nc_cat=105&_nc_sid=0debeb&_nc_oc=AQnO-GcTqL4HRCHmIJUvdvEOwCXoqOeEzScVfTryGZPa_ixXRJo1NHXovmkJKeaVuz0&_nc_ht=scontent.fdel12-1.fna&oh=e590ef292890c196120f6f290d3ab449&oe=5F157FA3  -->
+                    </article>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow-outer">
+                  <div class="wow fadeInUp">
+                    <article class="box-causes">
+                      <div class="box-causes-img"><img src="https://scontent.fdel12-1.fna.fbcdn.net/v/t31.0-8/28617188_876929182487351_8122191660608622357_o.jpg?_nc_cat=105&_nc_sid=0debeb&_nc_oc=AQnO-GcTqL4HRCHmIJUvdvEOwCXoqOeEzScVfTryGZPa_ixXRJo1NHXovmkJKeaVuz0&_nc_ht=scontent.fdel12-1.fna&oh=e590ef292890c196120f6f290d3ab449&oe=5F157FA3" alt="" width="396px" height="372px"><a class="button button-sm button-primary" href="/main/form1">Donate</a>
+                      </div>
+                      <h4 class="font-weight-medium"><a href="/main/form1">Digital Child Education</a></h4>
+                      <!-- <p class="box-causes-donate"><span class="box-causes-donate-complete">$52,380</span> of <span>$55,000</span> raised
+                      </p> -->
+                    </article>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow-outer">
+                  <div class="wow fadeInUp">
+                    <article class="box-causes">
+                      <div class="box-causes-img"><img src="https://scontent.fdel12-1.fna.fbcdn.net/v/t31.0-8/29352295_888523424661260_8511480353841458245_o.jpg?_nc_cat=105&_nc_sid=cdbe9c&_nc_oc=AQn5_0b-UzHTM3giYpZpZf4SLefikUaaX6zpyOr8G5QYBQl6V5Hzg_kYk-NZKgifoUQ&_nc_ht=scontent.fdel12-1.fna&oh=77658f9e935406bcec8b3ef0af503a4d&oe=5F14D41C" alt="" width="396px" height="372px"><a class="button button-sm button-primary" href="/main/form1">Donate</a>
+                      </div>
+                      <h4 class="font-weight-medium"><a href="/main/form1">Swachh Bharat</a></h4>
+                      <!-- <p class="box-causes-donate"><span class="box-causes-donate-complete">$52,380</span> of <span>$55,000</span> raised
+                      </p> -->
+                    </article>
+                  </div>
+                </div>
+    
+                
+              </div>
+            </div>
+          </section> 
+        <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+              <div class="wow fadeIn">
+                <div class="row row-50 row-lg-60">
+                  <div class="col-12"><a href="/"><img src="/images/Shuddhifooter.png" alt="" width="207" height="51"/></a></div>
+                  <p>Shuddhi is a Global Platform developed for People, Organisations and NGOs to Build Network of Social Workers, Raise Funds Online, Shop GoGreen Products, Organise Events etc. by using the most secure and transparent platform.</p>
+                  <div class="col-12">
+                    <ul class="footer-minimal-nav">
+                      <li><a href="/aboutus">About Us</a></li>
+                      <!--<li><a href="/causes">Causes</a></li>-->
+                      <li><a href="/main/gallery">Gallery</a></li>
+                      <li><a href="/main/registervolunteer">Volunteer</a></li>
+                      <li><a href="/contactus">Contacts</a></li>
+                      <li><a href="https://shuddhi.org/index.html">Old Website</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-12">
+                    <ul class="social-list">
+                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="https://www.facebook.com/shuddhi.org"></a></li>
+                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="https://www.instagram.com/ngoshuddhi/"></a></li>
+                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="https://twitter.com/ngoshuddhi"></a></li>
+                      <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="https://www.youtube.com/ShuddhiNGO"></a></li>
+                      
+                    </ul>
+                  </div>
+                </div><br>
+                <center><div>Share this page to:</div></center><br>
+                <div class="sharethis-inline-share-buttons"></div>
+               
+              </div>
+            </div>
+          </footer>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="/javascripts/core.min.js"></script>
+    <script src="/javascripts/script.js"></script>
+
+
+
+    </body>
+    </html>
