@@ -2571,6 +2571,7 @@ router.post('/loginvolunteer', urlencodedParser, (req, res) => {
 
 })
 const checkLogIn = (req, res, next) => {
+    console.log(req.session);
     if (req.session.work) {
         next();
     } else {
