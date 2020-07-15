@@ -16,7 +16,7 @@
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   
  
-  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <style>
      .dropdown{
@@ -153,16 +153,16 @@ ul, li{
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop1">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content1">
                           <a href="/aboutus">About Us</a></br>
                           <a href="/ourpartner">Our Partners</a></br>
                           <a href="/causes">Causes</a>                
                         </div>
                         </div>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop2"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content2">
                           <a href="/main/registervolunteer">User</a></br>
                           <a href="/main/registermember">Member</a></br>
                           <a href="/main/registerngo">NGO</a></br>
@@ -188,6 +188,18 @@ ul, li{
           </nav>
         </div>
       </header>
+      <script>
+        $(document).ready(function(){
+           $("#drop1").click(function(){
+        $("#content1").toggle();
+           });
+          });
+          $(document).ready(function(){
+           $("#drop2").click(function(){
+        $("#content2").toggle();
+           });
+          });
+        </script>
       <section class="section section-lg section-main-bunner section-main-bunner-filter">
         <div class="main-bunner-img" style="background-image: url('https://scontent.fjai1-2.fna.fbcdn.net/v/t1.0-9/91412018_1422291447951119_8185959842268053504_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_oc=AQmit43_eUI5XTIf09ZIEEW_mF1Yk9WBCzHS5M_cxLg2f1RsY0BVmGXqxyWAjumfecOyObN7zA0IvdaoKFp40KAy&_nc_ht=scontent.fjai1-2.fna&oh=d7843b4860a6c938efbe353d5be26e6a&oe=5F0F7E4A'); background-size: cover;"></div>
         <div class="main-bunner-inner">

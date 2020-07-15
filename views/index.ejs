@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/fonts.css">
     <link rel="stylesheet" href="/css/style.css">
 
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   
@@ -68,6 +68,30 @@
      .dropdown:hover .dropdown-content{
        display:block;
      }
+     @media(max-width: 320px){
+       #displaythis{
+         display:none;
+       }
+       #fixthis{
+         background-attachment: fixed;
+       }
+     } 
+     @media(max-width: 576px){
+       #displaythis{
+         display:none;
+       }
+       #fixthis{
+         background-attachment: fixed;
+       }
+     } 
+     @media(max-width: 768px){
+       #displaythis{
+         display:none;
+       }
+       #fixthis{
+         background-attachment: fixed;
+       }
+     } 
    </style>
    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   </head>
@@ -88,8 +112,8 @@
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-main-outer">
-              <div class="rd-navbar-main">
+            <div class="rd-navbar-main-outer" >
+              <div class="rd-navbar-main" >
                 <!-- RD Navbar Panel-->
                 <div class="rd-navbar-panel">
                   <!-- RD Navbar Toggle-->
@@ -104,16 +128,16 @@
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop1" >Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content1">
                           <a href="/aboutus">About Us</a></br>
                           <a href="/ourpartner">Our Partners</a>
                           <!-- <a href="/causes">Causes</a>                 -->
                         </div>
                         </div>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop2"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content2">
                           <a href="/main/registervolunteer">Volunteer</a></br>
                           <a href="/main/registermember">Member</a></br>
                           <a href="/main/registerngo">NGO</a></br>
@@ -131,14 +155,27 @@
                       </li> -->
                     <a class="button button-primary button-sm" href="/donate">Donate To Shuddhi</a>
                     <!-- </ul><a class="button button-primary button-sm" href="#">Donate</a> -->
-                  </div>
-                </div><a class="button button-primary button-sm" href="/main/ngo" style="background-color: #33C9FF;">Fundraiser</a>
+                  
+                <a class="button button-primary button-sm" href="/main/ngo" style="background-color: #33C9FF;">Fundraiser</a></div>
                 <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> -->
+                </div>
               </div>
             </div>
           </nav>
         </div>
       </header>
+      <script>
+        $(document).ready(function(){
+           $("#drop1").click(function(){
+        $("#content1").toggle();
+           });
+          });
+          $(document).ready(function(){
+           $("#drop2").click(function(){
+        $("#content2").toggle();
+           });
+          });
+        </script>
       <% if(locals.message){ %>
         <script>
         alert("<%=message %>");
@@ -257,14 +294,14 @@
           <div class="row row-50 justify-content-lg-between align-items-lg-center">
             <div class="col-lg-6">
               <div class="box-img-animate">
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;: 0, &quot;x&quot;: 140,  &quot;smoothness&quot;: 50 }"><img src="/images/movimage1.jpg" height="153px" width="217px"  alt=""></div>
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;: 150, &quot;x&quot;: 0,  &quot;smoothness&quot;: 50 }"><img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/ngo-membership-india-shuddhi-online_1_orig.jpg" height="191px" width="271px" alt=""></div>
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:70, &quot;x&quot;: -250,  &quot;smoothness&quot;: 50 }"><img src="/images/movimage2.jpg" width="271px" height="191px" alt=""></div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;: 0, &quot;x&quot;: 140,  &quot;smoothness&quot;: 50 }" id="displaythis"><img src="/images/movimage1.jpg" height="153px" width="217px"  alt=""></div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;: 150, &quot;x&quot;: 0,  &quot;smoothness&quot;: 50 }" id="displaythis"><img src="https://www.shuddhi.org/uploads/3/4/7/9/34791871/ngo-membership-india-shuddhi-online_1_orig.jpg" height="191px" width="271px" alt=""></div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:70, &quot;x&quot;: -250,  &quot;smoothness&quot;: 50 }" id="displaythis"><img src="/images/movimage2.jpg" width="271px" height="191px" alt=""></div>
              
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:20, &quot;x&quot;: 20,  &quot;smoothness&quot;: 50 }" style="margin-top: 7rem;"><img src="https://shuddhi.ngo/wp-content/uploads/2019/06/shuddh-ngo-india-clean-waste-charity.jpg" width="339px" height="236px" alt=""></div>
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:60, &quot;x&quot;: 70,  &quot;smoothness&quot;: 50 }"><img src="/images/movimage3.jpg" width="179px" height="126" alt=""></div>
-                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:0, &quot;x&quot;: 140,  &quot;smoothness&quot;: 50 }"><img src="/images/movimage4.jpg" width="217px" height="153px" alt=""></div>
-              </div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:20, &quot;x&quot;: 20,  &quot;smoothness&quot;: 50 }" id="fixthis"><img src="https://shuddhi.ngo/wp-content/uploads/2019/06/shuddh-ngo-india-clean-waste-charity.jpg" width="339px" height="236px" alt=""></div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:60, &quot;x&quot;: 70,  &quot;smoothness&quot;: 50 }" id="displaythis"><img src="/images/movimage3.jpg" width="179px" height="126" alt=""></div>
+                <div class="box-img-animate-item" data-parallax-scroll="{&quot;y&quot;:0, &quot;x&quot;: 140,  &quot;smoothness&quot;: 50 }" id="displaythis"><img src="/images/movimage4.jpg" width="217px" height="153px" alt=""></div>
+           </div>
             </div>
             <div class="col-lg-6 col-xl-5">
               <div class="innset-xl-left-70">
