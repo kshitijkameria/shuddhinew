@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
-  <style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <style>
     .dropdown{
        position:relative;
        display:inline-block;
@@ -75,16 +76,16 @@
                     <ul class="rd-navbar-nav">
                       <li class="rd-nav-item active"><a class="rd-nav-link" href="/">Home</a>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop1">Shuddhi NGO <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content1">
                           <a href="/aboutus">About Us</a></br>
                           <a href="/ourpartner">Our Partners</a></br>
                           <!-- <a href="/causes">Causes</a>   -->             
                         </div>
                         </div>
                       </li>
-                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
-                        <div class="dropdown-content">
+                      <li class="rd-nav-item"><div class="dropdown"><div class="rd-nav-link" id="drop2"></a>Register <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png" height="20px" width="20px"></div>
+                        <div class="dropdown-content" id="content2">
                           <a href="/main/registervolunteer">Volunteer</a></br>
                           <a href="/main/registermember">Member</a></br>
                           <a href="/main/registerngo">NGO</a></br>
@@ -102,16 +103,28 @@
                       </li> -->
                     <a class="button button-primary button-sm" href="/donate">Donate To Shuddhi</a>
 
-                     
+                    <a class="button button-primary button-sm" href="/main/ngo" style="background-color: #33C9FF;">Fundraiser</a>
                     <!-- </ul><a class="button button-primary button-sm" href="#">Donate</a> -->
                   </div>
-                </div><a class="button button-primary button-sm" href="/main/ngo" style="background-color: #33C9FF;">Fundraiser</a>
+                </div>
                 <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> -->
               </div>
             </div>
           </nav>
         </div>
       </header>
+      <script>
+        $(document).ready(function(){
+           $("#drop1").click(function(){
+        $("#content1").toggle();
+           });
+          });
+          $(document).ready(function(){
+           $("#drop2").click(function(){
+        $("#content2").toggle();
+           });
+          });
+        </script>
       <section class="parallax-container" data-parallax-img="https://shuddhi.ngo/wp-content/uploads/2019/06/shuddh-ngo-india-clean-waste-charity.jpg">
         <div class="parallax-content breadcrumbs-custom context-dark">
           <div class="container">

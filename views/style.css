@@ -1393,6 +1393,8 @@ ul.list-contact-info li .icon {
 ul.social-list {
 	margin-left: -10px;
 	margin-right: -10px;
+	
+	
 }
 
 ul.social-list > li {
@@ -1406,7 +1408,7 @@ ul.social-list > * {
 }
 
 ul.social-list a:hover {
-	color: #ffffff;
+	color: black;
 	background: #7FBC4E;
 }
 
@@ -1520,6 +1522,7 @@ img {
 .icon-sm {
 	font-size: 22px;
 	line-height: 28px;
+	
 }
 
 .icon-md {
@@ -3706,7 +3709,8 @@ ul.blog-post-meta li .icon {
 .footer-minimal {
 	padding: 60px 0;
 	text-align: center;
-	background: #343333;
+	background: white;
+	color:black;
 }
 
 @media (min-width: 992px) {
@@ -3716,7 +3720,7 @@ ul.blog-post-meta li .icon {
 }
 
 .footer-minimal .icon-bg-white {
-	background: rgba(255, 255, 255, 0.05);
+	background: black;
 	color: #ffffff;
 }
 
@@ -3757,7 +3761,7 @@ ul.blog-post-meta li .icon {
 @media (min-width: 768px) {
 	.footer-minimal-nav li + li {
 		margin-top: 0;
-		border-left: 1px solid rgba(255, 255, 255, 0.5);
+		border-left: 1px solid black;
 	}
 }
 
@@ -3766,7 +3770,7 @@ ul.blog-post-meta li .icon {
 	text-transform: uppercase;
 	letter-spacing: .02em;
 	text-align: center;
-	color: #ffffff;
+	color: black;
 }
 
 .footer-minimal-nav a:hover {
@@ -5749,7 +5753,8 @@ html.tablet .ui-to-top {
 
 .rd-navbar {
 	display: none;
-	background: #444141;
+	background: white;
+	color:black;
 }
 
 .rd-navbar-toggle {
@@ -6885,5 +6890,5 @@ html.rd-navbar-fixed-linked .page {
 }
 
 html:not(.ie-11):not(.ios) .parallax-disabled {
-	background-attachment: fixed;
+	background-attachment: inherit;
 }
