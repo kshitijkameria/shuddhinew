@@ -40,12 +40,15 @@
 					<span class="login100-form-title p-b-34">
 						<h2 style="margin-right: -2rem; margin-left: -1rem; margin-bottom: -2rem; color: #0a69f0; font-weight: 600;">WELCOME BACK !!</h2></br></br></br>
 					</span>
+        
+        <div style="width: 30%;">
 					<div class="form-group">
             <% if(locals.message){ %>
               <script>
               alert("<%=message %>");
             </script>
               <% } %>
+                  
 						<label for="email" style="margin-left:6rem; font-size: 1.5rem;">Email</label><br>
 						<input type="email" id="email" name="email" required="required" placeholder=" Your Email" style="width: 18rem; height: 2rem;" />
 					  </div>
@@ -53,6 +56,7 @@
 						<label for="password" style="margin-left:5rem; font-size: 1.5rem;">Password</label>
 						<input type="password" id="password" name="password" required="required" placeholder=" Your Password" style="width: 18rem; height: 2rem;" />
 					  </div>
+                </div>
             <br>
 					  <div class="form-group">
 						<button type="submit" style="background-color: #7FBC4E; width: 15rem; height: 2.5rem; border-radius: 0.7rem; margin-left: 1.5rem;">Log In</button><br><br>
@@ -67,7 +71,6 @@
 			</div>
 		</div>
 	</div>
-	
 	
 
 	<div id="dropDownSelect1"></div>
