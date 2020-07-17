@@ -27,7 +27,161 @@
     background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');
     box-shadow:10px 10px 10px 10px #888888;
   }
-  
+ .menu{
+  background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');
+  background-size:100% 100% ;
+}
+.logo{
+  width:200px;
+  height:200px;
+  border-radius: 50%;
+  position:relative;
+  margin-top:-125px;
+  border: 5px solid grey;
+}
+.hello{
+  font-size: 2em;
+  font-weight: bolder;
+}
+.important{
+  border:2px solid black;
+  width:600px;
+  box-shadow: 10px 10px 10px 10px #888888;
+  background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');
+}
+.tuble{
+  width:30rem;
+  font-family: initial;
+}
+.there{
+  height:100px;
+  width:100px;
+  box-shadow: 5px 5px #888888;
+}
+@media only screen and (max-width:500px) {
+  .logo {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    margin-top: -80px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .logo {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    margin-top: -90px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .hello{
+    font-size: 1.25em;
+    text-align: center;
+  }
+}
+@media only screen and (max-width:800px) {
+  .hello{
+    font-size: 1.65em;
+    text-align: center;
+  }
+}
+@media only screen and (max-width:500px) {
+  .important{
+    width: auto;
+  }
+}
+@media only screen and (max-width:800px) {
+  .important{
+    width: auto;
+  }
+}
+@media only screen and (max-width:500px) {
+  .hey{
+    font-size: 25px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .hey{
+    font-size: 32px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .hey1{
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .hey1{
+    font-size: 23px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .babe{
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .babe{
+    font-size: 21px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .hey2{
+    font-size: 28px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .hey2{
+    font-size: 28px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .tuble{
+    font-size: 20rem;
+  }
+}
+@media only screen and (max-width:800px) {
+  .tuble{
+    font-size: 20rem;
+  }
+}
+@media only screen and (max-width:500px) {
+  .there{
+    height: auto;
+    width: auto;
+  }
+}
+@media only screen and (max-width:800px) {
+  .there{
+    height: auto;
+    width: auto;
+  }
+}
+@media only screen and (max-width:500px) {
+  .bottom{
+    height: 175px;
+    width: 158px;
+  }
+}
+@media only screen and (max-width:800px) {
+  .bottom{
+    height: 180px;
+    width: 165px;
+  }
+}
+@media only screen and (max-width:500px) {
+  .shit{
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+/*@media only screen and (max-width:800px) {
+  .shit{
+    font-size: 2.25rem;
+    text-align: center;
+  }
+} */
   </style>
   <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   
@@ -55,15 +209,15 @@
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand " style="align-items: center;"><a href="#"><img class="brand-logo-light" src="https://shuddhi.org/uploads/3/4/7/9/34791871/shuddhi-ngo-logo.png" alt="" width="207" height="51"/></a></div>
+                  <div class="rd-navbar-brand " style="align-items: center;"><a href="#"><img class="brand-logo-light" src="/images/Shuddhi Mail LOGO.jpg.png" alt="" width="207" height="51"/></a></div>
                 </div>
                 <div class="rd-navbar-main-element">
                     <div class="rd-navbar-nav-wrap">
                       <!-- RD Navbar Nav-->
-                    
-                    </div>
-                  </div><a class="button button-primary button-sm" href='/main/form' style="font-family: initial;">DONATE</a>
-                
+                      <!--<a class="button button-primary button-sm" href='/main/form' style="font-family: initial;">DONATE</a>
+                      --></div>
+                  </div><!--<a class="button button-primary button-sm" href='/main/form' style="font-family: initial;">DONATE</a>
+                  -->
               </div>
             </div>
           </nav>
@@ -81,25 +235,26 @@
           </div>
         </div>
       </section>
-      <div align="center" style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin5.jpg');background-size:100% 100% ;">
-        <img src = "/<%= info.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;"/>
-        <h1 style="font-family: initial;">Name :<%= info.name %></h1>
+      <div align="center" class="menu" >
+        <img src = "/<%= info.logo %>" class="logo" style=""/>
+        <h1 class="hey" style="font-family: initial;">Name :<%= info.name %></h1>
+        <a class="button button-primary button-sm" href='/main/form' style="font-family: initial;">DONATE</a><br>
         <div>
         <div style="width: 48%;margin:1%;float:left;">
-            <h1 style="font-family: initial;">EMAIL ID:<%= info.email %></h1>
+            <h1 class="hey1" style="font-family: initial;">EMAIL ID: </h1><h1 class="babe" style="font-family: initial;"><%= info.email %></h1>
         </div>
         <div style="width: 48%;margin:1%;float:right;">
-        <h1 style="font-family: initial;">CONTACT NO:<%= info.phno %></h1>
+        <h1 class="hey1" style="font-family: initial;">CONTACT NO: </h1><h1 class="babe" style="font-family: initial;"><%= info.phno %></h1>
     </div>    
     </div>
 </br>
 </br>
 </br></br>
-    <div align="center" style="border:2px solid black;width:600px;box-shadow: 10px 10px 10px 10px #888888;background: url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
-        <h1 style="font-family: initial;">DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
-        <h1 style="font-family: initial;">THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
-        <h1 style="font-family: initial;">LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1></br>
-        <u><h1 style="font-family: initial;">RECENT DONORS</h1></u>
+    <div align="center" class="important" style="">
+        <h1 class="hello" style="font-family: initial;">DONATIONS TILL NOW :<%= info.donationtillnow %></h1>
+        <h1 class="hello" style="font-family: initial;">THIS MONTH DONATIONS :<%= info.thisMonthDonations %></h1>
+        <h1 class="hello" style="font-family: initial;">LAST MONTH DONATIONS :<%= info.lastMonthDonations %></h1></br>
+        <u><h1 class="hello" style="font-family: initial;">RECENT DONORS</h1></u>
       
         <% for(var i = 0; i < info.recentdonors.length; i++) { %>
         <h1><%= info.recentdonors[i].donor %></h1>
@@ -109,7 +264,7 @@
      
         </div>
     </br></br>
-        <h1 style="font-family: initial;">WORK</h1>
+        <h1 class="hey2" style="font-family: initial;">WORK</h1>
         <table align="center" style="width:35rem;"  class="table">
             <tr style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');">
                 <th></th>
@@ -119,7 +274,7 @@
             <% for(var i = 0; i < work.length; i++) { %>
             <tr align="center">
                 <td style="background:url('https://raw.githubusercontent.com/saiyamjindal/shuddhinew/master/public/images/backlogin1.jpeg');"></td>
-                <td style="width:30rem;font-family: initial;"><%=work[i].heading %>
+                <td class="tuble"><%=work[i].heading %>
                     </br>
                     </br>
                    <div style="font-family: initial;"> <%=work[i].content %></div>
@@ -133,10 +288,10 @@
                 <th></th>
             </tr>
         </table>
-        <h1 style="font-family: initial;">IMAGES</h1>
+        <h1 class="hey2" style="font-family: initial;">IMAGES</h1>
     </br>
             <% for(var i = 0; i < info.images.length; i++) { %>
-            <img src="/<%= info.images[i] %>" style="height:100px;width:100px;box-shadow: 5px 5px #888888;" />
+            <img class="there" src="/<%= info.images[i] %>" style="" />
           
       
             <% } %>
@@ -145,7 +300,7 @@
                 <div class="container wow-outer">
                   <div class="wow fadeIn">
                     <div class="row row-50 row-lg-60">
-                      <div class="col-12"><a href="index.html"><img src="https://shuddhi.org/uploads/3/4/7/9/34791871/shuddhi-ngo-logo.png" alt="" width="207" height="51" /></a></div>
+                      <div class="col-12"><a href="index.html"><img class="bottom" src="/images/Shuddhifooter.png" alt="LOGO" width="207" height="51"/></a></div>
                       <div class="col-12">
                         <ul class="footer-minimal-nav">
                           <li><a href="about-us (1).html">About Us</a></li>

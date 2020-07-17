@@ -54,12 +54,10 @@
   text-align: center;
   padding:10px;
 }
-
 .title {
   color: grey;
   font-size: 18px;
 }
-
 .square{
     font-size:25px;
     width: 50px;
@@ -69,8 +67,16 @@
 }
 .togglethis{
     display:none;
-
 }
+@media(max-width: 320px){
+  #button #button1{
+    font-size:8px;
+    width:20%;
+  }
+}
+#button #button1{
+    font-size:19px;
+  }
   </style>
   <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   
@@ -182,14 +188,14 @@
                          
                         <div>
                             <div style="float:left;width: 50%;">
-                        <button align="center" id="button" class="button button-sm button-primary" style="font-size: 19px;">Existing Donor</button></div>
+                        <button align="center" id="button" class="button button-sm button-primary">Existing Donor</button></div>
                         <div style="float:left;width: 50%;">
-                        <button align="center" id="button1" class="button button-sm button-primary" style="font-size: 19px;">First Time Donor</button></div>
+                        <button align="center" id="button1" class="button button-sm button-primary">First Time Donor</button></div>
                         </div></br></br>
                        
                        <div class="togglethis1">
                         <form id="form" method = "post" action="/main/one">
-                            <center><h3>Donate Here</h3></center>
+                            <center><h3 style="color:black;">Donate Here</h3></center>
                               <input type="text" name="name" placeholder="Name"></br></br>
                               
                               <input type="text" name="email" placeholder="Email"></br></br>
@@ -209,7 +215,7 @@
                        <div class="togglethis">
  
                         <form id="form1" method = "post" action="/main/form">
-                            <center><h3>Donate Here</h3></center>
+                            <center><h3 style="color:black;">Donate Here</h3></center>
                               <input type="text" name="name" placeholder="Name"></br>
                               </br>
                               <input type="text" name="email" placeholder="Email"></br>
