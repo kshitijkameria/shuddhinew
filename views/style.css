@@ -6892,3 +6892,18 @@ html.rd-navbar-fixed-linked .page {
 html:not(.ie-11):not(.ios) .parallax-disabled {
 	background-attachment: inherit;
 }
+
+@media(max-width: 320px){
+	.col-12 img{
+	  height:100px;
+	  width:100px;
+
+	}
+ }
+ @media(max-width: 576px){
+  .col-12 img{
+	  height:120px;
+	  width:120px;
+
+	}
+ }

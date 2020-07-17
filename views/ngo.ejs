@@ -27,7 +27,6 @@
             position: relative;
             z-index: 1;
         }
-
         html.ie-10 .ie-panel,
         html.lt-ie-10 .ie-panel {
             display: block;
@@ -41,9 +40,7 @@
         .dropdown {
             position: relative;
             display: inline-block;
-
         }
-
         .dropdown-content {
             display: none;
             position: absolute;
@@ -55,28 +52,29 @@
             font-size: 20px;
             BACKGROUND: BLACK;
         }
-
         .dropdown-content a {
             color: #7FBC4E;
             padding: 12px 12px;
             text-decoration: none;
             display: block;
         }
-
         .dropdown-content a:hover {
             background-color: #ddd;
         }
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-
         #more {
             display: none;
             
         }
         .wow-outer{
             display:inline;
+        }
+        @media(max-width:320px){
+          #myBtn{
+            margin-left:none;
+          }
         }
     </style>
     <script type="text/javascript"
@@ -130,10 +128,10 @@
                                         </li>
                                         <li class="rd-nav-item">
                                             <div class="dropdown">
-                                                <div class="rd-nav-link">Shuddhi NGO <img
+                                                <div class="rd-nav-link" id="drop1">Shuddhi NGO <img
                                                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png"
                                                         height="20px" width="20px"></div>
-                                                <div class="dropdown-content">
+                                                <div class="dropdown-content" id="content1">
                                                     <a href="/aboutus">About Us</a></br>
                                                     <a href="/ourpartner">Our Partners</a>
                                                     <!-- <a href="/causes">Causes</a>                 -->
@@ -142,10 +140,10 @@
                                         </li>
                                         <li class="rd-nav-item">
                                             <div class="dropdown">
-                                                <div class="rd-nav-link"></a>Register <img
+                                                <div class="rd-nav-link" id="drop2"></a>Register <img
                                                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Ic_arrow_drop_down_circle_48px.svg/1024px-Ic_arrow_drop_down_circle_48px.svg.png"
                                                         height="20px" width="20px"></div>
-                                                <div class="dropdown-content">
+                                                <div class="dropdown-content" id="content2">
                                                     <a href="/main/registervolunteer">Volunteer</a></br>
                                                     <a href="/main/registermember">Member</a></br>
                                                     <a href="/main/registerngo">NGO</a></br>
@@ -155,7 +153,7 @@
                                         </li>
                                         <li class="rd-nav-item"><a class="rd-nav-link" href="/main/login">Login</a>
                                         </li>
-                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/gallery">Gallery</a>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/main/gallery">Gallery</a>
                                         </li>
                                         <li class="rd-nav-item"><a class="rd-nav-link" href="/contactus"
                                                 style="margin-right: 2rem;">Contacts</a>
@@ -166,18 +164,31 @@
 
 
                                         <!-- </ul><a class="button button-primary button-sm" href="#">Donate</a> -->
-                                </div>
-                            </div><a class="button button-primary button-sm" href="/main/ngo"
+                                
+                            <a class="button button-primary button-sm" href="/main/ngo"
                                 style="background-color: #33C9FF;">Fundraiser</a>
-                            <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> -->
+                            <!-- <a class="button button-primary button-sm" href="/main/form1">Donate To SHUDDHI</a> --></div>
+                      </div>
                         </div>
                     </div>
                 </nav>
             </div>
         </header>
+        <script>
+          $(document).ready(function(){
+             $("#drop1").click(function(){
+          $("#content1").toggle();
+             });
+            });
+            $(document).ready(function(){
+             $("#drop2").click(function(){
+          $("#content2").toggle();
+             });
+            });
+          </script>
         <section class="section section-lg section-main-bunner section-main-bunner-filter">
             <div class="main-bunner-img"
-                style="background-image: url('https://scontent.fjai1-2.fna.fbcdn.net/v/t1.0-9/91412018_1422291447951119_8185959842268053504_o.jpg?_nc_cat=102&_nc_sid=8024bb&_nc_oc=AQmit43_eUI5XTIf09ZIEEW_mF1Yk9WBCzHS5M_cxLg2f1RsY0BVmGXqxyWAjumfecOyObN7zA0IvdaoKFp40KAy&_nc_ht=scontent.fjai1-2.fna&oh=d7843b4860a6c938efbe353d5be26e6a&oe=5F0F7E4A'); background-size: cover;">
+                style="background-image: url('/images/shuddhiarmy.jpg'); background-size: cover;">
             </div>
             <div class="main-bunner-inner">
                 <div class="container">
@@ -273,7 +284,6 @@
             <% for(var x = ngo.length -1 ; x > ngo.length-4 ; x--) { %>
             <div class="col-md-6 col-lg-4 wow-outer">
                 <div class="wow fadeInUp">
-
                     <article class="box-causes"
                         style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                         <form method="post">
@@ -282,7 +292,6 @@
                                     width="396px" height="372px" /><button type="submit"
                                     class="button button-sm button-primary">Know More</button>
                             </div>
-
                             <h4 class="font-weight-medium"><%=ngo[x].name %></h4></br>
                             <p class="box-causes-donate" style="text-transform: none;">Total Amount
                                 Donated:<%=ngo[x].donationtillnow%>
@@ -301,7 +310,7 @@
 
 
                     <section class="parallax-container bg-gray-600" style="background:rgb(75, 184, 211);"
-                        data-parallax-img="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/91334858_1422290077951256_1436459903865585664_o.jpg?_nc_cat=104&_nc_sid=8024bb&_nc_ohc=_lF48X9cklAAX-w6cc3&_nc_ht=scontent.fdel12-1.fna&oh=34674e3776dadb3b37fe37ee3e75d9ef&oe=5F18F10A">
+                        data-parallax-img="https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/91334858_1422290077951256_1436459903865585664_o.jpg?_nc_cat=104&_nc_sid=8024bb&_nc_ohc=_lF48X9cklAAX-w6cc3&_nc_ht=scontent.fdel12-1.fna&oh=34674e3776dadb3b37fe37ee3e75d9ef&oe=5F18F10A" style="background-size: 100% 100%;background-attachment: inherit;">
                         <div class="parallax-content section-xxl text-center">
                             <div class="container">
                                 <div class="row justify-content-md-center">
@@ -363,7 +372,6 @@
                                 <% for(var j = 0; j < 3; j++) { %>
                                 <div class="col-md-6 col-lg-4 wow-outer">
                                     <div class="wow fadeInUp">
-
                                         <article class="box-causes"
                                             style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                                             <form method="post">
@@ -372,7 +380,6 @@
                                                         width="396px" height="372px" /><button type="submit"
                                                         class="button button-sm button-primary">Know More</button>
                                                 </div>
-
                                                 <h4 class="font-weight-medium" id="sortme"><%=ngo[k].name %></h4></br>
                                                 <p class="box-causes-donate" style="text-transform: none;">Total Amount
                                                     Donated:<%=ngo[k].donationtillnow%>
@@ -385,12 +392,9 @@
                                 <% } %>
                                 <br>
                                 <% } %>
-
                                 <% for(var m = 0; m < mod; m++) { %>
-
                                 <div class="col-md-6 col-lg-4 wow-outer">
                                     <div class="wow fadeInUp">
-
                                         <article class="box-causes"
                                             style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                                             <form method="post">
@@ -399,7 +403,6 @@
                                                         width="396px" height="372px" /><button type="submit"
                                                         class="button button-sm button-primary">Know More</button>
                                                 </div>
-
                                                 <h4 class="font-weight-medium" id="sortme"><%=ngo[k].name %></h4></br>
                                                 <p class="box-causes-donate" style="text-transform: none;">Total Amount
                                                     Donated:<%=ngo[k].donationtillnow%>
@@ -416,7 +419,6 @@
                                 <% for(var j = 0; j < 3; j++) { %>
                                 <div class="col-md-6 col-lg-4 wow-outer">
                                     <div class="wow fadeInUp">
-
                                         <article class="box-causes"
                                             style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                                             <form method="post">
@@ -425,7 +427,6 @@
                                                         width="396px" height="372px" /><button type="submit"
                                                         class="button button-sm button-primary">Know More</button>
                                                 </div>
-
                                                 <h4 class="font-weight-medium" id="sortme"><%=ngo[k].name %></h4></br>
                                                 <p class="box-causes-donate" style="text-transform: none;">Total Amount
                                                     Donated:<%=ngo[k].donationtillnow%>
@@ -438,13 +439,11 @@
                                 <% } %>
                                 <br>
                                 <% } %>
-
                                <span id="dots"></span> <span id="more">
                                     <% for(var i = 0; i < (parseInt((length-6)/3)); i++) { %>
                                     <% for(var j = 0; j < 3; j++) { %>
                                     <div class="col-md-6 col-lg-4 wow-outer" >
                                         <div class="wow fadeInUp">
-
                                             <article class="box-causes"
                                                 style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                                                 <form method="post">
@@ -453,7 +452,6 @@
                                                             width="396px" height="372px" /><button type="submit"
                                                             class="button button-sm button-primary">Know More</button>
                                                     </div>
-
                                                     <h4 class="font-weight-medium" id="sortme"><%=ngo[k].name %></h4></br>
                                                     <p class="box-causes-donate" style="text-transform: none;">Total
                                                         Amount Donated:<%=ngo[k].donationtillnow%>
@@ -466,12 +464,9 @@
                                     <% } %>
                                     <br>
                                     <% } %>
-
                                     <% for(var m = 0; m < mod; m++) { %>
-
                                     <div class="col-md-6 col-lg-4 wow-outer">
                                         <div class="wow fadeInUp">
-
                                             <article class="box-causes"
                                                 style="border:2px solid black;box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
                                                 <form method="post">
@@ -480,7 +475,6 @@
                                                             width="396px" height="372px" /><button type="submit"
                                                             class="button button-sm button-primary">Know More</button>
                                                     </div>
-
                                                     <h4 class="font-weight-medium" id="sortme"><%=ngo[k].name %></h4></br>
                                                     <p class="box-causes-donate" style="text-transform: none;">Total
                                                         Amount Donated:<%=ngo[k].donationtillnow%>
@@ -491,18 +485,15 @@
                                         </div>
                                     </div>
                                     <% } %>
-
                                 </span>
                               
                             </br>
-
 <% } %>
                         </div>
                         <br><br>
-                        <button onclick="myFunction()" id="myBtn"
-                        style="background: green;color:white;font-size: 25px;padding:5px;height:4rem; position: relative; left: 25rem;
-                        width: 20rem; border-radius: 1rem; ">Show
-                        more</button></div>
+                        <button onclick="myFunction()" id="myBtn" class="button button-sm button-primary">Show
+                        more</button>
+                      </div>
                     </section>
 
                     <script>
@@ -510,7 +501,6 @@
                             let input = document.getElementById('searchbar').value
                             input = input.toLowerCase();
                             let x = document.getElementsByClassName('col-md-6');
-
                             for (i = 0; i < x.length; i++) {
                                 if (!x[i].innerHTML.toLowerCase().includes(input)) {
                                     x[i].style.display = "none";
@@ -546,7 +536,6 @@
                             var dots = document.getElementById("dots");
   var moreText = document.getElementById("more");
   var btnText = document.getElementById("myBtn");
-
   if (dots.style.display === "none") {
     dots.style.display = "inline";
     btnText.innerHTML = "Show more"; 
