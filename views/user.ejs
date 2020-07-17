@@ -101,6 +101,25 @@ font-size:16px;
  div.mem{
    display:none;
  }
+ .logo{
+  width:200px;
+  height:200px;
+  border-radius: 50%;
+  position:relative;
+  margin-top:-125px;
+  border: 5px solid grey;
+ }
+ @media only screen and (max-width:500px) {
+  .logo {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    margin-top: -80px;
+  }
+  .shutup{
+    font-size: 25px;
+  }
+ }
 </style>
 <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ef3a6c5a922da001296fc82&product=inline-share-buttons" async="async"></script>
   </head>
@@ -132,7 +151,7 @@ font-size:16px;
                 <div class="rd-navbar-main-element">
                     <div class="rd-navbar-nav-wrap">
                       <!-- RD Navbar Nav-->
-                    
+                      <a class="button button-primary button-sm" href='/main/logout'>LOGOUT</a>
                     </div>
                   </div><a class="button button-primary button-sm" href='/main/logout'>LOGOUT</a>
                 
@@ -157,15 +176,15 @@ font-size:16px;
    <!--  <button onclick ="location.href= '/main/member'" type="button">Member</button>
       <button onclick ="location.href= '/main/volunteer'"  type="button">Volunteer</button> -->
       <div align="center">
-        <img src="/<%= user.logo %>" style="width:200px;height:200px;border-radius: 50%;position:relative;margin-top:-125px;border: 5px solid grey;" />
+        <img src="/<%= user.logo %>" class="logo" style="" />
       </br><a href="/main/imageupload" style="font-size: 1.5rem;font-family: initial"> Upload Logo </a>
-      </br> <h1 style="font-family: initial"> <%= user.name %> </h1>
+      </br> <h1 class="shutup" style="font-family: initial"> <%= user.name %> </h1>
     
-    <br>
+    
       <div style="float: center; display: none;" class="vol"><a class="button button-primary button-sm vol"  href="/main/member" style="width: 30%; font-size: 15px;">Join as a Volunteer</a></div>
      <br> <div style="float: center;display:none;" class="mem"><a class="button button-primary button-sm mem" href="/main/volunteer" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>  
-     <br> <div style="float: center;display:none;" class="mem1"><a class="button button-primary button-sm mem" href="/main/mem" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
-      <br> <div style="float: center;display:none;" class="mem2"><a href = "/uploads/<%=user.certimem%>"type = "application/pdf"target = "_blank">Membership certificate</a></div>   
+     <br> <div  style="float: center;display:none;" class="mem1"><a class="button button-primary button-sm mem" href="/main/mem" style="width: 30%; font-size: 15px; background-color: #0574eb;">Join as a Member</a></div>      
+      <div style="float: center;display:none;" class="mem2"><a href = "/uploads/<%=user.certimem%>"type = "application/pdf"target = "_blank">Membership certificate</a></div>   
     </div>
 <script>
   if("<%= user.t %>"=="D"){
@@ -309,7 +328,7 @@ slideShow(0);
         <div class="container wow-outer">
           <div class="wow fadeIn">
             <div class="row row-50 row-lg-60">
-              <div class="col-12"><a href="index.html"><img src="https://shuddhi.org/uploads/3/4/7/9/34791871/shuddhi-ngo-logo.png" alt="" width="207" height="51" /></a></div>
+              <div class="col-12"><a href="index.html"><img src="/images/Shuddhifooter.png" alt="" width="207" height="51" /></a></div>
               <div class="col-12">
                 <ul class="footer-minimal-nav">
                   <li><a href="about-us (1).html">About Us</a></li>

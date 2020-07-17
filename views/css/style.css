@@ -6659,13 +6659,13 @@ html.tablet .ui-to-top {
 }
 
 .rd-navbar-fixed .rd-navbar-panel {
-	color: #9b9b9b;
-	background: #444141;
+	color: black;
+	background: white;
 }
 
 .rd-navbar-fixed .rd-navbar-nav-wrap {
 	color: #ffffff;
-	background: #444141;
+	background: white;
 	border: 1px solid #444141;
 	box-shadow: 0px 0px 15px rgba(21, 21, 21, 0.35);
 }
@@ -6680,7 +6680,7 @@ html.tablet .ui-to-top {
 }
 
 .rd-navbar-fixed .rd-nav-link {
-	color: #9b9b9b;
+	color: black;
 }
 
 .rd-navbar-fixed .rd-megamenu-list > li > a,
