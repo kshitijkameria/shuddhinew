@@ -5,13 +5,10 @@
 <style>
 body {font-family: Arial, Helvetica, sans-serif;
     background-image:url('/images/backlogin5.jpg');
-
 background-repeat:no-repeat;
-
 background-size:cover;
 }
 form {border: 3px solid #f1f1f1; }
-
 input[type=text], input[type=password] {
   width: 100%;
   padding: 12px 20px;
@@ -20,7 +17,6 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-
 button {
   background-color: #4CAF50;
   color: white;
@@ -30,37 +26,37 @@ button {
   cursor: pointer;
   width: 100%;
 }
-
 button:hover {
   opacity: 0.8;
 }
-
 .cancelbtn {
   width: auto;
   padding: 10px 18px;
   background-color: #f44336;
 }
-
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
 }
-
 img.avatar {
   width: 40%;
 }
-
 .container {
   padding: 16px;
 }
-
 span.psw {
   float: right;
   padding-top: 16px;
 }
-
+#alignthis{
+    padding-left:35%;
+    padding-top:10%;
+}
+form{
+    width:50%;
+}
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
+@media (max-width: 400px) {
   span.psw {
      display: block;
      float: none;
@@ -68,14 +64,64 @@ span.psw {
   .cancelbtn {
      width: 100%;
   }
+  #alignthis{
+      padding-left: 0%;
+    padding-top:15%;
+  }
+  form{
+      width:100%;
+  }
+  input{
+      width:inherit;
+  }
+}
+@media (max-width: 500px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+  #alignthis{
+      padding-left: 2%;
+    padding-top:15%;
+    padding-right:2%;
+  }
+  form{
+      width:100%;
+  }
+  input{
+      width:inherit;
+  }
+}
+@media (max-width: 576px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+  #alignthis{
+      padding-left: 4%;
+    padding-top:20%;
+    padding-right:4%;
+  }
+  form{
+      width:100%;
+  }
+  input{
+      width:inherit;
+  }
 }
 </style>
 </head>
 <body>
 
-<div style="padding-left: 35% ; padding-top: 10%; ">
+<div id="alignthis">
 
-<form  method="POST" style="width: 40%; border-color: #01b0d1;">
+<form  method="POST" style=" border-color: #01b0d1;">
   <div class="imgcontainer">
     <img src="/images/Shuddhifooter.png" alt="Avatar" class="avatar">
   </div>
