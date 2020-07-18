@@ -27,7 +27,18 @@
 	<link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
 <!--===============================================================================================-->
-
+<style>
+	@media (max-width:800px) {
+  div#optionalstuff {
+    display: none;
+  }
+}
+  @media (max-width:600px) {
+  form#shits {
+    margin-top: -70px;
+  }
+}
+</style>
 
 </head>
 
@@ -36,27 +47,23 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('/images/backlogin1.jpeg');">
 			<div class="wrap-login100" style="background-color: #e6e5e1;">
-				<form class="login100-form validate-form" method="post" style="background-color:#e6e5e1;">
+				<form class="login100-form validate-form" id="shits" method="post" style="background-color:#e6e5e1;">
 					<span class="login100-form-title p-b-34">
 						<h2 style="margin-right: -2rem; margin-left: -1rem; margin-bottom: -2rem; color: #0a69f0; font-weight: 600;">WELCOME BACK !!</h2></br></br></br>
 					</span>
-        
-        <div style="width: 30%;">
 					<div class="form-group">
             <% if(locals.message){ %>
               <script>
               alert("<%=message %>");
             </script>
               <% } %>
-                  
 						<label for="email" style="margin-left:6rem; font-size: 1.5rem;">Email</label><br>
 						<input type="email" id="email" name="email" required="required" placeholder=" Your Email" style="width: 18rem; height: 2rem;" />
 					  </div>
 					  <div class="form-group">
-						<label for="password" style="margin-left:5rem; font-size: 1.5rem;">Password</label>
+						<label for="password" style="margin-left:5rem; font-size: 1.5rem;">Password</label><br>
 						<input type="password" id="password" name="password" required="required" placeholder=" Your Password" style="width: 18rem; height: 2rem;" />
 					  </div>
-                </div>
             <br>
 					  <div class="form-group">
 						<button type="submit" style="background-color: #7FBC4E; width: 15rem; height: 2.5rem; border-radius: 0.7rem; margin-left: 1.5rem;">Log In</button><br><br>
@@ -67,10 +74,11 @@
 										
 				</form>
 
-				<div class="login100-more" style="background-image: url('https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/55905161_1126684794178454_2238827126960685056_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_oc=AQlqMb37HYK3BGj-WRE7FLvzYpMiOFOl0QWePPFbTWmThz1dxl_3ka6HFJsoFCxXDjU&_nc_ht=scontent.fdel12-1.fna&oh=f1fbcd86ea3ec5aba5da7bdbb3a22b84&oe=5F13261A')" ></div>
+				<div class="login100-more" id="optionalstuff" style="background-image: url('https://scontent.fdel12-1.fna.fbcdn.net/v/t1.0-9/55905161_1126684794178454_2238827126960685056_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_oc=AQlqMb37HYK3BGj-WRE7FLvzYpMiOFOl0QWePPFbTWmThz1dxl_3ka6HFJsoFCxXDjU&_nc_ht=scontent.fdel12-1.fna&oh=f1fbcd86ea3ec5aba5da7bdbb3a22b84&oe=5F13261A')" ></div>
 			</div>
 		</div>
 	</div>
+	
 	
 
 	<div id="dropDownSelect1"></div>
