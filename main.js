@@ -1191,7 +1191,7 @@ router.get('/form', (req, res) => {
 })
 var ses = ""
 router.post('/form', urlencodedParser, (req, res) => {
-    Member.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+    Member.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
             res.redirect('/')
