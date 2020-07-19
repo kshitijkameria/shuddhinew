@@ -1198,14 +1198,14 @@ router.post('/form', urlencodedParser, (req, res) => {
             return
         }
         if (_.isEmpty(doc)) {
-            Volunteer.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+            Volunteer.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
                 if (err) {
                     console.log(err, 'error')
                     res.redirect('/')
                     return
                 }
                 if (_.isEmpty(doc)) {
-                      Donor.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                      Donor.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
                         if (err) {
                             console.log(err, 'error')
                             res.redirect('/')
