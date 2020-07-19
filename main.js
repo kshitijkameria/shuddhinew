@@ -477,7 +477,7 @@ const DonorSchema = new Schema({
         unique: true
     },
     phNum: Number,
-    pan: Number,
+    pan: String,
     amount: Number,
     address: String,
     password: String,
