@@ -82,6 +82,11 @@
   
   </head>
   <body>
+    <% if(locals.message){ %>
+      <script>
+      alert("<%=message %>");
+    </script>
+      <% } %>
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
       <div class="preloader-body">
@@ -100,7 +105,7 @@
               <div class="rd-navbar-main-outer">
                 <div class="rd-navbar-main">
                   <!-- RD Navbar Panel-->
-                  <div class="rd-navbar-panel">
+                  <div class="rd-navbar-panel" style="background-color: white;">
                     <!-- RD Navbar Toggle-->
                     <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                     <!-- RD Navbar Brand-->
@@ -194,7 +199,7 @@
                         </div></br></br>
                        
                        <div class="togglethis1">
-                        <form id="form" method = "post" action="/main/one">
+                        <form id="form" method = "post" action="/main/oneo">
                             <center><h3 style="color:black;">Donate Here</h3></center>
                               <input type="text" name="name" placeholder="Name"></br></br>
                               
@@ -202,7 +207,7 @@
                               
                               <input type="tel" name="phone" placeholder="Phone Number"></br></br>
                           
-                              <input type="number" name="pan" placeholder="PAN Number(Optional)"></br></br>
+                              <input type="text" name="pan" placeholder="PAN Number(Optional)"></br></br>
                               
                               <input type="number" name="amount" placeholder="Donation Amount"></br></br>
                               
@@ -214,10 +219,9 @@
 
                        <div class="togglethis">
  
-                        <form id="form1" method = "post" action="/main/form">
+                        <form id="form1" method = "post" action="/main/form1">
                             <center><h3 style="color:black;">Donate Here</h3></center>
-                              <input type="text" name="name" placeholder="Name"></br>
-                              </br>
+                              
                               <input type="text" name="email" placeholder="Email"></br>
                               </br>
                               <input type="password" name="password" placeholder="Password"></br> </br>
