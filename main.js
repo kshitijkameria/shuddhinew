@@ -477,7 +477,7 @@ const DonorSchema = new Schema({
         unique: true
     },
     phNum: Number,
-    pan: Number,
+    pan: String,
     amount: Number,
     address: String,
     password: String,
@@ -1191,21 +1191,22 @@ router.get('/form', (req, res) => {
 })
 var ses = ""
 router.post('/form', urlencodedParser, (req, res) => {
-    Member.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+
+    Member.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
             res.redirect('/')
             return
         }
         if (_.isEmpty(doc)) {
-            Volunteer.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+            Volunteer.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
                 if (err) {
                     console.log(err, 'error')
                     res.redirect('/')
                     return
                 }
                 if (_.isEmpty(doc)) {
-                      Donor.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                      Donor.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
                         if (err) {
                             console.log(err, 'error')
                             res.redirect('/')
@@ -1300,21 +1301,21 @@ router.get('/form1', (req, res) => {
 })
 var ses = ""
 router.post('/form1', urlencodedParser, (req, res) => {
-    Member.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+    Member.findOne({ password: req.body.password, email: req.body.email }, function (err, doc) {
         if (err) {
             console.log(err, 'error')
             res.redirect('/')
             return
         }
         if (_.isEmpty(doc)) {
-            Volunteer.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+            Volunteer.findOne({ password: req.body.password, email: req.body.email}, function (err, doc) {
                 if (err) {
                     console.log(err, 'error')
                     res.redirect('/')
                     return
                 }
                 if (_.isEmpty(doc)) {
-                    Donor.findOne({ password: req.body.password, email: req.body.email, name: req.body.name }, function (err, doc) {
+                    Donor.findOne({ password: req.body.password, email: req.body.email}, function (err, doc) {
                         if (err) {
                             console.log(err, 'error')
                             res.redirect('/')
@@ -1570,20 +1571,24 @@ router.post('/resultshu', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('./public/images/Shuddhifooter.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/upper.png',200,0, {
+                    fit:[250,350],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
-                fit:[400,450],
+               doc.image('./public/images/recfooter.png',10,300, {
+                fit:[600,750],
                 align:'center',
                 valign:'center'
                  
            });
+
+           doc.moveTo(0,40)
+              .lineTo(500,40)      
+
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,200,{
+               doc.text("Donor Name :" + " " + ses.name,50,300,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -1814,20 +1819,23 @@ router.post('/result', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                 doc.image('./public/images/Shuddhifooter.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/upper.png',200,0, {
+                    fit:[250,350],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
-                fit:[400,450],
+               doc.image('./public/images/recfooter.png',10,300, {
+                fit:[600,750],
                 align:'center',
                 valign:'center'
                  
            });
+
+           doc.moveTo(0,40)
+              .lineTo(500,40) 
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,200,{
+               doc.text("Donor Name :" + " " + ses.name,50,300,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -1983,51 +1991,33 @@ router.post('/resultmember', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                 doc.fontSize(35)
-                doc.font('Courier-Bold').fillColor('blue').text("C E R T I F I C A T E",{
-                    align:'center'
-                });
-                doc.fontSize(30)
-                doc.font('Courier-Oblique').fillColor('blue').text("OF LIFE MEMBERSHIP",{
-                    align:'center'
-                });
-                doc.moveDown();
-                doc.fontSize(20)
-                doc.fillColor('blue').text("This Certifies that",{
-                    align:'center'
-                });
-                doc.moveDown();
-                doc.fontSize(25)
-                doc.fillColor('red').text("Donor Name :" + " " + mem.name,{
+
+                doc.image('./public/images/certi.jpg',30,10, {
+                    width:100,
+                    height:200,
+                    fit:[500,550],
+                    align:'center',
+                    valign:'center'
+                     
+               });
+              
+
+                
+                doc.fontSize(15)
+                doc.fillColor('red').text( " " + mem.name,0,270{
                    align:'center'
                 });
-                doc.moveDown();
-                doc.fontSize(20)
-                doc.fillColor('blue').text("is a lifetime member of SHUDDHI (Regd.) NGO",{
-                    align:'center'
-                });
+
+                
                 doc.moveDown();
                 doc.moveDown();
-                doc.fontSize(15)
-                doc.font('Courier-Bold').fillColor('blue').text("Certificate Number :" + " " + postData.referenceId,{
+                doc.fontSize(10)
+                doc.font('Courier-Bold').fillColor('blue').text(" " + postData.referenceId,130,340{
                     align:'center'
                 });
                 doc.moveDown();
                 
-                doc.font('Helvetica-Bold').fillColor('blue').text(postData.txTime,{
-                    underline:true,
-                    align:'left',
-                    continued:true
-                }).image('./public/images/Shuddhifooter.png',250,350, {
-                    fit:[50,100],
-                    align:'center',
-                    valign:'center',
-                    continued:true 
-               }).font('Helvetica-Bold').fillColor('blue').text('PRESIDENT(SAURABH GUPTA)',{
-                underline:true,
-                align:'right'
-               });
-               doc.fillColor('lightblue').rect(doc.x, 40, 510, doc.y).stroke();
+                
              
                 doc.end()
                 let transporter = nodemailer.createTransport({
@@ -2333,20 +2323,23 @@ router.post('/resultdonatemem', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-               doc.image('./public/images/Shuddhifooter.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/upper.png',200,0, {
+                    fit:[250,350],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
-                fit:[400,450],
+               doc.image('./public/images/recfooter.png',10,300, {
+                fit:[600,750],
                 align:'center',
                 valign:'center'
                  
            });
+
+           doc.moveTo(0,40)
+              .lineTo(500,40) 
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + vol.name,50,200,{
+               doc.text("Donor Name :" + " " + vol.name,50,300,{
                    align:'center'
                });
                doc.fontSize(20)
