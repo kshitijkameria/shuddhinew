@@ -1571,24 +1571,24 @@ router.post('/resultshu', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('./public/images/upper.png',200,0, {
-                    fit:[250,350],
+                doc.image('upper.png',250,10, {
+                    fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/recfooter.png',10,300, {
-                fit:[600,750],
+               doc.image('recfooter.png',650,10, {
+                fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
 
-           doc.moveTo(0,40)
-              .lineTo(500,40)      
+           doc.moveTo(0,20)
+              .lineTo(500,20)      
 
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,300,{
+               doc.text("Donor Name :" + " " + ses.name,50,200,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -1819,23 +1819,23 @@ router.post('/result', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('./public/images/upper.png',200,0, {
-                    fit:[250,350],
+                doc.image('upper.png',250,10, {
+                    fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/recfooter.png',10,300, {
-                fit:[600,750],
+               doc.image('recfooter.png',650,10, {
+                fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
-
-           doc.moveTo(0,40)
-              .lineTo(500,40) 
+           
+           doc.moveTo(0,20)
+              .lineTo(500,20)  
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,300,{
+               doc.text("Donor Name :" + " " + ses.name,50,200,{
                    align:'center'
                });
                doc.fontSize(20)
@@ -1992,10 +1992,8 @@ router.post('/resultmember', (req, res, next) => {
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
 
-                doc.image('./public/images/certi.jpg',30,10, {
-                    width:100,
-                    height:200,
-                    fit:[500,550],
+                doc.image('certi.png',250,10, {
+                    fit:[700,550],
                     align:'center',
                     valign:'center'
                      
@@ -2003,16 +2001,16 @@ router.post('/resultmember', (req, res, next) => {
               
 
                 
-                doc.fontSize(15)
-                doc.fillColor('red').text( " " + mem.name,0,270{
+                doc.fontSize(25)
+                doc.fillColor('red').text("Donor Name :" + " " + mem.name,{
                    align:'center'
                 });
 
                 
                 doc.moveDown();
                 doc.moveDown();
-                doc.fontSize(10)
-                doc.font('Courier-Bold').fillColor('blue').text(" " + postData.referenceId,130,340{
+                doc.fontSize(15)
+                doc.font('Courier-Bold').fillColor('blue').text("Certificate Number :" + " " + postData.referenceId,{
                     align:'center'
                 });
                 doc.moveDown();
@@ -2323,23 +2321,23 @@ router.post('/resultdonatemem', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('./public/images/upper.png',200,0, {
-                    fit:[250,350],
+                doc.image('upper.png',250,10, {
+                    fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/recfooter.png',10,300, {
-                fit:[600,750],
+               doc.image('recfooter.png',650,10, {
+                fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
-
-           doc.moveTo(0,40)
-              .lineTo(500,40) 
+           
+           doc.moveTo(0,20)
+              .lineTo(500,20)  
                doc.fontSize(20)
-               doc.text("Donor Name :" + " " + vol.name,50,300,{
+               doc.text("Donor Name :" + " " + vol.name,50,200,{
                    align:'center'
                });
                doc.fontSize(20)
