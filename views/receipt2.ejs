@@ -1,56 +1,26 @@
 <html>
     <head>
         <style>
-body{
-background-image:url('https://barbarashdwallpapers.com/wp-content/uploads/2015/01/White-wallpaper-with-dots.jpg');
-background-repeat:no-repeat;
-background-size:cover;
-
-}
-.wrap-login100 {
-  border: 2px solid black;
-padding: 20px;
- background:#fff;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  flex-direction: row-reverse;
-border-radius: 10px;
-}
-.container-login100 {
-  width: 100%;  
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  
-}
-.limiter {
-  width: 100%;
-  margin: 0 auto;
-}
-            @media print {
-                #printPageButton{
-                    display:none;
-                }
+table,td{
+                border:1px solid black;
+                border-collapse: collapse;
+                font-size:20px;
             }
+            
 #printPageButton{
 font-size:20px;
 background:black;
 color:white;
 padding:10px;
 }
+@media(max-width: 375px) {
+                #printPageButton{
+                    display:none !important ;
+                }
+                table,td{
+                    font-size:20px;
+                }
+            }
         </style>
         <script>
             function myfunction() {
@@ -59,6 +29,71 @@ padding:10px;
         </script>
     </head>
     <body>
+        <div align="center">
+            <img src="/images/upper.png" >
+            <hr style="width:100%;color:darkblue;height:2px;background:#01b0d1;">
+    <h2 style="float:left;">Donation Date : 22\07\2020</h2><h2 style="float:right;">Donation Receipt Number : <%=data.referenceId %></h2></br>
+            </br></br></br>
+    <table align="center" style="border:1px solid black">
+        <tr>
+      <th style="font-size:25px;" colspan="2">80G TAX BENEFIT DONATION RECEIPT</th></tr>
+      <tr>
+          <td>Donor Name</td>
+          <td><%=task.name %></td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td><%=task.email %></td>
+          </tr>
+          <tr>
+              <td>Phone</td>
+              <td><%=task.phNum %></td>
+          </tr>
+          <tr>
+              <td>Total pledge amount</td>
+              <td><%=data.orderAmount %></td>
+          </tr>
+          <tr>
+              <td>Type of Donation</td>
+              <td><%=data.paymentMode%></td>
+          </tr>
+          <tr>
+              <td>Description</td>
+              <td>Donation to Shuddhi</td>
+          </tr>
+          
+          <tr>
+              <td>Thank you for your generous support</br>SHUDDHI (Regd.) NGO</br>All India NGO,New Delhi</br>Website : <a href="/">www.shuddhi.org</a></td>
+              <td><img src="/images/stamp.png" height="100px" width="300px"></td>
+          </tr>
+    
+    </table></br>
+    
+    <p>
+        <h2>SHUDDHI NGO</h2>
+        Society Name- <b>SHUDDHI</b>, Address-<b> 86C, Block-CD, Pitampura, Delhi-110034, PAN-AAMAS3012R</b></BR>
+    
+                1. Bank Account Number-<b> 608810110002607</b> IFSC Code- <b>BKID0006088</b></br>
+                  Bank Address- <b>BANK OF INDIA, E-6 PRASHANT VIHAR, Delhi-110085</b></br>
+            
+                2. Bank Account Number- <b>54510549392</b> IFSC Code: <b>SCBL0036029</b></br>
+                  Bank Address- <b>Central Market, Punjabi Bagh, Delhi- 110038</b></br>
+                  SHUDDHI Registeration Number- <b>S/2020/SDM/NW/2014</b></br>
+                  80G Reg. No. DEL-SE26291-07092015/6773 (Issue Date-07/09/2015)</br>
+    <img src="/images/lower.png">
+                  <hr style="width:100%;color:orange;height:2px;background:orange;">
+                  <p style="color:purple">Contact (+91)96548-15105, Email:<a href="mailto:ino@shuddhi.org">info@shuddhi.org</a>, 
+                    Website:<a href="/">www.shuddhi.org</a>
+                  </br><b>"Shuddhi"</b> is a registered under the Societies Registeration Act XXIof 1960.<b>Registeration Number</b>: S/2020/DM/NW/2014 
+                </p>
+    
+    </p>
+            <div class="myclass"  >
+                <button id="printPageButton" style="background:#01b0d1" type="button" onclick="myfunction()">Print</button>
+                <button id="printPageButton" style="background:seagreen" type="button" onclick="location.href= 'http://localhost:3000'">Home</button>
+    </div>
+            </div>
+        <!---
        <div class="limiter">
 <div class="container-login100">
 <div class="wrap-login100">
@@ -79,5 +114,6 @@ padding:10px;
 </div>
 </div>
         </div>
+    -->
     </body>
 </html>

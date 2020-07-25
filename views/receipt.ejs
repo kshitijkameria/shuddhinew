@@ -1,85 +1,169 @@
 <html>
     <head>
         <style>
-body{
-background-image:url('https://barbarashdwallpapers.com/wp-content/uploads/2015/01/White-wallpaper-with-dots.jpg');
-background-repeat:no-repeat;
-background-size:cover;
 
-}
-.wrap-login100 {
-  border: 2px solid black;
-padding: 20px;
- background:#fff;
-  overflow: hidden;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  flex-direction: row-reverse;
-border-radius: 10px;
-}
-.container-login100 {
-  width: 100%;  
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  
-}
-.limiter {
-  width: 100%;
-  margin: 0 auto;
-}
-            @media print {
-                #printPageButton{
-                    display:none;
-                }
+table,td{
+                border:1px solid black;
+                border-collapse: collapse;
+                font-size:20px;
             }
+            
 #printPageButton{
 font-size:20px;
 background:black;
 color:white;
 padding:10px;
 }
-
+@media(max-width: 375px) {
+                #printPageButton{
+                    display:none !important ;
+                }
+                table,td{
+                    font-size:20px;
+                }
+            }
         </style>
         <script>
             function myfunction() {
                 window.print();
             }
         </script>
+       
     </head>
     <body>
-<div class="limiter">
-<div class="container-login100">
-<div class="wrap-login100">
-        <div style="box-sizing: border-box; border-right: none;font-size:25px;" align="center">
-<img src="https://d2aq6dqxahe4ka.cloudfront.net/assets/uploads/beneficiary/-2069379359625602049.png" alt="" width="250" height="200"/>        
-<div class="info" style="height: 20%">Receipt No. : <b> <%=data.referenceId %></b></div>
-            <div class="info" style="height: 20%">Donor Name : <b> <%=task.name %></b></div>
-            <div class="info" style="height: 20%"> Email : <b> <%=task.email %></b></div>
-            <div class="info" style="height: 20%">Phone : <b> <%=task.phNum %></b></div>
-            <div class="info" style="height: 20%">Amount : <b> <%=data.orderAmount %></b></div>
-            <div class="info" style="height: 20%">Type of donation : <b> <%=data.paymentMode%></b></div>
-            <div class="info" style="height: 20%">Description<b>  Donation to : <%=ngo.name%></b></div>
-            <div class="info" style="height: 20%">NGO Contact No. : <b> <%=ngo.phno%></b></div>
-</br></br>
-            <div class="myclass" style="height: 30px;" >
+        <div align="center">
+        <img src="/images/upper.png" >
+        <hr style="width:100%;color:darkblue;height:2px;background:#01b0d1;">
+<h2 style="float:left;">Donation Date : 22\07\2020</h2><h2 style="float:right;">Donation Receipt Number : <%=data.referenceId %></h2></br>
+        </br></br></br>
+<table align="center" style="border:1px solid black">
+    <tr>
+  <th style="font-size:25px;" colspan="2">80G TAX BENEFIT DONATION RECEIPT</th></tr>
+  <tr>
+      <td>Donor Name</td>
+      <td><%=task.name %></td>
+  </tr>
+  <tr>
+      <td>Email</td>
+      <td><%=task.email %></td>
+      </tr>
+      <tr>
+          <td>Phone</td>
+          <td><%=task.phNum %></td>
+      </tr>
+      <tr>
+          <td>Total pledge amount</td>
+          <td><%=data.orderAmount %></td>
+      </tr>
+      <tr>
+          <td>Type of Donation</td>
+          <td><%=data.paymentMode%></td>
+      </tr>
+      <tr>
+          <td>Description</td>
+          <td>Donation to : <%=ngo.name%></td>
+      </tr>
+      <tr>
+          <td>NGO Contact No.</td>
+          <td><%=ngo.phno%></td>
+      </tr>
+      <tr>
+          <td>Thank you for your generous support</br>SHUDDHI (Regd.) NGO</br>All India NGO,New Delhi</br>Website : <a href="/">www.shuddhi.org</a></td>
+          <td><img src="/images/stamp.png" height="100px" width="300px"></td>
+      </tr>
+
+</table></br>
+
+<p>
+    <h2>SHUDDHI NGO</h2>
+    Society Name- <b>SHUDDHI</b>, Address-<b> 86C, Block-CD, Pitampura, Delhi-110034, PAN-AAMAS3012R</b></BR>
+
+            1. Bank Account Number-<b> 608810110002607</b> IFSC Code- <b>BKID0006088</b></br>
+              Bank Address- <b>BANK OF INDIA, E-6 PRASHANT VIHAR, Delhi-110085</b></br>
+        
+            2. Bank Account Number- <b>54510549392</b> IFSC Code: <b>SCBL0036029</b></br>
+              Bank Address- <b>Central Market, Punjabi Bagh, Delhi- 110038</b></br>
+              SHUDDHI Registeration Number- <b>S/2020/SDM/NW/2014</b></br>
+              80G Reg. No. DEL-SE26291-07092015/6773 (Issue Date-07/09/2015)</br>
+<img src="/images/lower.png">
+              <hr style="width:100%;color:orange;height:2px;background:orange;">
+              <p style="color:purple">Contact (+91)96548-15105, Email:<a href="mailto:ino@shuddhi.org">info@shuddhi.org</a>, 
+                Website:<a href="/">www.shuddhi.org</a>
+              </br><b>"Shuddhi"</b> is a registered under the Societies Registeration Act XXIof 1960.<b>Registeration Number</b>: S/2020/DM/NW/2014 
+            </p>
+
+</p>
+        <div class="myclass"  >
+            <button id="printPageButton" style="background:#01b0d1" type="button" onclick="myfunction()">Print</button>
+            <button id="printPageButton" style="background:seagreen" type="button" onclick="location.href= 'http://localhost:3000'">Home</button>
+</div>
+        </div>
+
+
+        <!---
+<img src="ShuddhiFooter.png" alt="" width="220" height="200" style="position:absolute;float:left;left:360px;"/>  
+<h1 style="color:rgb(36, 161, 36);font-size:120px;position:absolute;left:620px;top:-80px;" >SHUDDHI</h1>
+<h4 style="color:red;position:absolute;left:600px;top:100px;font-size:25px;">Registered Non-Governmental Organisation (NGO),India</h4>
+<h4 style="color:#01b0d1;position:absolute;left:600px;font-family:'impact';top:145px;font-size:17px;">Environment Protection*Child Support*Legal Support*Old Age*Women Empowerment</h4>
+    <hr style="width:100%;position:absolute;top:220px;color:darkblue;height:5px;background:#01b0d1;">
+    <h4 style="float:left;position:absolute;left:360px;top:235px">Donation Date: 22/07/2020</h4>
+    <h4 style="float:left;position:absolute;left:900px;top:235px">Donation Receipt Number: <%=data.referenceId %></h4>
+
+    <table style="position:absolute;top:290px;left:500px;" >
+        <tr>
+      <th style="font-size:25px;">80G TAX BENEFIT DONATION RECEIPT</th></tr>
+      <tr>
+          <td>Donor Name</td>
+          <td><%=task.name %></td>
+      </tr>
+      <tr>
+          <td>Email</td>
+          <td><%=task.email %></td>
+          </tr>
+          <tr>
+              <td>Phone</td>
+              <td><%=task.phNum %></td>
+          </tr>
+          <tr>
+              <td>Total pledge amount</td>
+              <td><%=data.orderAmount %></td>
+          </tr>
+          <tr>
+              <td>Type of Donation</td>
+              <td><%=data.paymentMode%></td>
+          </tr>
+          <tr>
+              <td>Description</td>
+              <td>Donation to : <%=ngo.name%></td>
+          </tr>
+          <tr>
+              <td>NGO Contact No.</td>
+              <td><%=ngo.phno%></td>
+          </tr>
+          <tr>
+              <td>Thank you for your generous support</br>SHUDDHI (Regd.) NGO</br>All India NGO,New Delhi</br>Website : <a href="index.html">www.shuddhi.org</a></td>
+              <td><img src="stamp.png" height="100px" width="300px"></td>
+          </tr>
+
+    </table>
+    <div class="myclass"  >
+        <button id="printPageButton" style="position:absolute;top:600px;left:500px;"  type="button" onclick="myfunction()">Print</button>
+        <button id="printPageButton" type="button" onclick="location.href= 'http://localhost:3000'">Home</button>
+</div>
+      <div style="box-sizing: border-box; border-right: none;font-size:25px;" align="center">
+       
+<div class="info" >Receipt No. : <b> <%=data.referenceId %></b></div>
+            <div class="info" >Donor Name : <b> <%=task.name %></b></div>
+            <div class="info" > Email : <b> <%=task.email %></b></div>
+            <div class="info" >Phone : <b> <%=task.phNum %></b></div>
+            <div class="info">Amount : <b> <%=data.orderAmount %></b></div>
+            <div class="info" >Type of donation : <b> <%=data.paymentMode%></b></div>
+            <div class="info" >Description<b>  Donation to : <%=ngo.name%></b></div>
+            <div class="info" >NGO Contact No. : <b> <%=ngo.phno%></b></div></br>
+            <div class="myclass"  >
                 <button id="printPageButton" type="button" onclick="myfunction()">Print</button>
                 <button id="printPageButton" type="button" onclick="location.href= 'http://localhost:3000'">Home</button>
 </div></br>
-</div>
-</div>
-        </div>
+-->
     </body>
 </html>
