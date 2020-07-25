@@ -1571,18 +1571,22 @@ router.post('/resultshu', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('./public/images/Shuddhifooter.png',250,10, {
+                doc.image('upper.png',250,10, {
                     fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
+               doc.image('recfooter.png',650,10, {
                 fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
+
+           doc.moveTo(0,20)
+              .lineTo(500,20)      
+
                doc.fontSize(20)
                doc.text("Donor Name :" + " " + ses.name,50,200,{
                    align:'center'
@@ -1815,18 +1819,21 @@ router.post('/result', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                 doc.image('./public/images/Shuddhifooter.png',250,10, {
+                doc.image('upper.png',250,10, {
                     fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
+               doc.image('recfooter.png',650,10, {
                 fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
+           
+           doc.moveTo(0,20)
+              .lineTo(500,20)  
                doc.fontSize(20)
                doc.text("Donor Name :" + " " + ses.name,50,200,{
                    align:'center'
@@ -1984,29 +1991,22 @@ router.post('/resultmember', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                 doc.fontSize(35)
-                doc.font('Courier-Bold').fillColor('blue').text("C E R T I F I C A T E",{
-                    align:'center'
-                });
-                doc.fontSize(30)
-                doc.font('Courier-Oblique').fillColor('blue').text("OF LIFE MEMBERSHIP",{
-                    align:'center'
-                });
-                doc.moveDown();
-                doc.fontSize(20)
-                doc.fillColor('blue').text("This Certifies that",{
-                    align:'center'
-                });
-                doc.moveDown();
+
+                doc.image('certi.png',250,10, {
+                    fit:[700,550],
+                    align:'center',
+                    valign:'center'
+                     
+               });
+              
+
+                
                 doc.fontSize(25)
                 doc.fillColor('red').text("Donor Name :" + " " + mem.name,{
                    align:'center'
                 });
-                doc.moveDown();
-                doc.fontSize(20)
-                doc.fillColor('blue').text("is a lifetime member of SHUDDHI (Regd.) NGO",{
-                    align:'center'
-                });
+
+                
                 doc.moveDown();
                 doc.moveDown();
                 doc.fontSize(15)
@@ -2015,20 +2015,7 @@ router.post('/resultmember', (req, res, next) => {
                 });
                 doc.moveDown();
                 
-                doc.font('Helvetica-Bold').fillColor('blue').text(postData.txTime,{
-                    underline:true,
-                    align:'left',
-                    continued:true
-                }).image('./public/images/Shuddhifooter.png',250,350, {
-                    fit:[50,100],
-                    align:'center',
-                    valign:'center',
-                    continued:true 
-               }).font('Helvetica-Bold').fillColor('blue').text('PRESIDENT(SAURABH GUPTA)',{
-                underline:true,
-                align:'right'
-               });
-               doc.fillColor('lightblue').rect(doc.x, 40, 510, doc.y).stroke();
+                
              
                 doc.end()
                 let transporter = nodemailer.createTransport({
@@ -2334,18 +2321,21 @@ router.post('/resultdonatemem', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-               doc.image('./public/images/Shuddhifooter.png',250,10, {
+                doc.image('upper.png',250,10, {
                     fit:[100,150],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('./public/images/ground.jpg', {
+               doc.image('recfooter.png',650,10, {
                 fit:[400,450],
                 align:'center',
                 valign:'center'
                  
            });
+           
+           doc.moveTo(0,20)
+              .lineTo(500,20)  
                doc.fontSize(20)
                doc.text("Donor Name :" + " " + vol.name,50,200,{
                    align:'center'

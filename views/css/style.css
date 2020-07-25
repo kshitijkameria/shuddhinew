@@ -6906,3 +6906,20 @@ html:not(.ie-11):not(.ios) .parallax-disabled {
 
 	}
  }
+ @media(max-width: 500px){
+	.brand-logo-light{
+	  width:120px;
+	  height:50px;
+	}
+  }
+  @media(max-width: 320px){
+	.brand-logo-light{
+	  width:80px;
+	  height:30px;
+	}
+  }
+  @media(min-width:576px){
+	.callme{
+	  display:none;
+	}
+  }
