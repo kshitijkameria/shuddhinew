@@ -1853,7 +1853,7 @@ router.post('/result', (req, res, next) => {
                    align:'center'
                });
                doc.fontSize(8)
-               doc.text(" " + ses.email,150,173{
+               doc.text(" " + ses.email,150,173,{
                    align:'center'
                });
                doc.fontSize(8)
@@ -2018,7 +2018,7 @@ router.post('/resultmember', (req, res, next) => {
 
                 
                 doc.fontSize(15)
-                doc.fillColor('red').text( " " + mem.name,0,270{
+                doc.fillColor('red').text( " " + mem.name,0,270,{
                    align:'center'
                 });
 
@@ -2026,7 +2026,7 @@ router.post('/resultmember', (req, res, next) => {
                 doc.moveDown();
                 doc.moveDown();
                 doc.fontSize(10)
-                doc.font('Courier-Bold').fillColor('blue').text(" " + postData.referenceId,130,340{
+                doc.font('Courier-Bold').fillColor('blue').text(" " + postData.referenceId,130,340,{
                     align:'center'
                 });
                 doc.moveDown();
@@ -2360,7 +2360,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                    align:'center'
                });
                doc.fontSize(8)
-               doc.text(" " + vol.email,150,173{
+               doc.text(" " + vol.email,150,173,{
                    align:'center'
                });
                doc.fontSize(8)
