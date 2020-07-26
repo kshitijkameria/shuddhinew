@@ -616,6 +616,10 @@ const MemberSchema = new Schema({
     certimem:{
         type:String
     },
+    pan:{
+        type:String,
+        default:" "
+    },
 
     resetToken:String,
     resetTokenExpires: Date
@@ -722,6 +726,10 @@ const VolunteerSchema = new Schema({
     t :{
         type:String,
         default : "V"
+    },
+    pan:{
+        type:String,
+        default:" "
     },
 
     resetToken:String,
@@ -1571,54 +1579,57 @@ router.post('/resultshu', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('upper.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/rec.jpg',80,0, {
+                    fit:[450,550],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('recfooter.png',650,10, {
-                fit:[400,450],
-                align:'center',
-                valign:'center'
                  
-           });
-
-           doc.moveTo(0,20)
-              .lineTo(500,20)      
-
-               doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,200,{
+               doc.fontSize(5)
+               doc.text(" " + postData.txTime,-75,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Receipt No. :" + " " + postData.referenceId,{
+               doc.fontSize(8)
+               doc.text(" " + ses.name,150,145,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Email :" + " " + ses.email,{
+               doc.fontSize(8)
+               doc.text(ses.address,140,155,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Ph No. :" + " " + ses.phNum,{
+               doc.fontSize(5)
+               doc.text("Receipt No. :" + " " + postData.referenceId,300,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Amount :" + " " + postData.orderAmount,{
+               doc.fontSize(8)
+               doc.text(" " + ses.email,150,173,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Type of Donation :" + " " + postData.paymentMode,{
+               doc.fontSize(8)
+               doc.text(" " + ses.phNum,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Description :" + " " + "Donation to SHUDDHI ",{
+               doc.fontSize(8)
+               doc.text(" " + postData.orderAmount,{
                    align:'center'
                });
-               doc.fontSize(20)
+               doc.fontSize(7)
+               doc.text(" " + ses.pan,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text(" " + postData.paymentMode,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text( " " + "Donation to SHUDDHI ",{
+                   align:'center'
+               });
+               /*doc.fontSize(20)
                doc.text("NGO phone no. :" + " " + "9654815105",{
                    align:'center'
-               });
+               });*/
                 doc.end()
                 let transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -1819,53 +1830,56 @@ router.post('/result', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('upper.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/rec.jpg',80,0, {
+                    fit:[450,550],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('recfooter.png',650,10, {
-                fit:[400,450],
-                align:'center',
-                valign:'center'
-                 
-           });
-           
-           doc.moveTo(0,20)
-              .lineTo(500,20)  
-               doc.fontSize(20)
-               doc.text("Donor Name :" + " " + ses.name,50,200,{
+               doc.fontSize(5)
+               doc.text(" " + postData.txTime,-75,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Receipt No. :" + " " + postData.referenceId,{
+               doc.fontSize(8)
+               doc.text( " " + ses.name,150,145,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Email :" + " " + ses.email,{
+               doc.fontSize(8)
+               doc.text(" " + ses.address,140,155,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Ph No. :" + " " + ses.phNum,{
+               doc.fontSize(5)
+               doc.text( " " + postData.referenceId,300,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Amount :" + " " + postData.orderAmount,{
+               doc.fontSize(8)
+               doc.text(" " + ses.email,150,173{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Type of Donation :" + " " + postData.paymentMode,{
+               doc.fontSize(8)
+               doc.text(" " + ses.phNum,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Description :" + " " + "Donation to " + ses1.name,{
+               doc.fontSize(8)
+               doc.text(" " + postData.orderAmount,{
                    align:'center'
                });
-               doc.fontSize(20)
+               doc.fontSize(7)
+               doc.text(" " + ses.pan,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text(" " + postData.paymentMode,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text(" " + "Donation to " + ses1.name,{
+                   align:'center'
+               });
+               /*doc.fontSize(20)
                doc.text("NGO phone no. :" + " " + ses1.phno,{
                    align:'center'
-               });
+               });*/
 
                 doc.end()
                 let transporter = nodemailer.createTransport({
@@ -1992,8 +2006,10 @@ router.post('/resultmember', (req, res, next) => {
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
 
-                doc.image('certi.png',250,10, {
-                    fit:[700,550],
+                doc.image('./public/images/certi.jpg',30,10, {
+                    width:100,
+                    height:200,
+                    fit:[500,550],
                     align:'center',
                     valign:'center'
                      
@@ -2001,16 +2017,16 @@ router.post('/resultmember', (req, res, next) => {
               
 
                 
-                doc.fontSize(25)
-                doc.fillColor('red').text("Donor Name :" + " " + mem.name,{
+                doc.fontSize(15)
+                doc.fillColor('red').text( " " + mem.name,0,270{
                    align:'center'
                 });
 
                 
                 doc.moveDown();
                 doc.moveDown();
-                doc.fontSize(15)
-                doc.font('Courier-Bold').fillColor('blue').text("Certificate Number :" + " " + postData.referenceId,{
+                doc.fontSize(10)
+                doc.font('Courier-Bold').fillColor('blue').text(" " + postData.referenceId,130,340{
                     align:'center'
                 });
                 doc.moveDown();
@@ -2321,53 +2337,56 @@ router.post('/resultdonatemem', (req, res, next) => {
                 receiptno = receiptno + 1
                 const doc = new pdfDocument();
                 doc.pipe(fs.createWriteStream('./public/uploads/' + postData.referenceId + '.pdf'));
-                doc.image('upper.png',250,10, {
-                    fit:[100,150],
+                doc.image('./public/images/rec.jpg',80,0, {
+                    fit:[450,550],
                     align:'center',
                     valign:'center'
                      
                });
-               doc.image('recfooter.png',650,10, {
-                fit:[400,450],
-                align:'center',
-                valign:'center'
-                 
-           });
-           
-           doc.moveTo(0,20)
-              .lineTo(500,20)  
-               doc.fontSize(20)
-               doc.text("Donor Name :" + " " + vol.name,50,200,{
+               doc.fontSize(5)
+               doc.text(" " + postData.txTime,-75,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Receipt No. :" + " " + postData.referenceId,{
+               doc.fontSize(8)
+               doc.text(" " + vol.name,150,145,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Email :" + " " + vol.email,{
+               doc.fontSize(8)
+               doc.text(" " + vol.address,140,155,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Ph No. :" + " " + vol.phNum,{
+               doc.fontSize(5)
+               doc.text(" " + postData.referenceId,300,117,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Amount :" + " " + postData.orderAmount,{
+               doc.fontSize(8)
+               doc.text(" " + vol.email,150,173{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Type of Donation :" + " " + postData.paymentMode,{
+               doc.fontSize(8)
+               doc.text(" " + vol.phNum,{
                    align:'center'
                });
-               doc.fontSize(20)
-               doc.text("Description :" + " " + "Donation to SHUDDHI ",{
+               doc.fontSize(8)
+               doc.text(" " + postData.orderAmount,{
                    align:'center'
                });
-               doc.fontSize(20)
+               doc.fontSize(7)
+               doc.text(" " + vol.pan,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text(" " + postData.paymentMode,{
+                   align:'center'
+               });
+               doc.fontSize(8)
+               doc.text(" " + "Donation to SHUDDHI ",{
+                   align:'center'
+               });
+               /*doc.fontSize(20)
                doc.text("NGO phone no. :" + " " + "9654815105",{
                    align:'center'
-               });
+               });*/
                 doc.end()
                 let transporter = nodemailer.createTransport({
                     service: 'gmail',
