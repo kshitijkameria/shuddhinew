@@ -23,29 +23,7 @@ padding:10px;
                 }
             }
         </style>
-        <script>
-            function myfunction() {
-                window.print();
-            }
-            // var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
-            // var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
-
-            // function inWords (num) {
-            //     if ((num = num.toString()).length > 9) return 'overflow';
-            //     n = ('000000000' + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-            //     if (!n) return; var str = '';
-            //     str += (n[1] != 0) ? (a[Number(n[1])] || b[n[1][0]] + ' ' + a[n[1][1]]) + 'crore ' : '';
-            //     str += (n[2] != 0) ? (a[Number(n[2])] || b[n[2][0]] + ' ' + a[n[2][1]]) + 'lakh ' : '';
-            //     str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + 'thousand ' : '';
-            //     str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + 'hundred ' : '';
-            //     str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + 'only ' : '';
-            //     return str;
-            // }
-
-            // document.getElementById('number').onkeyup = function () {
-            //     document.getElementById('words').innerHTML = inWords(document.getElementById('number').value);
-            // };
-        </script>
+        
        
     </head>
     <body>
@@ -71,13 +49,14 @@ padding:10px;
       </tr>
       <tr>
           <td>Total pledge amount</td>
-          <td><%=data.orderAmount %></td>
-          <!-- <span id="words"></span>
-          <td id="number"><%=data.orderAmount %></td> -->
+          <td>
+            <div id="w" data-value = "<%=data.orderAmount %>" style="display: flex;"><%=data.orderAmount %>(<div id ="words"></div>)</div>
+          </td>
+        
       </tr>
       <tr>
           <td>Type of Donation</td>
-          <td><%=data.paymentMode%></td>
+          <td><%=data.paymentMode%>-<%=data.referenceId %></td>
       </tr>
       <tr>
           <td>Description</td>
@@ -185,5 +164,58 @@ padding:10px;
                 <button id="printPageButton" type="button" onclick="location.href= 'http://localhost:3000'">Home</button>
 </div></br>
 -->
+<script>
+    function myfunction() {
+        window.print();
+    }
+    var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+    var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+    var divelement = document.getElementById('w');
+    var num1 = divelement.getAttribute('data-value');
+    var num = Number(num1);
+    var word = "";
+    function humanize(num){
+
+    var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+                'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+                'seventeen', 'eighteen', 'nineteen'];
+    var tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty',
+                'ninety'];
+
+    var numString = num.toString();
+
+    if (num < 0) throw new Error('Negative numbers are not supported.');
+    
+    if (num === 0) return 'zero';
+
+    //the case of 1 - 20
+    if (num < 20) {
+        return ones[num];
+    }
+
+    if (numString.length === 2) {
+        return tens[numString[0]] + ' ' + ones[numString[1]];
+    }
+
+    //100 and more
+    if (numString.length == 3) {
+        if (numString[1] === '0' && numString[2] === '0')
+        return ones[numString[0]] + ' hundred';
+        else
+        return ones[numString[0]] + ' hundred and ' + convert(+(numString[1] + numString[2]));
+    }
+
+    if (numString.length === 4) {
+        var end = +(numString[1] + numString[2] + numString[3]);
+        if (end === 0) return ones[numString[0]] + ' thousand';
+        if (end < 100) return ones[numString[0]] + ' thousand and ' + convert(end);
+      
+        return ones[numString[0]] + ' thousand ' + convert(end);
+    }
+    }
+    word = humanize(num);
+    document.getElementById('words').innerHTML = word;
+
+</script>
     </body>
 </html>

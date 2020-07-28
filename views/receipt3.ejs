@@ -25,11 +25,7 @@ padding:10px;
                 }
             }
         </style>
-        <script>
-            function myfunction() {
-                window.print();
-            }
-        </script>
+        
     </head>
     <body>
         <div align="center">
@@ -54,11 +50,13 @@ padding:10px;
           </tr>
           <tr>
               <td>Total pledge amount</td>
-              <td><%=data.orderAmount %></td>
+              <td>
+                <div id="w" data-value = "<%=data.orderAmount %>" style="display: flex;"><%=data.orderAmount %>(<div id ="words"></div>)</div>
+              </td>
           </tr>
           <tr>
               <td>Type of Donation</td>
-              <td><%=data.paymentMode%></td>
+              <td><%=data.paymentMode%>-<%=data.referenceId %></td>
           </tr>
           <tr>
               <td>Description</td>
@@ -122,5 +120,58 @@ padding:10px;
 </div>
         </div>
     -->
+    <script>
+        function myfunction() {
+            window.print();
+        }
+        var a = ['','one ','two ','three ','four ', 'five ','six ','seven ','eight ','nine ','ten ','eleven ','twelve ','thirteen ','fourteen ','fifteen ','sixteen ','seventeen ','eighteen ','nineteen '];
+        var b = ['', '', 'twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety'];
+        var divelement = document.getElementById('w');
+        var num1 = divelement.getAttribute('data-value');
+        var num = Number(num1);
+        var word = "";
+        function humanize(num){
+    
+        var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+                    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+                    'seventeen', 'eighteen', 'nineteen'];
+        var tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty',
+                    'ninety'];
+
+        var numString = num.toString();
+
+        if (num < 0) throw new Error('Negative numbers are not supported.');
+        
+        if (num === 0) return 'zero';
+
+        //the case of 1 - 20
+        if (num < 20) {
+            return ones[num];
+        }
+
+        if (numString.length === 2) {
+            return tens[numString[0]] + ' ' + ones[numString[1]];
+        }
+
+        //100 and more
+        if (numString.length == 3) {
+            if (numString[1] === '0' && numString[2] === '0')
+            return ones[numString[0]] + ' hundred';
+            else
+            return ones[numString[0]] + ' hundred and ' + convert(+(numString[1] + numString[2]));
+        }
+  
+        if (numString.length === 4) {
+            var end = +(numString[1] + numString[2] + numString[3]);
+            if (end === 0) return ones[numString[0]] + ' thousand';
+            if (end < 100) return ones[numString[0]] + ' thousand and ' + convert(end);
+          
+            return ones[numString[0]] + ' thousand ' + convert(end);
+        }
+        }
+        word = humanize(num);
+        document.getElementById('words').innerHTML = word;
+
+    </script>
     </body>
 </html>
