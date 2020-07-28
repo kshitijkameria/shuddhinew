@@ -939,7 +939,7 @@ router.post('/gov', urlencodedParser, singleupload, function (req, res) {
                 from: 'ngo@shuddhi.org',
                 to: req.body.email,
                 subject: 'Successfull Registration',
-                text: 'Dear Member,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+                text: 'Dear CSR,\n\n Thank you for your Registration. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
                
             };
             transporter.sendMail(mailOptions, function (err, data) {
@@ -1642,7 +1642,7 @@ router.post('/resultshu', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: ses.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+                    text: 'Dear Donor,\n\nGreetings of the day\n\nPlease find attached your 80G Tax benefit donation receipt. \n\n We thank you for your contribution and we look forward to your continued support and patronage.\n\nYou are a hero and today you have made a difference.\n\n Thanking You \n\n Team SHUDDHI NGO\n\n ',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -1893,7 +1893,7 @@ router.post('/result', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: ses.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards,SHUDDHI',
+                    text: 'Dear Donor,\n\nGreetings of the day\n\nPlease find attached your 80G Tax benefit donation receipt. \n\n We thank you for your contribution and we look forward to your continued support and patronage.\n\nYou are a hero and today you have made a difference.\n\n Thanking You \n\n Team SHUDDHI NGO\n\n ',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -2045,7 +2045,7 @@ router.post('/resultmember', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: mem.email,
                     subject: 'Successfull Registration',
-                    text: 'Dear Member,\n\n You are now a member of Shuddhi.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+                    text: 'Dear Member,\n\n We welcome you to our family of Shuddhi NGO.\n\n Please find attached your Life Membership Certificate. \n\nBest wishes for all the good works you can now do for people and communities with this membership. \n\n Best Regards \n\n Team SHUDDHI NGO \n\n Website: https://www.shuddhi.org \n\n Facebook Page: https://www.facebook.com/shuddhi.org \n\n Instagram Page: https://www.instagram.com/ngoshuddhi \n\n  YouTube Channel: https://www.youtube.com/shuddhingo \n\n --- \n\n SHUDDHI® \n\n Non Governmental Organisation (NGO) \n\n Head Office: New Delhi, India - 110088 \n\n Email: info@shuddhi.org \n\n Website: www.shuddhi.org \n\n',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -2208,7 +2208,7 @@ router.post('/resultdonatevol', (req, res, next) => {
                         from: 'examstet@gmail.com',
                         to: ses.email,
                         subject: 'Successfull Donation',
-                        text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, STET-2020\n Govt. of Sikkim',
+                        text: 'Dear Donor,\n\nGreetings of the day\n\nPlease find attached your 80G Tax benefit donation receipt. \n\n We thank you for your contribution and we look forward to your continued support and patronage.\n\nYou are a hero and today you have made a difference.\n\n Thanking You \n\n Team SHUDDHI NGO\n\n ',
                         attachments: [
                             {
                                 filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
@@ -2399,7 +2399,7 @@ router.post('/resultdonatemem', (req, res, next) => {
                     from: 'ngo@shuddhi.org',
                     to: vol.email,
                     subject: 'Successfull Donation',
-                    text: 'Dear Donor,\n\n Thank you for your Donation.\n\n Please find your receipt enclosed. \n\nPlease visit the website for further updates.\n\nIt is an auto generated mail so please do not reply.\n\n-Regards, SHUDDHI',
+                    text: 'Dear Donor,\n\nGreetings of the day\n\nPlease find attached your 80G Tax benefit donation receipt. \n\n We thank you for your contribution and we look forward to your continued support and patronage.\n\nYou are a hero and today you have made a difference.\n\n Thanking You \n\n Team SHUDDHI NGO\n\n ',
                     attachments: [
                         {
                             filename: postData.referenceId + '.pdf', path: './public/uploads/' + postData.referenceId + '.pdf'
